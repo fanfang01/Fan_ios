@@ -1,0 +1,26 @@
+PODS:
+  - Masonry (1.0.2)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
+  - SocketRocket (0.5.1)
+  - SVProgressHUD (2.1.2)
+  - WeexSDK (0.11.0):
+    - SocketRocket
+
+DEPENDENCIES:
+  - Masonry
+  - SDWebImage (= 3.7.5)
+  - SVProgressHUD
+  - WeexSDK
+
+SPEC CHECKSUMS:
+  Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  WeexSDK: f9cfe6adc91fba3ca5e36bc9808bf1b6e8be2106
+
+PODFILE CHECKSUM: 9e4d74dc7bd5d96c9dcfac043454163ec1b9c0df
+
+COCOAPODS: 1.0.1
