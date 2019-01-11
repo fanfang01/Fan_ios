@@ -81,24 +81,6 @@
 
 }
 
-- (void)reloadTableView
-{
-    _moduleArray = [_manager.allModules copy];
-    
-#warning 添加RGB的测试
-    //    if (!_tempArr) {
-    //        _tempArr = [NSMutableArray array];
-    //    }
-    //    [_tempArr removeAllObjects];
-    //
-    //    for (MinewModule *module in _moduleArray) {
-    //        if ([module.name isEqualToString:@"Minew_RGB"]) {
-    //            [_tempArr addObject:module];
-    //        }
-    //    }
-    //    _sectionModel.rowAtitude = _tempArr.count;
-    
-}
 
 - (void)infoButtonClick:(UIButton *)sender
 {

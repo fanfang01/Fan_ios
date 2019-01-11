@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2842134A21BF8E0000B36B94 /* BYScanDeviceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2842134921BF8E0000B36B94 /* BYScanDeviceViewController.storyboard */; };
+		286D18D021E829B1000A122E /* ScanConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286D18CF21E829B1000A122E /* ScanConnectViewController.m */; };
+		286D18D321E8368F000A122E /* shake.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 286D18D221E8368F000A122E /* shake.xcassets */; };
 		B1CFC9764E4898520C187548 /* libPods-BeaconYun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F5851AABDA97E315A353A0BF /* libPods-BeaconYun.a */; };
 		E532AFD01E9B92290001BE28 /* lock.js in Resources */ = {isa = PBXBuildFile; fileRef = E532AFCF1E9B92290001BE28 /* lock.js */; };
 		E539CF0D1E762AA800B9D731 /* ui2.js in Resources */ = {isa = PBXBuildFile; fileRef = E539CF0C1E762AA800B9D731 /* ui2.js */; };
@@ -85,6 +87,10 @@
 
 /* Begin PBXFileReference section */
 		2842134921BF8E0000B36B94 /* BYScanDeviceViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BYScanDeviceViewController.storyboard; sourceTree = "<group>"; };
+		286D18CE21E829B1000A122E /* ScanConnectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanConnectViewController.h; sourceTree = "<group>"; };
+		286D18CF21E829B1000A122E /* ScanConnectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanConnectViewController.m; sourceTree = "<group>"; };
+		286D18D121E830FF000A122E /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		286D18D221E8368F000A122E /* shake.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = shake.xcassets; sourceTree = "<group>"; };
 		49E0A3CD57A1B7DE50179925 /* Pods-BeaconYun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaconYun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeaconYun/Pods-BeaconYun.debug.xcconfig"; sourceTree = "<group>"; };
 		B370C1B698562C91509A8E8F /* Pods-BeaconYun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaconYun.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeaconYun/Pods-BeaconYun.release.xcconfig"; sourceTree = "<group>"; };
 		E532AFCF1E9B92290001BE28 /* lock.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = lock.js; sourceTree = "<group>"; };
@@ -338,6 +344,7 @@
 		E56992D21E5EB91500C76E42 /* Configs */ = {
 			isa = PBXGroup;
 			children = (
+				286D18D221E8368F000A122E /* shake.xcassets */,
 				E56992D31E5EB91500C76E42 /* AppDelegate.h */,
 				E56992D41E5EB91500C76E42 /* AppDelegate.m */,
 				E56992D51E5EB91500C76E42 /* Assets.xcassets */,
@@ -351,6 +358,7 @@
 		E56992E21E5EB97100C76E42 /* CommonTools */ = {
 			isa = PBXGroup;
 			children = (
+				286D18D121E830FF000A122E /* PrefixHeader.pch */,
 				E56992E31E5EB97100C76E42 /* BYCommonMacros.h */,
 				E56992E41E5EB97100C76E42 /* BYCommonTools.h */,
 				E56992E51E5EB97100C76E42 /* BYCommonTools.m */,
@@ -386,6 +394,8 @@
 				E54520321E68469500C0D46E /* BYDeviceDetailViewController.m */,
 				E5E4BDB31E71427D0086472B /* BYInfoViewController.h */,
 				E5E4BDB41E71427D0086472B /* BYInfoViewController.m */,
+				286D18CE21E829B1000A122E /* ScanConnectViewController.h */,
+				286D18CF21E829B1000A122E /* ScanConnectViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -525,7 +535,7 @@
 				TargetAttributes = {
 					E56992961E5EB60B00C76E42 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = PXH72F7T3D;
+						DevelopmentTeam = R4BAK83LRY;
 						ProvisioningStyle = Automatic;
 					};
 					E56992AF1E5EB60B00C76E42 = {
@@ -580,6 +590,7 @@
 				E54070091E972B3E00D9ECB4 /* down.png in Resources */,
 				E539CF0D1E762AA800B9D731 /* ui2.js in Resources */,
 				E5BF8E6F1EB03DFB00AF94DC /* colors.jpg in Resources */,
+				286D18D321E8368F000A122E /* shake.xcassets in Resources */,
 				E54070081E972B3E00D9ECB4 /* bluebed.js in Resources */,
 				E56992DD1E5EB91500C76E42 /* Assets.xcassets in Resources */,
 				E5A7E1E81E60251900D72212 /* InfoPlist.strings in Resources */,
@@ -683,6 +694,7 @@
 				E56992F11E5EB97100C76E42 /* BYCustomManager.m in Sources */,
 				E5BF8E721EB040A300AF94DC /* ColorPickerView.m in Sources */,
 				E56992F21E5EB97100C76E42 /* BYBindDeviceViewController.m in Sources */,
+				286D18D021E829B1000A122E /* ScanConnectViewController.m in Sources */,
 				E56992DC1E5EB91500C76E42 /* AppDelegate.m in Sources */,
 				E54520331E68469500C0D46E /* BYDeviceDetailViewController.m in Sources */,
 				E5A7E1E31E600FB000D72212 /* BYScanDeviceViewController.m in Sources */,
@@ -854,7 +866,8 @@
 			baseConfigurationReference = 49E0A3CD57A1B7DE50179925 /* Pods-BeaconYun.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PXH72F7T3D;
+				DEVELOPMENT_TEAM = R4BAK83LRY;
+				GCC_PREFIX_HEADER = $SRCROOT/BeaconYun/CommonTools/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/BeaconYun/Configs/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -868,7 +881,8 @@
 			baseConfigurationReference = B370C1B698562C91509A8E8F /* Pods-BeaconYun.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PXH72F7T3D;
+				DEVELOPMENT_TEAM = R4BAK83LRY;
+				GCC_PREFIX_HEADER = $SRCROOT/BeaconYun/CommonTools/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/BeaconYun/Configs/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
