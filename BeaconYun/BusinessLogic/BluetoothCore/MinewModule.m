@@ -10,15 +10,24 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "MinewCommonTool.h"
 
-#define sWriteUUIDs @[@"6E400002-B5A3-F393-E0A9-E50E24DCCA9E", @"FFF2"]
-#define sNotifyUUIDs @[@"6E400003-B5A3-F393-E0A9-E50E24DCCA9E", @"FFF1"]
-#define sServiceUUIDs @[@"6E400001-B5A3-F393-E0A9-E50E24DCCA9E", @"FFF0"]
+//#define sWriteUUIDs @[@"6E400002-B5A3-F393-E0A9-E50E24DCCA9E", @"FFF2"]
+//#define sNotifyUUIDs @[@"6E400003-B5A3-F393-E0A9-E50E24DCCA9E", @"FFF1"]
+//#define sServiceUUIDs @[@"6E400001-B5A3-F393-E0A9-E50E24DCCA9E", @"FFF0"]
+
+#define WriteCharacterUUID @[@"FFF1"]
+#define ReadCharacterUUID @[@"FFF4"]
+#define SERVICEUUID @[@"0xFFF0"]
+
+#define Characters @[@"FFF1",@"FFF4"]
 
 @interface MinewModule()<CBPeripheralDelegate>
 
 @property (nonatomic, strong) CBCharacteristic *writeCharacteristic;
 
-@property (nonatomic, strong) CBCharacteristic *notifyCharacteristic;
+@property (nonatomic, strong) CBCharacteristic *readCharacteristic;
+
+
+//@property (nonatomic, strong) CBCharacteristic *notifyCharacteristic;
 
 @end
 
@@ -32,13 +41,12 @@
 
 - (void)writeData:(NSData *)data hex:(BOOL)hex
 {
-    if (!_writeCharacteristic && _writeHandler)
-    {
-        _writeHandler(NO);
-        return ;
+    NSLog(@"_writeCharacteristic.UUID.UUIDString==%@  character==%@",_writeCharacteristic.UUID.UUIDString,_writeCharacteristic);
+
+    if (_writeCharacteristic) {
+        [_peripheral writeValue:data forCharacteristic:_writeCharacteristic type:CBCharacteristicWriteWithResponse];
+
     }
-    
-    [_peripheral writeValue:data forCharacteristic:_writeCharacteristic type:CBCharacteristicWriteWithResponse];
 }
 
 - (instancetype)initWithPeripheral:(CBPeripheral *)per infoDict:(NSDictionary *)info
@@ -71,19 +79,14 @@
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
-    NSInteger svcCount = peripheral.services.count;
-    
-    if (svcCount != 1)
-    {
-        [self executeConnectionHandler:NO];
-        return ;
-    }
-    
     
     for ( CBService *s in peripheral.services)
     {
-        if ([sServiceUUIDs indexOfObject:s.UUID.UUIDString])
-           [peripheral discoverCharacteristics:nil forService:s];
+        if ([SERVICEUUID indexOfObject:s.UUID.UUIDString])
+        {
+            [peripheral discoverCharacteristics:nil forService:s];
+
+        }
         else
             [self executeConnectionHandler:NO];
     }
@@ -93,10 +96,15 @@
 {
     NSLog(@"++++%@", characteristic);
     
-    if ([_notifyCharacteristic.UUID.UUIDString isEqualToString:characteristic.UUID.UUIDString] && !error)
+    if (error.description) {
+        NSLog(@"读取设备的错误信息==%@",error.description);
+    }
+    
+    if ([_readCharacteristic.UUID.UUIDString isEqualToString:characteristic.UUID.UUIDString] && !error)
     {
         if (_receiveHandler)
            _receiveHandler(characteristic.value);
+        NSLog(@"receive收到的数据===%@",characteristic.value);
     }
 }
 
@@ -104,35 +112,43 @@
 {
     NSLog(@"didUpdateNotificationStateForCharacteristic Error:%@", error);
     
+    if (_notifyHandler) {
+        _notifyHandler(characteristic.value);
+        NSLog(@"notify得到的数据===%@",characteristic.value);
+    }
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
+    NSLog(@"扫描到的服务==%@",service.UUID.UUIDString);
     for (CBCharacteristic *c in service.characteristics)
     {
-    
-        if ([sNotifyUUIDs indexOfObject:[c.UUID.UUIDString uppercaseString]] != NSNotFound)
+        NSLog(@"扫描到的character的特性==%@",c.UUID.UUIDString);
+        if ([WriteCharacterUUID indexOfObject:[c.UUID.UUIDString uppercaseString]] != NSNotFound)
         {
-           [peripheral setNotifyValue:YES forCharacteristic:c];
-            _notifyCharacteristic = c;
+            _writeCharacteristic = c;
+            
         }
-        else if ([sWriteUUIDs indexOfObject:[c.UUID.UUIDString uppercaseString]] != NSNotFound)
-                 _writeCharacteristic = c;
-        
+        if ([ReadCharacterUUID indexOfObject:[c.UUID.UUIDString uppercaseString]] != NSNotFound) {
+            _readCharacteristic = c;
+           [peripheral setNotifyValue:YES forCharacteristic:c];
+
+        }
         [peripheral readValueForCharacteristic:c];
+
     }
     
     
     if (!_connectionHandler)
         return ;
     
-    
-    if (_writeCharacteristic && _notifyCharacteristic)
+    if (_writeCharacteristic)
         [self executeConnectionHandler:YES];
     else
         [self executeConnectionHandler:NO];
 }
 
+//如果有写入回应的情况
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     NSLog(@"didWriteValueForCharacteristic Error:%@", error);
@@ -150,8 +166,6 @@
         _connectionHandler(dict, self);
     }
 }
-
-
 
 #pragma mark ***********************************Setter
 - (void)setPeripheral:(CBPeripheral *)peripheral

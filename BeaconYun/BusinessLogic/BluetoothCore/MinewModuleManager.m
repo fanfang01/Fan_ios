@@ -19,6 +19,7 @@
 
 @interface MinewModuleManager () <CBCentralManagerDelegate>
 
+@property (nonatomic, strong) CBCharacteristic *writeCharacteristic;
 @end
 
 @implementation MinewModuleManager
@@ -62,7 +63,7 @@
     _bindUUIDs = [[NSMutableDictionary alloc]init];
     _connectingModuleDict = [NSMutableDictionary dictionary];
     
-    _bluetoothQueue = dispatch_queue_create("com.minew.tech", DISPATCH_QUEUE_SERIAL);
+    _bluetoothQueue = dispatch_queue_create("com.ask.tech", DISPATCH_QUEUE_SERIAL);
     _centralManager = [[CBCentralManager alloc]initWithDelegate:self queue:_bluetoothQueue options:@{CBCentralManagerOptionShowPowerAlertKey: @NO}];
     
     
@@ -149,13 +150,13 @@
     [NSKeyedArchiver archiveRootObject:_bindModulesDict toFile:sBindDataFile];
 }
 
-
 #pragma mark ********************************Public
 - (void)startScan
 {
     _scanning = YES;
     [self initializeTimer];
     
+    //指定扫描特定的服务
     [MinewCommonTool onThread:_bluetoothQueue execute:^{
         [_centralManager scanForPeripheralsWithServices:nil options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @NO}];
     }];
@@ -204,25 +205,21 @@
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI
 {
-    if ([RSSI intValue] < -50) {
-        return;
-    }
+    NSLog(@"还在持续扫描");
     NSDictionary *adverDataDict = advertisementData[CBAdvertisementDataServiceDataKey];
     
-//    NSString *serviceuuid = [NSString stringWithFormat:@"%@", [adverDataDict.allKeys firstObject]];
-//    
-//    NSArray *serviceuuids = @[ @"FFF0"];
-    
-//    NSUInteger index = [serviceuuids indexOfObject:serviceuuid];
     
     NSString *name = peripheral.name;
+
     
     NSString *adName = advertisementData[CBAdvertisementDataLocalNameKey];
     
     
-//    if (index != NSNotFound )
-//    {
-    
+    if ([adName isEqualToString:@"ZLN12774"] )
+    {
+
+        NSLog(@"扫描到的数据::::%@",advertisementData);
+
         MinewModule *module = [self moduleExist:peripheral.identifier.UUIDString];
         
         if ( module.connecting)
@@ -241,24 +238,23 @@
                     [self.delegaate manager:self appearModules:_appearModules];
                 }];
         }
-    
-       NSString *dataString =  [MinewCommonTool getDataString:adverDataDict[adverDataDict.allKeys[0]]];
-    
-        if (dataString.length >= 10)
-        {
-            module.updateTime = [NSDate date];
-            module.peripheral = peripheral;
-            
-            NSString *battery = [dataString substringToIndex:1];
-            module.battery = [MinewCommonTool decimalFromHexString:battery];
-            
-        }
+        
+        module.updateTime = [NSDate date];
+        module.peripheral = peripheral;
 
        module.inRange = YES;
        module.name = adName? adName:( name? name: @"Unnamed");
        module.rssi = [RSSI integerValue];
+        
+        NSLog(@"module.name===%@",module.name);
 
-//    }
+    
+    NSLog(@"收到的数据====%@",advertisementData);
+    if (self.findDevice) {
+        self.findDevice(module);
+    }
+
+    }
 }
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error

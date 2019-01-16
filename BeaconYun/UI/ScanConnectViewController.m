@@ -127,7 +127,7 @@ static NSInteger scanCount;
 }
 
 #pragma mark ---- 连接搜索成功的Module
-- (void)connectToModules:(MinewModule *)module {
+- (void)connectToModule:(MinewModule *)module {
     
     MinewModuleAPI *api = [MinewModuleAPI sharedInstance];
     api.lastModule = module;
@@ -155,7 +155,7 @@ static NSInteger scanCount;
     [_manager startScan];
     [self scanAction];
     
-    [self connectSucessSkipToNextVC];
+//    [self connectSucessSkipToNextVC];
 #ifdef debug
     
 #else
@@ -190,20 +190,19 @@ static NSInteger scanCount;
     
     
     __weak  ScanConnectViewController *weakSelf = self;
-//    _manager.findDevice = ^(MinewModule *module) {
-//        __strong BYScanDeviceViewController *strongSelf = weakSelf;
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            _showLabel.text = [NSString stringWithFormat:@"扫描到%@",module.name];
-//            if (scanCount == 0) {
-//                [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"成功扫描到设备%@",module.name]];
-//
-//                //连接搜索的设备
-//                [strongSelf connectToModules:module];
-//
-//            }
-//        });
-//
-//    };
+    _manager.findDevice = ^(MinewModule *module) {
+        __strong ScanConnectViewController *strongSelf = weakSelf;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            strongSelf->_showLabel.text = [NSString stringWithFormat:@"扫描到%@",module.name];
+            if (scanCount == 0) {
+                [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"成功扫描到设备%@",module.name]];
+                
+                //连接搜索的设备
+                [strongSelf connectToModule:module];
+            }
+        });
+
+    };
     
     if (_timer)
         [_timer invalidate];

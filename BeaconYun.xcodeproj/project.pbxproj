@@ -10,6 +10,10 @@
 		2842134A21BF8E0000B36B94 /* BYScanDeviceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2842134921BF8E0000B36B94 /* BYScanDeviceViewController.storyboard */; };
 		286D18D021E829B1000A122E /* ScanConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286D18CF21E829B1000A122E /* ScanConnectViewController.m */; };
 		286D18D321E8368F000A122E /* shake.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 286D18D221E8368F000A122E /* shake.xcassets */; };
+		286D18DD21E86E83000A122E /* MinewModuleAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 286D18D621E86E83000A122E /* MinewModuleAPI.m */; };
+		286D18DE21E86E83000A122E /* MinewCommonTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 286D18D721E86E83000A122E /* MinewCommonTool.m */; };
+		286D18DF21E86E83000A122E /* MinewModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 286D18DA21E86E83000A122E /* MinewModuleManager.m */; };
+		286D18E021E86E83000A122E /* MinewModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 286D18DB21E86E83000A122E /* MinewModule.m */; };
 		B1CFC9764E4898520C187548 /* libPods-BeaconYun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F5851AABDA97E315A353A0BF /* libPods-BeaconYun.a */; };
 		E532AFD01E9B92290001BE28 /* lock.js in Resources */ = {isa = PBXBuildFile; fileRef = E532AFCF1E9B92290001BE28 /* lock.js */; };
 		E539CF0D1E762AA800B9D731 /* ui2.js in Resources */ = {isa = PBXBuildFile; fileRef = E539CF0C1E762AA800B9D731 /* ui2.js */; };
@@ -23,10 +27,6 @@
 		E540700C1E972B3E00D9ECB4 /* union_up.png in Resources */ = {isa = PBXBuildFile; fileRef = E54070051E972B3E00D9ECB4 /* union_up.png */; };
 		E540700D1E972B3E00D9ECB4 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = E54070061E972B3E00D9ECB4 /* up.png */; };
 		E54070101E97320100D9ECB4 /* WXImgLoaderDefaultImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = E540700F1E97320100D9ECB4 /* WXImgLoaderDefaultImpl.m */; };
-		E545202A1E67FFB700C0D46E /* MinewCommonTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E54520231E67FFB700C0D46E /* MinewCommonTool.m */; };
-		E545202C1E67FFB700C0D46E /* MinewModule.m in Sources */ = {isa = PBXBuildFile; fileRef = E54520271E67FFB700C0D46E /* MinewModule.m */; };
-		E545202D1E67FFB700C0D46E /* MinewModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E54520291E67FFB700C0D46E /* MinewModuleManager.m */; };
-		E54520301E68000000C0D46E /* MinewModuleAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = E545202F1E68000000C0D46E /* MinewModuleAPI.m */; };
 		E54520331E68469500C0D46E /* BYDeviceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E54520321E68469500C0D46E /* BYDeviceDetailViewController.m */; };
 		E54F0A2B1EA9D13F008B7CC3 /* auto.png in Resources */ = {isa = PBXBuildFile; fileRef = E54F0A221EA9D13F008B7CC3 /* auto.png */; };
 		E54F0A2C1EA9D13F008B7CC3 /* down@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E54F0A231EA9D13F008B7CC3 /* down@3x.png */; };
@@ -91,6 +91,14 @@
 		286D18CF21E829B1000A122E /* ScanConnectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanConnectViewController.m; sourceTree = "<group>"; };
 		286D18D121E830FF000A122E /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		286D18D221E8368F000A122E /* shake.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = shake.xcassets; sourceTree = "<group>"; };
+		286D18D521E86E83000A122E /* MinewModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinewModuleManager.h; sourceTree = "<group>"; };
+		286D18D621E86E83000A122E /* MinewModuleAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinewModuleAPI.m; sourceTree = "<group>"; };
+		286D18D721E86E83000A122E /* MinewCommonTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinewCommonTool.m; sourceTree = "<group>"; };
+		286D18D821E86E83000A122E /* MinewModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinewModule.h; sourceTree = "<group>"; };
+		286D18D921E86E83000A122E /* MinewModuleAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinewModuleAPI.h; sourceTree = "<group>"; };
+		286D18DA21E86E83000A122E /* MinewModuleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinewModuleManager.m; sourceTree = "<group>"; };
+		286D18DB21E86E83000A122E /* MinewModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinewModule.m; sourceTree = "<group>"; };
+		286D18DC21E86E83000A122E /* MinewCommonTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinewCommonTool.h; sourceTree = "<group>"; };
 		49E0A3CD57A1B7DE50179925 /* Pods-BeaconYun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaconYun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeaconYun/Pods-BeaconYun.debug.xcconfig"; sourceTree = "<group>"; };
 		B370C1B698562C91509A8E8F /* Pods-BeaconYun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaconYun.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeaconYun/Pods-BeaconYun.release.xcconfig"; sourceTree = "<group>"; };
 		E532AFCF1E9B92290001BE28 /* lock.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = lock.js; sourceTree = "<group>"; };
@@ -107,14 +115,6 @@
 		E54070061E972B3E00D9ECB4 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
 		E540700E1E97320100D9ECB4 /* WXImgLoaderDefaultImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXImgLoaderDefaultImpl.h; path = BeaconYun/CommonTools/WXImgLoaderDefaultImpl.h; sourceTree = SOURCE_ROOT; };
 		E540700F1E97320100D9ECB4 /* WXImgLoaderDefaultImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WXImgLoaderDefaultImpl.m; path = BeaconYun/CommonTools/WXImgLoaderDefaultImpl.m; sourceTree = SOURCE_ROOT; };
-		E54520221E67FFB700C0D46E /* MinewCommonTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinewCommonTool.h; sourceTree = "<group>"; };
-		E54520231E67FFB700C0D46E /* MinewCommonTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinewCommonTool.m; sourceTree = "<group>"; };
-		E54520261E67FFB700C0D46E /* MinewModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinewModule.h; sourceTree = "<group>"; };
-		E54520271E67FFB700C0D46E /* MinewModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinewModule.m; sourceTree = "<group>"; };
-		E54520281E67FFB700C0D46E /* MinewModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinewModuleManager.h; sourceTree = "<group>"; };
-		E54520291E67FFB700C0D46E /* MinewModuleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinewModuleManager.m; sourceTree = "<group>"; };
-		E545202E1E68000000C0D46E /* MinewModuleAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinewModuleAPI.h; sourceTree = "<group>"; };
-		E545202F1E68000000C0D46E /* MinewModuleAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinewModuleAPI.m; sourceTree = "<group>"; };
 		E54520311E68469500C0D46E /* BYDeviceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYDeviceDetailViewController.h; sourceTree = "<group>"; };
 		E54520321E68469500C0D46E /* BYDeviceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYDeviceDetailViewController.m; sourceTree = "<group>"; };
 		E54F0A221EA9D13F008B7CC3 /* auto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = auto.png; sourceTree = "<group>"; };
@@ -208,6 +208,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		286D18D421E86E83000A122E /* BluetoothCore */ = {
+			isa = PBXGroup;
+			children = (
+				286D18D521E86E83000A122E /* MinewModuleManager.h */,
+				286D18DA21E86E83000A122E /* MinewModuleManager.m */,
+				286D18D921E86E83000A122E /* MinewModuleAPI.h */,
+				286D18D621E86E83000A122E /* MinewModuleAPI.m */,
+				286D18DC21E86E83000A122E /* MinewCommonTool.h */,
+				286D18D721E86E83000A122E /* MinewCommonTool.m */,
+				286D18D821E86E83000A122E /* MinewModule.h */,
+				286D18DB21E86E83000A122E /* MinewModule.m */,
+			);
+			path = BluetoothCore;
+			sourceTree = "<group>";
+		};
 		4A16B165B91471A682D1289E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,21 +274,6 @@
 			name = Resources;
 			path = BeaconYun/Resources;
 			sourceTree = SOURCE_ROOT;
-		};
-		E54520211E67FFB700C0D46E /* BluetoothCore */ = {
-			isa = PBXGroup;
-			children = (
-				E54520221E67FFB700C0D46E /* MinewCommonTool.h */,
-				E54520231E67FFB700C0D46E /* MinewCommonTool.m */,
-				E54520261E67FFB700C0D46E /* MinewModule.h */,
-				E54520271E67FFB700C0D46E /* MinewModule.m */,
-				E54520281E67FFB700C0D46E /* MinewModuleManager.h */,
-				E54520291E67FFB700C0D46E /* MinewModuleManager.m */,
-				E545202E1E68000000C0D46E /* MinewModuleAPI.h */,
-				E545202F1E68000000C0D46E /* MinewModuleAPI.m */,
-			);
-			path = BluetoothCore;
-			sourceTree = "<group>";
 		};
 		E569928E1E5EB60B00C76E42 = {
 			isa = PBXGroup;
@@ -419,7 +419,7 @@
 		E56992FC1E5ECA4200C76E42 /* BusinessLogic */ = {
 			isa = PBXGroup;
 			children = (
-				E54520211E67FFB700C0D46E /* BluetoothCore */,
+				286D18D421E86E83000A122E /* BluetoothCore */,
 			);
 			name = BusinessLogic;
 			path = BeaconYun/BusinessLogic;
@@ -685,11 +685,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5E4BDB51E71427D0086472B /* BYInfoViewController.m in Sources */,
-				E545202D1E67FFB700C0D46E /* MinewModuleManager.m in Sources */,
+				286D18DD21E86E83000A122E /* MinewModuleAPI.m in Sources */,
+				286D18E021E86E83000A122E /* MinewModule.m in Sources */,
 				E56992EF1E5EB97100C76E42 /* BYCommonTools.m in Sources */,
+				286D18DE21E86E83000A122E /* MinewCommonTool.m in Sources */,
 				E5A7E1EF1E602A6300D72212 /* BYHeaderView.m in Sources */,
-				E545202A1E67FFB700C0D46E /* MinewCommonTool.m in Sources */,
-				E54520301E68000000C0D46E /* MinewModuleAPI.m in Sources */,
 				E53E94CB1E6526FB0047D49A /* BYSetDeviceViewController.m in Sources */,
 				E56992F11E5EB97100C76E42 /* BYCustomManager.m in Sources */,
 				E5BF8E721EB040A300AF94DC /* ColorPickerView.m in Sources */,
@@ -702,7 +702,7 @@
 				E5E4BDAF1E710B780086472B /* NSTimer+Blocks.m in Sources */,
 				E56992FB1E5EBE6B00C76E42 /* BYTableViewModel.m in Sources */,
 				E56992E01E5EB91500C76E42 /* main.m in Sources */,
-				E545202C1E67FFB700C0D46E /* MinewModule.m in Sources */,
+				286D18DF21E86E83000A122E /* MinewModuleManager.m in Sources */,
 				E54070101E97320100D9ECB4 /* WXImgLoaderDefaultImpl.m in Sources */,
 				E56993011E5ECA9400C76E42 /* BYCellModel.m in Sources */,
 				E56993041E5ED41100C76E42 /* BYSectionModel.m in Sources */,

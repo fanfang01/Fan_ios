@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeaconYun/UI/BYBindDeviceViewController.m"
-            timestampString = "566212551.6954449"
+            filePath = "BeaconYun/BusinessLogic/BluetoothCore/MinewModuleAPI.m"
+            timestampString = "569234433.387731"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "-initGUI"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "-sendData:hex:completion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeaconYun/UI/BYBindDeviceViewController.m"
-            timestampString = "566212551.695537"
+            filePath = "BeaconYun/BusinessLogic/BluetoothCore/MinewModule.m"
+            timestampString = "569295698.892882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "-initGUI"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
+            landmarkName = "-peripheral:didDiscoverCharacteristicsForService:error:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeaconYun/UI/ScanConnectViewController.m"
-            timestampString = "568867702.243443"
+            filePath = "BeaconYun/BusinessLogic/BluetoothCore/MinewModule.m"
+            timestampString = "569295698.893028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "248"
-            endingLineNumber = "248"
-            landmarkName = "-connectSucessSkipToNextVC"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "-peripheral:didDiscoverCharacteristicsForService:error:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

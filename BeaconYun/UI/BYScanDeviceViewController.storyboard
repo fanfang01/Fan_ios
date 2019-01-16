@@ -30,8 +30,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="g8f-S6-T9T">
-                                <rect key="frame" x="110" y="272.5" width="216" height="30"/>
+                            <slider opaque="NO" tag="301" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="g8f-S6-T9T">
+                                <rect key="frame" x="110" y="272.5" width="249" height="30"/>
+                                <connections>
+                                    <action selector="sliderMoved:" destination="FcD-zM-bEG" eventType="valueChanged" id="Xwg-XI-VSo"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上下摇头" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="twX-lm-3nv">
                                 <rect key="frame" x="233" y="97" width="70" height="20"/>
@@ -41,6 +44,9 @@
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yFL-Yl-Pdd">
                                 <rect key="frame" x="308" y="91.5" width="49" height="31"/>
+                                <connections>
+                                    <action selector="UpDownRoute:" destination="FcD-zM-bEG" eventType="valueChanged" id="xjr-hf-X2V"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="定时开关" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PoT-cl-GA2">
                                 <rect key="frame" x="20" y="97" width="70" height="20"/>
@@ -64,6 +70,9 @@
                                     <constraint firstAttribute="height" constant="31" id="3bd-8l-MGZ"/>
                                     <constraint firstAttribute="width" constant="47" id="Rkb-oa-zMy"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="LeftRightRoute:" destination="FcD-zM-bEG" eventType="valueChanged" id="l8Z-t7-28U"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="语音识别" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYq-qN-LMn">
                                 <rect key="frame" x="20" y="40" width="70" height="20"/>
@@ -81,6 +90,9 @@
                                     <constraint firstAttribute="width" constant="47" id="SyU-aB-DBB"/>
                                     <constraint firstAttribute="height" constant="31" id="WRl-Re-Ty8"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="voiceRecognize:" destination="FcD-zM-bEG" eventType="valueChanged" id="Epu-Wc-zW8"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="定时时长" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Vv-Sg-ZfK">
                                 <rect key="frame" x="20" y="197" width="70" height="20"/>
@@ -88,12 +100,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ncd-2c-fk3">
-                                <rect key="frame" x="108" y="192" width="216" height="31"/>
+                            <slider opaque="NO" tag="300" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ncd-2c-fk3">
+                                <rect key="frame" x="108" y="192" width="249" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="212" id="2O4-qq-rgR"/>
                                     <constraint firstAttribute="height" constant="30" id="I7Z-Hh-TSn"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="sliderMoved:" destination="FcD-zM-bEG" eventType="valueChanged" id="fyy-2B-xAH"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开机" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CvN-0P-XXK">
                                 <rect key="frame" x="20" y="521" width="35" height="20"/>
@@ -118,6 +132,9 @@
                                     <constraint firstAttribute="width" constant="47" id="IrI-82-a2f"/>
                                     <constraint firstAttribute="height" constant="31" id="YTP-M1-0JE"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="onOff:" destination="FcD-zM-bEG" eventType="valueChanged" id="Hlp-9T-lek"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="语音风扇" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvl-aX-9rR">
                                 <rect key="frame" x="152.5" y="607" width="70" height="20"/>
@@ -137,6 +154,9 @@
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yif-6c-7sC">
                                 <rect key="frame" x="100" y="91.5" width="49" height="31"/>
+                                <connections>
+                                    <action selector="limitTimeSwitch:" destination="FcD-zM-bEG" eventType="valueChanged" id="4ZT-mZ-D4K"/>
+                                </connections>
                             </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -181,6 +201,7 @@
                             <constraint firstItem="tvl-aX-9rR" firstAttribute="top" secondItem="CvN-0P-XXK" secondAttribute="bottom" constant="66" id="h2I-2q-CsP"/>
                             <constraint firstItem="PoT-cl-GA2" firstAttribute="centerX" secondItem="dYq-qN-LMn" secondAttribute="centerX" id="hKD-Ii-ztY"/>
                             <constraint firstItem="Tj5-VU-H9u" firstAttribute="centerX" secondItem="0Vv-Sg-ZfK" secondAttribute="centerX" id="izF-fa-EaW"/>
+                            <constraint firstAttribute="trailing" secondItem="Ncd-2c-fk3" secondAttribute="trailing" constant="20" id="j8a-vP-uQa"/>
                             <constraint firstItem="yif-6c-7sC" firstAttribute="width" secondItem="xVH-22-3dt" secondAttribute="width" id="m26-k5-R6W"/>
                             <constraint firstItem="g8f-S6-T9T" firstAttribute="height" secondItem="Ncd-2c-fk3" secondAttribute="height" constant="-1" id="nN3-Wq-1xX"/>
                             <constraint firstItem="CvN-0P-XXK" firstAttribute="leading" secondItem="vBv-pe-Iem" secondAttribute="leading" constant="20" id="pOB-gh-1n1"/>
