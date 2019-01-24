@@ -37,4 +37,6 @@
 #pragma mark ---- 16进制字符串 转NSData
 + (NSData *)hexString:(NSString *)hexString;
 
++ (NSString *)reverseString:(NSString *)string;
+
 @end

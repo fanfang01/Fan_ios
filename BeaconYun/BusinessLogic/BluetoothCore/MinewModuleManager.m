@@ -19,7 +19,6 @@
 
 @interface MinewModuleManager () <CBCentralManagerDelegate>
 
-@property (nonatomic, strong) CBCharacteristic *writeCharacteristic;
 @end
 
 @implementation MinewModuleManager
@@ -208,14 +207,13 @@
     NSLog(@"还在持续扫描");
     NSDictionary *adverDataDict = advertisementData[CBAdvertisementDataServiceDataKey];
     
-    
     NSString *name = peripheral.name;
 
     
     NSString *adName = advertisementData[CBAdvertisementDataLocalNameKey];
     
     
-    if ([adName isEqualToString:@"ZLN12774"] )
+    if ([adName isEqualToString:@"S301R"] )
     {
 
         NSLog(@"扫描到的数据::::%@",advertisementData);

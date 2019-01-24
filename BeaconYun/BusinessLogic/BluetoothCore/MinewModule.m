@@ -14,8 +14,9 @@
 //#define sNotifyUUIDs @[@"6E400003-B5A3-F393-E0A9-E50E24DCCA9E", @"FFF1"]
 //#define sServiceUUIDs @[@"6E400001-B5A3-F393-E0A9-E50E24DCCA9E", @"FFF0"]
 
-#define WriteCharacterUUID @[@"FFF1"]
-#define ReadCharacterUUID @[@"FFF4"]
+#define WriteCharacterUUID @[@"FF01"]
+//#define ReadCharacterUUID @[@"FFF4"]
+#define NotifyCharacterUUID @[@"FF02"]
 #define SERVICEUUID @[@"0xFFF0"]
 
 #define Characters @[@"FFF1",@"FFF4"]
@@ -24,7 +25,7 @@
 
 @property (nonatomic, strong) CBCharacteristic *writeCharacteristic;
 
-@property (nonatomic, strong) CBCharacteristic *readCharacteristic;
+@property (nonatomic, strong) CBCharacteristic *notifyCharacteristic;
 
 
 //@property (nonatomic, strong) CBCharacteristic *notifyCharacteristic;
@@ -100,10 +101,10 @@
         NSLog(@"读取设备的错误信息==%@",error.description);
     }
     
-    if ([_readCharacteristic.UUID.UUIDString isEqualToString:characteristic.UUID.UUIDString] && !error)
+    if ([_writeCharacteristic.UUID.UUIDString isEqualToString:characteristic.UUID.UUIDString])
     {
         if (_receiveHandler)
-           _receiveHandler(characteristic.value);
+            _receiveHandler(error?NO:YES,characteristic.value);
         NSLog(@"receive收到的数据===%@",characteristic.value);
     }
 }
@@ -112,10 +113,11 @@
 {
     NSLog(@"didUpdateNotificationStateForCharacteristic Error:%@", error);
     
-    if (_notifyHandler) {
+    if (_notifyHandler)
+    {
         _notifyHandler(characteristic.value);
-        NSLog(@"notify得到的数据===%@",characteristic.value);
     }
+        
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
@@ -127,10 +129,10 @@
         if ([WriteCharacterUUID indexOfObject:[c.UUID.UUIDString uppercaseString]] != NSNotFound)
         {
             _writeCharacteristic = c;
-            
+            NSLog(@"已扫描到写服务");
         }
-        if ([ReadCharacterUUID indexOfObject:[c.UUID.UUIDString uppercaseString]] != NSNotFound) {
-            _readCharacteristic = c;
+        if ([NotifyCharacterUUID indexOfObject:[c.UUID.UUIDString uppercaseString]] != NSNotFound) {
+            _notifyCharacteristic = c;
            [peripheral setNotifyValue:YES forCharacteristic:c];
 
         }
@@ -152,9 +154,16 @@
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     NSLog(@"didWriteValueForCharacteristic Error:%@", error);
-    if ( [_writeCharacteristic.UUID.UUIDString isEqualToString:characteristic.UUID.UUIDString] && _writeHandler)
+    
+    
+    NSLog(@"peripheral == %@",peripheral);
+    if ( [_writeCharacteristic.UUID.UUIDString isEqualToString:characteristic.UUID.UUIDString] )
     {
-        _writeHandler(error? NO: YES);
+        [peripheral readValueForCharacteristic:characteristic];
+        
+        NSLog(@"写入回应收到的数据:%@",characteristic.value);
+
+//        _writeHandler(error? NO: YES,characteristic.value);
     }
 }
 

@@ -18,6 +18,15 @@
 #import "MinewCommonTool.h"
 #import "BYNavigationController.h"
 
+#import "FanDeviceSet.h"
+#import "CustomSlider.h"
+
+//#import "BDSEventManager.h"
+//#import "BDSASRDefines.h"
+//#import "BDSASRParameters.h"
+//#import "BDSWakeupDefines.h"
+//#import "BDSWakeupParameters.h"
+
 //#import "BDSEventManager.h"
 //#import "BDSASRDefines.h"
 //#import "BDSASRParameters.h"

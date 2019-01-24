@@ -240,4 +240,14 @@
     
     return newData;
 }
+
++ (NSString *)reverseString:(NSString *)string {
+    NSMutableString *reverseStr = [[NSMutableString alloc] init];
+    for (NSInteger i = string.length; i>1; i-=2) {
+        NSRange range = NSMakeRange(i-2, 2);
+        NSString *str = [string substringWithRange:range];
+        reverseStr = [reverseStr stringByAppendingString:str];
+    }
+    return reverseStr;
+}
 @end

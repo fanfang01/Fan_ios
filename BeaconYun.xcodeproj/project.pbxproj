@@ -7,7 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28193E9721F6EE7A00AD3B97 /* CustomSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 28193E9521F6EE7A00AD3B97 /* CustomSlider.m */; };
 		2842134A21BF8E0000B36B94 /* BYScanDeviceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2842134921BF8E0000B36B94 /* BYScanDeviceViewController.storyboard */; };
+		2845216A21F9960A0089D6FE /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845216921F9960A0089D6FE /* CoreTelephony.framework */; };
+		2845216C21F996130089D6FE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845216B21F996120089D6FE /* CoreLocation.framework */; };
+		2845216E21F9961A0089D6FE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845216D21F9961A0089D6FE /* CFNetwork.framework */; };
+		2845217021F996230089D6FE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845216F21F996230089D6FE /* AVFoundation.framework */; };
+		2845217221F9962D0089D6FE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845217121F9962D0089D6FE /* AudioToolbox.framework */; };
+		2845217421F996350089D6FE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845217321F996350089D6FE /* SystemConfiguration.framework */; };
+		2845217621F9963F0089D6FE /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845217521F9963F0089D6FE /* GLKit.framework */; };
+		2845217821F996470089D6FE /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845217721F996470089D6FE /* libz.1.2.5.tbd */; };
+		2845217A21F9964F0089D6FE /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845217921F9964F0089D6FE /* libc++.tbd */; };
+		2845217C21F9965A0089D6FE /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845217B21F9965A0089D6FE /* libiconv.2.4.0.tbd */; };
+		2845217E21F996650089D6FE /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845217D21F996650089D6FE /* libsqlite3.0.tbd */; };
 		286D18D021E829B1000A122E /* ScanConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286D18CF21E829B1000A122E /* ScanConnectViewController.m */; };
 		286D18D321E8368F000A122E /* shake.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 286D18D221E8368F000A122E /* shake.xcassets */; };
 		286D18DD21E86E83000A122E /* MinewModuleAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 286D18D621E86E83000A122E /* MinewModuleAPI.m */; };
@@ -86,7 +98,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		28193E9521F6EE7A00AD3B97 /* CustomSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSlider.m; sourceTree = "<group>"; };
+		28193E9621F6EE7A00AD3B97 /* CustomSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSlider.h; sourceTree = "<group>"; };
 		2842134921BF8E0000B36B94 /* BYScanDeviceViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BYScanDeviceViewController.storyboard; sourceTree = "<group>"; };
+		2845216921F9960A0089D6FE /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		2845216B21F996120089D6FE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		2845216D21F9961A0089D6FE /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		2845216F21F996230089D6FE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		2845217121F9962D0089D6FE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		2845217321F996350089D6FE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2845217521F9963F0089D6FE /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		2845217721F996470089D6FE /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		2845217921F9964F0089D6FE /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		2845217B21F9965A0089D6FE /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
+		2845217D21F996650089D6FE /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		286D18CE21E829B1000A122E /* ScanConnectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanConnectViewController.h; sourceTree = "<group>"; };
 		286D18CF21E829B1000A122E /* ScanConnectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanConnectViewController.m; sourceTree = "<group>"; };
 		286D18D121E830FF000A122E /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -99,6 +124,7 @@
 		286D18DA21E86E83000A122E /* MinewModuleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinewModuleManager.m; sourceTree = "<group>"; };
 		286D18DB21E86E83000A122E /* MinewModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinewModule.m; sourceTree = "<group>"; };
 		286D18DC21E86E83000A122E /* MinewCommonTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinewCommonTool.h; sourceTree = "<group>"; };
+		286D18ED21EEDC68000A122E /* FanDeviceSet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FanDeviceSet.h; sourceTree = "<group>"; };
 		49E0A3CD57A1B7DE50179925 /* Pods-BeaconYun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaconYun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeaconYun/Pods-BeaconYun.debug.xcconfig"; sourceTree = "<group>"; };
 		B370C1B698562C91509A8E8F /* Pods-BeaconYun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaconYun.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeaconYun/Pods-BeaconYun.release.xcconfig"; sourceTree = "<group>"; };
 		E532AFCF1E9B92290001BE28 /* lock.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = lock.js; sourceTree = "<group>"; };
@@ -187,6 +213,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2845217E21F996650089D6FE /* libsqlite3.0.tbd in Frameworks */,
+				2845217C21F9965A0089D6FE /* libiconv.2.4.0.tbd in Frameworks */,
+				2845217A21F9964F0089D6FE /* libc++.tbd in Frameworks */,
+				2845217821F996470089D6FE /* libz.1.2.5.tbd in Frameworks */,
+				2845217621F9963F0089D6FE /* GLKit.framework in Frameworks */,
+				2845217421F996350089D6FE /* SystemConfiguration.framework in Frameworks */,
+				2845217221F9962D0089D6FE /* AudioToolbox.framework in Frameworks */,
+				2845217021F996230089D6FE /* AVFoundation.framework in Frameworks */,
+				2845216E21F9961A0089D6FE /* CFNetwork.framework in Frameworks */,
+				2845216C21F996130089D6FE /* CoreLocation.framework in Frameworks */,
+				2845216A21F9960A0089D6FE /* CoreTelephony.framework in Frameworks */,
 				B1CFC9764E4898520C187548 /* libPods-BeaconYun.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,6 +263,17 @@
 		4A16B165B91471A682D1289E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2845217D21F996650089D6FE /* libsqlite3.0.tbd */,
+				2845217B21F9965A0089D6FE /* libiconv.2.4.0.tbd */,
+				2845217921F9964F0089D6FE /* libc++.tbd */,
+				2845217721F996470089D6FE /* libz.1.2.5.tbd */,
+				2845217521F9963F0089D6FE /* GLKit.framework */,
+				2845217321F996350089D6FE /* SystemConfiguration.framework */,
+				2845217121F9962D0089D6FE /* AudioToolbox.framework */,
+				2845216F21F996230089D6FE /* AVFoundation.framework */,
+				2845216D21F9961A0089D6FE /* CFNetwork.framework */,
+				2845216B21F996120089D6FE /* CoreLocation.framework */,
+				2845216921F9960A0089D6FE /* CoreTelephony.framework */,
 				F5851AABDA97E315A353A0BF /* libPods-BeaconYun.a */,
 			);
 			name = Frameworks;
@@ -403,6 +451,8 @@
 		E56992F81E5EBE6B00C76E42 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				28193E9621F6EE7A00AD3B97 /* CustomSlider.h */,
+				28193E9521F6EE7A00AD3B97 /* CustomSlider.m */,
 				E540700E1E97320100D9ECB4 /* WXImgLoaderDefaultImpl.h */,
 				E540700F1E97320100D9ECB4 /* WXImgLoaderDefaultImpl.m */,
 				E56992F91E5EBE6B00C76E42 /* BYTableViewModel.h */,
@@ -419,6 +469,7 @@
 		E56992FC1E5ECA4200C76E42 /* BusinessLogic */ = {
 			isa = PBXGroup;
 			children = (
+				286D18ED21EEDC68000A122E /* FanDeviceSet.h */,
 				286D18D421E86E83000A122E /* BluetoothCore */,
 			);
 			name = BusinessLogic;
@@ -699,6 +750,7 @@
 				E54520331E68469500C0D46E /* BYDeviceDetailViewController.m in Sources */,
 				E5A7E1E31E600FB000D72212 /* BYScanDeviceViewController.m in Sources */,
 				E56992F31E5EB97100C76E42 /* BYNavigationController.m in Sources */,
+				28193E9721F6EE7A00AD3B97 /* CustomSlider.m in Sources */,
 				E5E4BDAF1E710B780086472B /* NSTimer+Blocks.m in Sources */,
 				E56992FB1E5EBE6B00C76E42 /* BYTableViewModel.m in Sources */,
 				E56992E01E5EB91500C76E42 /* main.m in Sources */,
@@ -867,10 +919,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = R4BAK83LRY;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = $SRCROOT/BeaconYun/CommonTools/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/BeaconYun/Configs/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BeaconYun/BaiduSDK/BDSClientLib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.minew.blelighttest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -882,10 +939,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = R4BAK83LRY;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = $SRCROOT/BeaconYun/CommonTools/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/BeaconYun/Configs/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BeaconYun/BaiduSDK/BDSClientLib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.minew.blelighttest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

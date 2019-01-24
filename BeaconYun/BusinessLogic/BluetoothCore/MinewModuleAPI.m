@@ -106,7 +106,18 @@ WX_EXPORT_METHOD(@selector(getLanguage:))
 {
     MinewModuleAPI *api = [self getInstance];
 
-    api.lastModule.receiveHandler = ^(NSData *data) {
+    api.lastModule.receiveHandler = ^(BOOL result,NSData *data) {
+        NSString *dataString = [NSString stringWithFormat:@"%@", data];
+        dataString = [dataString stringByReplacingOccurrencesOfString:@"<" withString:@""];
+        dataString = [dataString stringByReplacingOccurrencesOfString:@">" withString:@""];
+        handler(dataString, YES);
+    };
+}
+
+- (void)dataNotify:(WXModuleKeepAliveCallback)handler {
+    MinewModuleAPI *api = [self getInstance];
+    
+    api.lastModule.notifyHandler = ^(NSData *data) {
         NSString *dataString = [NSString stringWithFormat:@"%@", data];
         dataString = [dataString stringByReplacingOccurrencesOfString:@"<" withString:@""];
         dataString = [dataString stringByReplacingOccurrencesOfString:@">" withString:@""];
@@ -117,7 +128,14 @@ WX_EXPORT_METHOD(@selector(getLanguage:))
 //hex  是否是 16进制
 - (void)sendData:(NSString *)data hex:(BOOL)hex completion:(WXModuleKeepAliveCallback)handler
 {
-    NSLog(@"++INS:%@, hex:%d", data, hex);
+    NSString *copyStr = [data copy];
+    if (data.length<20*2) {
+        for (NSInteger i= data.length; i< 20*2 ; i++) {
+            copyStr = [copyStr stringByAppendingFormat:@"%@",@"0"];
+        }
+    }
+//    NSLog(@"++INS:%@, hex:%d", copyStr, hex);
+
     
     MinewModuleAPI *api = [self getInstance];
     
@@ -131,7 +149,7 @@ WX_EXPORT_METHOD(@selector(getLanguage:))
     
     if (hex)
     {
-        dataValue = [self dataFromHexString:data];
+        dataValue = [self dataFromHexString:copyStr];
         
         if (!dataValue)
         {
@@ -140,17 +158,17 @@ WX_EXPORT_METHOD(@selector(getLanguage:))
         }
     }
     else
-        dataValue = [data dataUsingEncoding:NSUTF8StringEncoding];
+        dataValue = [copyStr dataUsingEncoding:NSUTF8StringEncoding];
     
     NSLog(@"++DATA:%@", dataValue);
     
     
-    api.lastModule.writeHandler = ^(BOOL result) {
-        handler( result? @"1": @"0", YES);
+    api.lastModule.receiveHandler = ^(BOOL result,NSData *data) {
+        handler( data, result);
         
-        NSLog(@"++RE:%d", result);
+        NSLog(@"++RE:%d ++ WriteWithResponse==%@", result,data);
     };
-    
+
     [api.lastModule writeData:dataValue hex:hex];
 }
 
@@ -167,7 +185,7 @@ WX_EXPORT_METHOD(@selector(getLanguage:))
     NSTimeInterval interval = [inter integerValue];
     
     api.timer = [NSTimer scheduledTimerWithTimeInterval:interval block:^{
-        [api sendData:data hex:hex completion:handler];    
+        [api sendData:data hex:hex completion:handler];
     } repeats:YES];
     
     [api.timer fire];

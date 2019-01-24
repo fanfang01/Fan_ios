@@ -28,8 +28,8 @@ struct SendDataNodel {
 };
 
 typedef void(^Connection)(NSDictionary *dataDict, MinewModule *module);
-typedef void(^Receive)(NSData *data);
-typedef void(^Send)(BOOL result);
+typedef void(^Receive)(BOOL result, NSData *data);
+typedef void(^Send)(BOOL result,NSData *data);//写入回应的回调
 typedef void(^Notify)(NSData *data);
 
 @class CBPeripheral;
@@ -39,6 +39,8 @@ typedef void(^Notify)(NSData *data);
 @property (nonatomic, strong) CBPeripheral *peripheral;
 
 @property (nonatomic, strong) NSString *UUID;
+
+@property (nonatomic, strong) NSString *macString;
 
 @property (nonatomic, assign) BOOL connecting;
 
@@ -62,6 +64,7 @@ typedef void(^Notify)(NSData *data);
 
 @property (nonatomic, copy) Receive receiveHandler;
 
+//获取设备推送过来的数据
 @property (nonatomic, copy) Notify notifyHandler;
 
 @property (nonatomic, copy) Send writeHandler;
