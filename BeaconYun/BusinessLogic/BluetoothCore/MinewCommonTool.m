@@ -250,4 +250,22 @@
     }
     return reverseStr;
 }
+
+// 16进制转10进制
++ (NSNumber *) numberHexString:(NSString *)aHexString
+{
+        // 空,直接返回.
+        if (nil == aHexString)
+            {
+                    return nil;
+                }
+        NSScanner * scanner = [NSScanner scannerWithString:aHexString];
+        unsigned long long longlongValue;
+        [scanner scanHexLongLong:&longlongValue];
+    
+        //将整数转换为NSNumber,存储到数组中
+        NSNumber * hexNumber = [NSNumber numberWithLongLong:longlongValue];
+        return hexNumber;
+        
+}
 @end

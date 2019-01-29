@@ -27,12 +27,21 @@ struct SendDataNodel {
     Byte reserve[12];
 };
 
+struct DeviceBaseInfo {
+    uint32_t deviceId;
+    uint32_t firewareVer;
+    uint8_t PairFlag;
+};
+
 typedef void(^Connection)(NSDictionary *dataDict, MinewModule *module);
 typedef void(^Receive)(BOOL result, NSData *data);
 typedef void(^Send)(BOOL result,NSData *data);//写入回应的回调
 typedef void(^Notify)(NSData *data);
 
 @class CBPeripheral;
+
+//struct SendDataNodel dataModel = {0,0,0,0,0,0,0,0};
+
 
 @interface MinewModule : NSObject
 
@@ -41,6 +50,13 @@ typedef void(^Notify)(NSData *data);
 @property (nonatomic, strong) NSString *UUID;
 
 @property (nonatomic, strong) NSString *macString;
+@property (nonatomic, strong) NSString *device_id;
+@property (nonatomic, strong) NSString *version;
+@property (nonatomic, assign) BOOL pair_flag;
+
+//设备状态
+//@property (nonatomic, assign) WorkMode workMode;
+//@property (nonatomic, assign) WorkMode workMode;
 
 @property (nonatomic, assign) BOOL connecting;
 

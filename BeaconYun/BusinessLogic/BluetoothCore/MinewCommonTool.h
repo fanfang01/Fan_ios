@@ -39,4 +39,7 @@
 
 + (NSString *)reverseString:(NSString *)string;
 
+// 16进制转10进制
++ (NSNumber *) numberHexString:(NSString *)aHexString;
+
 @end

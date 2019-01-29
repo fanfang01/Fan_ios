@@ -56,7 +56,8 @@
 
 @implementation BYScanDeviceViewController
 
-
+struct SendDataNodel dataModel = {0,0,0,0,0,0};
+struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
 
 - (void)viewDidLoad
 {
@@ -321,6 +322,8 @@
         [SVProgressHUD showSuccessWithStatus:@"您已关闭定时开关功能"];
 
     }
+    
+    [self setDeveiceState];
 }
 
 #pragma mark --- 风扇总开关
@@ -348,6 +351,23 @@
         //when write with response,you can receive a result
         //when write with response,you can receive a result
         NSLog(@"发送设备基本信息==%@,发送结果===%u",result,keepAlive);
+        
+        NSObject *data = result;
+        NSString *dataString = [MinewCommonTool getDataString:data];
+        NSRange range = NSMakeRange(4, 18);
+        NSString *deviceInfoString = [dataString substringWithRange:range];
+        NSString *device_id = [deviceInfoString substringWithRange:NSMakeRange(0, 8)];
+        _api.lastModule.device_id =  [MinewCommonTool reverseString:device_id];
+
+        NSString *version = [deviceInfoString substringWithRange:NSMakeRange(8, 8)];
+        _api.lastModule.version = [MinewCommonTool reverseString:version];
+
+        NSString *pair_flag = [deviceInfoString substringWithRange:NSMakeRange(16, 2)];
+        _api.lastModule.pair_flag = [[MinewCommonTool reverseString:pair_flag] boolValue];
+
+        NSLog(@"测试设备基本信息===%@  %@  %@  %lu",deviceInfoString,_api.lastModule.device_id,_api.lastModule.version,_api.lastModule.pair_flag);
+        
+        
     }];
     
 }
@@ -367,6 +387,58 @@
     }];
 }
 
+- (void)getDeviceStateInfo {
+    [_api sendData:@"0202" hex:YES completion:^(id result, BOOL keepAlive) {
+        //when write with response,you can receive a result
+        NSLog(@"发送设备状态信息==%@,发送结果===%u",result,keepAlive);
+        
+        NSData *data = (NSData *)result;
+        Byte *testByte = (Byte *)[data bytes];
+        dataModel.mode = testByte[2];
+        dataModel.Wind_Speed = testByte[3];
+        dataModel.Hand_Flag = testByte[4];
+        dataModel.Dispaly_Flag = testByte[5];
+        NSString *timingStr = [NSString stringWithFormat:@"%02x%02x",testByte[7],testByte[6]];
+        uint16_t timing =  [[MinewCommonTool numberHexString:timingStr] integerValue];
+        dataModel.Timing = timing;
+        NSLog(@"testByte[4]==%02x  testByte[5]==%02x",testByte[4],testByte[5]);
+        NSLog(@"得到的设备状态信息===%02x %02x %02x %02x %04x ",dataModel.mode,dataModel.Wind_Speed,dataModel.Hand_Flag,dataModel.Dispaly_Flag,dataModel.Timing);
+        
+    }];
+
+}
+
+#pragma mark --- 收到notify设备的信息时，更新设备的状态
+- (void)updateViewState {
+    switch (dataModel.mode) {
+        case ModeClose: // 关闭
+        {
+            [_timingonOffSwitch setOn:NO];
+            [_onOffSwitch setOn:NO];
+            _timeCusSlider.value = 0;
+        }
+            break;
+        case ModeLimitedTiming: // 定时
+        {
+            [_timingonOffSwitch setOn:YES];
+            [_onOffSwitch setOn:YES];
+            _timeCusSlider.value = dataModel.Timing ;
+        }
+            break;
+        case ModeNormal: // 关闭
+        {
+            [_timingonOffSwitch setOn:NO];
+            [_onOffSwitch setOn:YES];
+            _timeCusSlider.value = 0;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    
+}
 
 //风的模式选择
 - (IBAction)SpeedModeSelectAction:(UIButton *)sender {
