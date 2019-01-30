@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="风扇转速" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tj5-VU-H9u">
-                                <rect key="frame" x="20" y="277" width="70" height="20"/>
+                                <rect key="frame" x="20" y="317" width="70" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -76,8 +76,11 @@
                                     <action selector="voiceRecognize:" destination="FcD-zM-bEG" eventType="valueChanged" id="Epu-Wc-zW8"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="定时时长" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Vv-Sg-ZfK">
-                                <rect key="frame" x="20" y="167" width="70" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="定时时长 x 30min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Vv-Sg-ZfK">
+                                <rect key="frame" x="20" y="167" width="160" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="zqu-Jo-Om9"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -136,17 +139,17 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="2h0-ps-5Uh"/>
                                 </constraints>
-                                <state key="normal" title="模式选择">
+                                <state key="normal" title="风行模式选择">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
                                     <action selector="SpeedModeSelectAction:" destination="FcD-zM-bEG" eventType="touchUpInside" id="dOB-Qy-Utm"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="NG8-kg-LoP">
-                                <rect key="frame" x="103" y="272" width="259" height="31"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="32" translatesAutoresizingMaskIntoConstraints="NO" id="NG8-kg-LoP">
+                                <rect key="frame" x="103" y="312" width="259" height="31"/>
                                 <connections>
-                                    <action selector="speedSliderMoved:" destination="FcD-zM-bEG" eventType="valueChanged" id="zxd-R5-aM0"/>
+                                    <action selector="speedSliderMoved:" destination="FcD-zM-bEG" eventType="touchUpInside" id="ZZX-qz-wAm"/>
                                 </connections>
                             </slider>
                         </subviews>
@@ -154,7 +157,6 @@
                         <constraints>
                             <constraint firstItem="ss0-OG-qso" firstAttribute="leading" secondItem="nP9-UV-aCx" secondAttribute="trailing" constant="10" id="2vt-Ue-48f"/>
                             <constraint firstItem="AOX-W6-kAl" firstAttribute="centerY" secondItem="CvN-0P-XXK" secondAttribute="centerY" id="3NR-C5-ViE"/>
-                            <constraint firstItem="0Vv-Sg-ZfK" firstAttribute="centerX" secondItem="PoT-cl-GA2" secondAttribute="centerX" id="4Cj-xv-p2i"/>
                             <constraint firstItem="PcN-fo-Wuh" firstAttribute="centerY" secondItem="dYq-qN-LMn" secondAttribute="centerY" id="4Wh-mj-HZx"/>
                             <constraint firstItem="0Vv-Sg-ZfK" firstAttribute="height" secondItem="PoT-cl-GA2" secondAttribute="height" id="4xr-3B-6SP"/>
                             <constraint firstItem="PoT-cl-GA2" firstAttribute="width" secondItem="dYq-qN-LMn" secondAttribute="width" id="5a7-c1-uIm"/>
@@ -162,20 +164,22 @@
                             <constraint firstAttribute="trailing" secondItem="PcN-fo-Wuh" secondAttribute="trailing" constant="20" id="7Gx-XU-hyf"/>
                             <constraint firstItem="yif-6c-7sC" firstAttribute="centerY" secondItem="PoT-cl-GA2" secondAttribute="centerY" id="8W9-T8-z4d"/>
                             <constraint firstItem="Rzd-rd-vcf" firstAttribute="top" secondItem="ofn-Dq-ffX" secondAttribute="bottom" constant="-20" id="9de-mq-Btp"/>
+                            <constraint firstItem="Tj5-VU-H9u" firstAttribute="width" secondItem="PoT-cl-GA2" secondAttribute="width" id="B5f-kH-gBP"/>
                             <constraint firstAttribute="trailing" secondItem="ss0-OG-qso" secondAttribute="trailing" constant="20" id="C4K-EC-AsM"/>
                             <constraint firstItem="PcN-fo-Wuh" firstAttribute="leading" secondItem="jNL-u3-oSR" secondAttribute="trailing" constant="5" id="CHf-z4-DjH"/>
+                            <constraint firstItem="0Vv-Sg-ZfK" firstAttribute="leading" secondItem="PoT-cl-GA2" secondAttribute="leading" id="Cej-Le-wOq"/>
                             <constraint firstItem="nP9-UV-aCx" firstAttribute="height" secondItem="CvN-0P-XXK" secondAttribute="height" id="DEH-9L-58v"/>
-                            <constraint firstItem="Tj5-VU-H9u" firstAttribute="top" secondItem="0Vv-Sg-ZfK" secondAttribute="bottom" constant="90" id="GSZ-Oi-iQz"/>
+                            <constraint firstItem="Tj5-VU-H9u" firstAttribute="top" secondItem="0Vv-Sg-ZfK" secondAttribute="bottom" constant="130" id="GSZ-Oi-iQz"/>
                             <constraint firstItem="dYq-qN-LMn" firstAttribute="top" secondItem="ofn-Dq-ffX" secondAttribute="bottom" constant="20" id="Iil-ev-lqs"/>
                             <constraint firstItem="dYq-qN-LMn" firstAttribute="leading" secondItem="vBv-pe-Iem" secondAttribute="leading" constant="20" id="JXL-wc-k8H"/>
                             <constraint firstItem="nP9-UV-aCx" firstAttribute="centerY" secondItem="CvN-0P-XXK" secondAttribute="centerY" id="JbJ-Zv-swA"/>
                             <constraint firstItem="ss0-OG-qso" firstAttribute="centerY" secondItem="CvN-0P-XXK" secondAttribute="centerY" id="JxE-fJ-vcM"/>
                             <constraint firstItem="tvl-aX-9rR" firstAttribute="centerX" secondItem="vBv-pe-Iem" secondAttribute="centerX" id="K7I-WU-YSy"/>
                             <constraint firstItem="0Vv-Sg-ZfK" firstAttribute="top" secondItem="PoT-cl-GA2" secondAttribute="bottom" constant="50" id="RII-BI-btf"/>
-                            <constraint firstItem="0Vv-Sg-ZfK" firstAttribute="width" secondItem="PoT-cl-GA2" secondAttribute="width" id="Ttw-fE-apI"/>
                             <constraint firstItem="nP9-UV-aCx" firstAttribute="width" secondItem="CvN-0P-XXK" secondAttribute="width" id="UGg-Lj-miW"/>
                             <constraint firstItem="AOX-W6-kAl" firstAttribute="leading" secondItem="CvN-0P-XXK" secondAttribute="trailing" constant="11" id="UOt-IU-D21"/>
                             <constraint firstItem="Zff-5w-SKt" firstAttribute="top" secondItem="tvl-aX-9rR" secondAttribute="bottom" constant="40" id="W73-Jl-P7J"/>
+                            <constraint firstItem="Tj5-VU-H9u" firstAttribute="centerX" secondItem="PoT-cl-GA2" secondAttribute="centerX" id="Y7Z-bW-Hj7"/>
                             <constraint firstAttribute="trailing" secondItem="Rzd-rd-vcf" secondAttribute="trailing" id="ZBS-K6-AJ5"/>
                             <constraint firstAttribute="trailing" secondItem="NG8-kg-LoP" secondAttribute="trailing" constant="15" id="c0J-AP-bzf"/>
                             <constraint firstItem="xVH-22-3dt" firstAttribute="leading" secondItem="dYq-qN-LMn" secondAttribute="trailing" constant="10" id="d7Y-gy-iNO"/>
@@ -183,14 +187,12 @@
                             <constraint firstItem="Zff-5w-SKt" firstAttribute="top" secondItem="Rzd-rd-vcf" secondAttribute="bottom" id="gSK-15-UTo"/>
                             <constraint firstItem="tvl-aX-9rR" firstAttribute="top" secondItem="CvN-0P-XXK" secondAttribute="bottom" constant="66" id="h2I-2q-CsP"/>
                             <constraint firstItem="PoT-cl-GA2" firstAttribute="centerX" secondItem="dYq-qN-LMn" secondAttribute="centerX" id="hKD-Ii-ztY"/>
-                            <constraint firstItem="Tj5-VU-H9u" firstAttribute="centerX" secondItem="0Vv-Sg-ZfK" secondAttribute="centerX" id="izF-fa-EaW"/>
                             <constraint firstItem="yif-6c-7sC" firstAttribute="width" secondItem="xVH-22-3dt" secondAttribute="width" id="m26-k5-R6W"/>
                             <constraint firstItem="oU3-Ic-I7t" firstAttribute="centerY" secondItem="PoT-cl-GA2" secondAttribute="centerY" id="mmX-EI-2hY"/>
                             <constraint firstItem="NG8-kg-LoP" firstAttribute="leading" secondItem="Tj5-VU-H9u" secondAttribute="trailing" constant="15" id="nOS-A2-DSh"/>
                             <constraint firstItem="CvN-0P-XXK" firstAttribute="leading" secondItem="vBv-pe-Iem" secondAttribute="leading" constant="20" id="pOB-gh-1n1"/>
                             <constraint firstItem="Tj5-VU-H9u" firstAttribute="height" secondItem="0Vv-Sg-ZfK" secondAttribute="height" id="peK-hd-eAd"/>
                             <constraint firstItem="PoT-cl-GA2" firstAttribute="height" secondItem="dYq-qN-LMn" secondAttribute="height" id="qrd-xJ-Fi3"/>
-                            <constraint firstItem="Tj5-VU-H9u" firstAttribute="width" secondItem="0Vv-Sg-ZfK" secondAttribute="width" id="rGh-Q2-a2h"/>
                             <constraint firstItem="oU3-Ic-I7t" firstAttribute="leading" secondItem="jNL-u3-oSR" secondAttribute="leading" id="rJs-ah-L9L"/>
                             <constraint firstItem="xVH-22-3dt" firstAttribute="centerY" secondItem="dYq-qN-LMn" secondAttribute="centerY" id="sLY-Sb-otn"/>
                             <constraint firstItem="oU3-Ic-I7t" firstAttribute="height" secondItem="PoT-cl-GA2" secondAttribute="height" constant="10" id="vht-UQ-ftM"/>
@@ -202,10 +204,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="xWK-3L-DDt"/>
                     <connections>
-                        <outlet property="SpeedmodeSelect" destination="oU3-Ic-I7t" id="K7V-eG-w0W"/>
                         <outlet property="onOffSwitch" destination="AOX-W6-kAl" id="nmD-Fq-xvw"/>
                         <outlet property="setSwitch" destination="ss0-OG-qso" id="Qlz-GJ-DhG"/>
                         <outlet property="shakeSwitch" destination="PcN-fo-Wuh" id="7mE-BY-0vI"/>
+                        <outlet property="speedModeSelectBtn" destination="oU3-Ic-I7t" id="HM5-Ca-Des"/>
+                        <outlet property="speedSlider" destination="NG8-kg-LoP" id="Bju-eu-rg4"/>
                         <outlet property="timingonOffSwitch" destination="yif-6c-7sC" id="X8m-aw-c7x"/>
                         <outlet property="voiceSwitch" destination="xVH-22-3dt" id="2g5-tf-PJb"/>
                     </connections>

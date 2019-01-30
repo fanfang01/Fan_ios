@@ -176,12 +176,33 @@
         return NO;
     }
     
+    NSLog(@"滑块的位置====%@",NSStringFromCGPoint(point));
+    
     int index = [self getCurrentXWithOffset:point.x];
+    if (index>=self.numberOfPart) {
+        index = self.numberOfPart-1;
+    }
     self.thumbRect = [self.partRectArray[index] CGRectValue];
+    
+    [self.thumbImage drawInRect:self.thumbRect];
     [self setNeedsDisplay];
 
     return YES;
     
+}
+
+- (void)setValue:(NSInteger)value
+{
+    _value = value;
+    
+    int index = (int)value;
+    if (index>=self.numberOfPart) {
+        index = self.numberOfPart-1;
+    }
+    self.thumbRect = [self.partRectArray[index] CGRectValue];
+    [MinewCommonTool onMainThread:^{
+        [self setNeedsDisplay];
+    }];
 }
 
 
@@ -205,6 +226,9 @@
     CGPoint point = [touch locationInView:self];
 
     int index = [self getCurrentXWithOffset:point.x];
+    if (index>=self.numberOfPart) {
+        index = self.numberOfPart-1;
+    }
     self.thumbRect = [self.partRectArray[index] CGRectValue];
     [self setNeedsDisplay];
     NSLog(@"point = %f",point.x);

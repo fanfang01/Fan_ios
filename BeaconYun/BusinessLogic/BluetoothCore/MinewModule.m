@@ -96,22 +96,32 @@
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     NSLog(@"++++%@", characteristic);
-    
-    if (error.description) {
+        if (error.description) {
         NSLog(@"读取设备的错误信息==%@",error.description);
     }
     
+    if ([_notifyCharacteristic.UUID.UUIDString isEqualToString:characteristic.UUID.UUIDString]) {
+        if (_notifyHandler) {
+            _notifyHandler(characteristic.value);
+        }
+    }
+    
+
     if ([_writeCharacteristic.UUID.UUIDString isEqualToString:characteristic.UUID.UUIDString])
     {
         if (_receiveHandler)
             _receiveHandler(error?NO:YES,characteristic.value);
-        NSLog(@"receive收到的数据===%@",characteristic.value);
     }
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-    NSLog(@"didUpdateNotificationStateForCharacteristic Error:%@", error);
+    NSLog(@"didUpdateNotificationStateForCharacteristic Error:%@  收到的数据:%@", error,characteristic.value);
+    if (error.description) {
+        NSLog(@"读取设备的错误信息==%@",error.description);
+    }
+    
+    [peripheral readValueForCharacteristic:characteristic];
     
     if (_notifyHandler)
     {
@@ -161,7 +171,7 @@
     {
         [peripheral readValueForCharacteristic:characteristic];
         
-        NSLog(@"写入回应收到的数据:%@",characteristic.value);
+//        NSLog(@"写入回应收到的数据:%@",characteristic.value);
 
 //        _writeHandler(error? NO: YES,characteristic.value);
     }

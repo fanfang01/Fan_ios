@@ -121,7 +121,7 @@ WX_EXPORT_METHOD(@selector(getLanguage:))
         NSString *dataString = [NSString stringWithFormat:@"%@", data];
         dataString = [dataString stringByReplacingOccurrencesOfString:@"<" withString:@""];
         dataString = [dataString stringByReplacingOccurrencesOfString:@">" withString:@""];
-        handler(dataString, YES);
+        handler(data, YES);
     };
 }
 
@@ -164,6 +164,7 @@ WX_EXPORT_METHOD(@selector(getLanguage:))
     
     
     api.lastModule.receiveHandler = ^(BOOL result,NSData *data) {
+        
         handler( data, result);
         
         NSLog(@"++RE:%d ++ WriteWithResponse==%@", result,data);

@@ -38,23 +38,28 @@
 @property (nonatomic, assign) ShakeState shakeState;
 @property (nonatomic, assign) DisplayState displayState;
 
+@property (weak, nonatomic) IBOutlet UIButton *speedModeSelectBtn;
 
-@property (weak, nonatomic) IBOutlet UIButton *SpeedmodeSelect;
+
+
 @property (weak, nonatomic) IBOutlet UISwitch *shakeSwitch;
 
 @property (nonatomic, strong) UIAlertController *alert;
 
-@property (nonatomic, assign) NSInteger fanSpeed;
-@property (nonatomic, assign) NSInteger limitedTime;
+@property (nonatomic, assign) NSInteger fanSpeed;//风扇速度
+@property (nonatomic, assign) NSInteger limitedTime;//定时时间
 
-@property (nonatomic, strong) CustomSlider *speedCusSlider;
 
 @property (nonatomic, strong) CustomSlider *timeCusSlider;
+
 
 //@property (nonatomic, strong) WakeUpManager *wakeupManager;
 @end
 
 @implementation BYScanDeviceViewController
+{
+    BOOL _isWriting;
+}
 
 struct SendDataNodel dataModel = {0,0,0,0,0,0};
 struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
@@ -65,16 +70,21 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     
     self.title = @"Fan";
     
+    _isWriting = NO;
+    
+    [self timeCusSlider];
+
     [self initCore];
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"更新设备状态" style:UIBarButtonItemStylePlain target:self action:@selector(getDeviceStateInfo)];
     
+    [SVProgressHUD showInfoWithStatus:@"设备信息更新中..."];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    [self timeCusSlider];
     
 //    [self getDeviceMacAddress];
     
@@ -86,6 +96,8 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
 {
     [super viewWillDisappear:animated];
     [_api disconnect:nil];
+    
+    [SVProgressHUD dismiss];
 }
 
 //- (void)wakeupConfiguration {
@@ -144,22 +156,24 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
             break;
     }
     dispatch_async(dispatch_get_main_queue(), ^{
-        [_SpeedmodeSelect setTitle:title forState:UIControlStateNormal];
-        [_SpeedmodeSelect setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_speedModeSelectBtn setTitle:title forState:UIControlStateNormal];
+        [_speedModeSelectBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     });
 
 }
 
+#pragma mark --- 设定风扇的转速
 - (IBAction)speedSliderMoved:(UISlider *)sender {
-    NSInteger index = sender.tag-300;
     float value = sender.value;
     
-    NSInteger speed = value * 32;
+    NSInteger speed = value ;
     _fanSpeed = speed;
     
     _workSpeed = SpeedRealWind;
+    
     [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"您已设定风扇转速%ld",speed]];
-
+    [_speedModeSelectBtn setTitle:[NSString stringWithFormat:@"当前风速:%ld",_fanSpeed] forState:UIControlStateNormal];
+    
     [self setDeveiceState];
 
 }
@@ -169,6 +183,8 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
 {
     if (!_timeCusSlider) {
         CustomSlider *slider = [[CustomSlider alloc] initWithFrame:CGRectMake(0, 250, CGRectGetWidth(self.view.frame), 80)];
+        _timeCusSlider = slider;
+
 //
         [self.view addSubview:slider];
 //        [slider mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -178,12 +194,11 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
 ////            make.height.mas_equalTo(50);
 //        }];
 
-        _timeCusSlider = slider;
         slider.backgroundColor = [UIColor clearColor];
         slider.sliderBarHeight = 10;
         slider.numberOfPart = 13;
         slider.partColor = [UIColor cyanColor];
-        slider.sliderColor = [UIColor redColor];
+        slider.sliderColor = [UIColor lightGrayColor];
         slider.thumbImage = [UIImage imageNamed:@"4.png"];
         slider.partNameOffset = CGPointMake(0, -30);
         slider.thumbSize = CGSizeMake(12, 10);
@@ -200,9 +215,10 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     NSLog(@"current index = %ld",(long)sender.value);
     NSInteger value = sender.value;
     if (value>0) {
+        _workMode = ModeLimitedTiming;
         [_timingonOffSwitch setOn:YES];
     }
-    _limitedTime = value *60;
+    _limitedTime = value *30;
 
     [self setDeveiceState];
 }
@@ -269,17 +285,58 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
 - (void)initCore
 {
     _manager = [MinewModuleManager sharedInstance];
-    _manager.delegaate = self;
+//    _manager.delegaate = self;
     
     _api = [MinewModuleAPI sharedInstance];
     
-    [_api dataReceive:^(id result, BOOL keepAlive) {
-        NSLog(@"receive==%@",result);
-    }];
+//    [_api dataReceive:^(id result, BOOL keepAlive) {
+//        NSLog(@"receive==%@",result);
+//    }];
     
+    [_api dataNotify:^(id result, BOOL keepAlive) {
+        NSLog(@"notify==%@",result);
+        NSData *notifyData = (NSData *)result;
+        if (notifyData.length) {
+            Byte *testByte = (Byte *)[notifyData bytes];
+            dataModel.key = testByte[1];
+            dataModel.mode = testByte[2];
+            dataModel.Wind_Speed = testByte[3];
+            dataModel.Hand_Flag = testByte[4];
+            dataModel.Dispaly_Flag = testByte[5];
+            NSString *timingStr = [NSString stringWithFormat:@"%02x%02x",testByte[7],testByte[6]];
+            uint16_t timing =  [[MinewCommonTool numberHexString:timingStr] integerValue];
+            dataModel.Timing = timing;
+            NSLog(@"得到的设备状态信息===%02x %02x %02x %02x %04x ",dataModel.mode,dataModel.Wind_Speed,dataModel.Hand_Flag,dataModel.Dispaly_Flag,dataModel.Timing);
+            
+
+            [MinewCommonTool onMainThread:^{
+                if (dataModel.key == 1) {
+                    return ;
+                }
+                if (_isWriting) {
+                    return;
+                }
+                //更新风扇的状态
+                [self updateViewState];
+            }];
+
+        }
+    }];
     //start scan
     [_manager startScan];
+    
+    //获取设备的基本信息
+    [self getBasicDeviceInfo];
+}
 
+#pragma mark --- 获取设备的基本信息
+- (void)getBasicDeviceInfo {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self getDeviceMacAddress];
+        [self getDeviceInfo];
+        
+        [self getDeviceStateInfo];
+    });
 }
 
 - (void)infoButtonClick:(UIButton *)sender
@@ -300,6 +357,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     //to be confirmed
 }
 
+#pragma mark --- 摇头功能
 - (IBAction)LeftRightRoute:(UISwitch *)sender {
     if (sender.isOn) {
         [SVProgressHUD showSuccessWithStatus:@"您已开启摇头功能"];
@@ -312,6 +370,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     [self setDeveiceState];
 }
 
+#pragma mark --- 定时开关
 - (IBAction)limitTimeSwitch:(UISwitch *)sender {
     if (sender.isOn) {
         _workMode = ModeLimitedTiming;
@@ -350,7 +409,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     [_api sendData:@"0201" hex:YES completion:^(id result, BOOL keepAlive) {
         //when write with response,you can receive a result
         //when write with response,you can receive a result
-        NSLog(@"发送设备基本信息==%@,发送结果===%u",result,keepAlive);
+//        NSLog(@"发送设备基本信息==%@,发送结果===%u",result,keepAlive);
         
         NSObject *data = result;
         NSString *dataString = [MinewCommonTool getDataString:data];
@@ -364,19 +423,23 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
 
         NSString *pair_flag = [deviceInfoString substringWithRange:NSMakeRange(16, 2)];
         _api.lastModule.pair_flag = [[MinewCommonTool reverseString:pair_flag] boolValue];
-
         NSLog(@"测试设备基本信息===%@  %@  %@  %lu",deviceInfoString,_api.lastModule.device_id,_api.lastModule.version,_api.lastModule.pair_flag);
+
+        NSData *deviceData = (NSData *)result;
+        
+//        deviceBaseInfoModel.deviceId =
+
         
         
     }];
     
 }
 
-//获取设备的Mac地址
+#pragma mark 获取设备的Mac地址
 - (void)getDeviceMacAddress {
     [_api sendData:@"0204" hex:YES completion:^(id result, BOOL keepAlive) {
         //when write with response,you can receive a result
-        NSLog(@"发送设备基本信息==%@,发送结果===%u",result,keepAlive);
+//        NSLog(@"发送设备基本信息==%@,发送结果===%u",result,keepAlive);
         NSObject *data = result;
         NSString *dataString = [MinewCommonTool getDataString:data];
         NSRange range = NSMakeRange(4, 12);
@@ -387,11 +450,13 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     }];
 }
 
+#pragma mark --- 得到设备的状态信息
 - (void)getDeviceStateInfo {
+    
     [_api sendData:@"0202" hex:YES completion:^(id result, BOOL keepAlive) {
         //when write with response,you can receive a result
-        NSLog(@"发送设备状态信息==%@,发送结果===%u",result,keepAlive);
-        
+//        NSLog(@"发送设备状态信息==%@,发送结果===%u",result,keepAlive);
+        [SVProgressHUD dismiss];
         NSData *data = (NSData *)result;
         Byte *testByte = (Byte *)[data bytes];
         dataModel.mode = testByte[2];
@@ -401,15 +466,20 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         NSString *timingStr = [NSString stringWithFormat:@"%02x%02x",testByte[7],testByte[6]];
         uint16_t timing =  [[MinewCommonTool numberHexString:timingStr] integerValue];
         dataModel.Timing = timing;
-        NSLog(@"testByte[4]==%02x  testByte[5]==%02x",testByte[4],testByte[5]);
+//        NSLog(@"testByte[4]==%02x  testByte[5]==%02x",testByte[4],testByte[5]);
         NSLog(@"得到的设备状态信息===%02x %02x %02x %02x %04x ",dataModel.mode,dataModel.Wind_Speed,dataModel.Hand_Flag,dataModel.Dispaly_Flag,dataModel.Timing);
         
+        [MinewCommonTool onMainThread:^{
+            [self updateViewState];
+        }];
     }];
 
 }
 
 #pragma mark --- 收到notify设备的信息时，更新设备的状态
 - (void)updateViewState {
+    _workMode = dataModel.mode ;
+    _shakeState = dataModel.Hand_Flag;
     switch (dataModel.mode) {
         case ModeClose: // 关闭
         {
@@ -420,9 +490,9 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
             break;
         case ModeLimitedTiming: // 定时
         {
+            _limitedTime = dataModel.Timing;//记录定时时间
             [_timingonOffSwitch setOn:YES];
             [_onOffSwitch setOn:YES];
-            _timeCusSlider.value = dataModel.Timing ;
         }
             break;
         case ModeNormal: // 关闭
@@ -437,11 +507,76 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
             break;
     }
     
+    switch (dataModel.Wind_Speed) {
+        case SpeedSleepWind://
+        {
+            _fanSpeed = 0;
+            _workSpeed = SpeedSleepWind;
+        }
+            break;
+        case SpeedNatureWind://自然风
+        {
+            _fanSpeed = 0;
+            _workSpeed = SpeedNatureWind;
+        }
+            break;
+        case SpeedSuperWeakWind://
+        {
+            _fanSpeed = 0;
+            _workSpeed = SpeedSuperWeakWind;
+        }
+            break;
+        case SpeedSuperStrongWind://
+        {
+            _fanSpeed = 0;
+            _workSpeed = SpeedSuperStrongWind;
+        }
+            break;
+        default:
+        {
+            _fanSpeed = dataModel.Wind_Speed ;
+            _workSpeed = SpeedRealWind ;
+            [MinewCommonTool onMainThread:^{
+                _speedSlider.value = dataModel.Wind_Speed;
+
+            }];
+
+        }
+            break;
+    }
+    
+    switch (dataModel.Hand_Flag) {
+        case ShakeYES:
+        {
+            [_shakeSwitch setOn:YES];
+        }
+            break;
+        case ShakeNo:
+        {
+            [_shakeSwitch setOn:NO];
+        }
+            break;
+        default:
+            break;
+    }
+    
+    if (dataModel.Timing) {
+        
+        NSInteger index = dataModel.Timing/30;
+        if (dataModel.Timing % 30 >= 10) {
+            index += 1;
+        }
+        if (index>=12) {
+            index = 12;
+        }
+        _timeCusSlider.value = index;
+    }
     
 }
 
-//风的模式选择
+#pragma mark --- 风的模式选择
 - (IBAction)SpeedModeSelectAction:(UIButton *)sender {
+    
     [self alert];
     
 }
@@ -456,15 +591,24 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     }else {
         dataModel.Wind_Speed = _fanSpeed;
     }
+    //当开关为关闭的状态时
+    if (_onOffSwitch.isOn == NO) {
+        dataModel.Wind_Speed = 0;
+    }
     dataModel.Hand_Flag = _shakeSwitch.isOn?ShakeYES:ShakeNo;
     dataModel.Dispaly_Flag = DisplayNO;//to be confirmed  不确定是做什么用的
     dataModel.Timing = _timingonOffSwitch.isOn?_limitedTime:0;
     
-    NSString *dataString = [NSString stringWithFormat:@"%02x%02x%02x%02x%02x%02x%04x",dataModel.Command_id,dataModel.key,dataModel.mode,dataModel.Wind_Speed
-                            ,dataModel.Hand_Flag,dataModel.Dispaly_Flag,dataModel.Timing];
+    NSString *timing = [NSString stringWithFormat:@"%04x",dataModel.Timing];
+    timing = [MinewCommonTool reverseString:timing];
+    
+    NSString *dataString = [NSString stringWithFormat:@"%02x%02x%02x%02x%02x%02x%@",dataModel.Command_id,dataModel.key,dataModel.mode,dataModel.Wind_Speed
+                            ,dataModel.Hand_Flag,dataModel.Dispaly_Flag,timing];
     NSLog(@"你发送的数据===%@",dataString);
+    _isWriting = YES;
     [_api sendData:dataString hex:YES completion:^(id result, BOOL keepAlive) {
         //如果有回调的话
+        _isWriting = NO;
         NSLog(@"在此处判断写入是否成功!");
     }];
 }

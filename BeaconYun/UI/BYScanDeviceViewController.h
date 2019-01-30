@@ -14,4 +14,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *onOffSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *setSwitch;
 
+@property (weak, nonatomic) IBOutlet UISlider *speedSlider;
+
+
 @end
