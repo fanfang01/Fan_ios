@@ -29,8 +29,6 @@
 		28B8944922018CCF00A156C9 /* .gitIgnore in Resources */ = {isa = PBXBuildFile; fileRef = 28B8940122018CCF00A156C9 /* .gitIgnore */; };
 		28B8946222018CD000A156C9 /* English_Speech_Female.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B8943422018CCF00A156C9 /* English_Speech_Female.dat */; };
 		28B8946322018CD000A156C9 /* offline_engine_tmp_license.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B8943522018CCF00A156C9 /* offline_engine_tmp_license.dat */; };
-		28B8946422018CD000A156C9 /* TTDFileWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B8943822018CCF00A156C9 /* TTDFileWriter.m */; };
-		28B8946522018CD000A156C9 /* TTDFileReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B8943922018CCF00A156C9 /* TTDFileReader.m */; };
 		28B8946622018CD000A156C9 /* English_Text.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B8943B22018CCF00A156C9 /* English_Text.dat */; };
 		28B8946722018CD000A156C9 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 28B8943C22018CCF00A156C9 /* .gitignore */; };
 		28B8946822018CD000A156C9 /* English_Speech_Male.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B8943D22018CCF00A156C9 /* English_Speech_Male.dat */; };
@@ -38,9 +36,7 @@
 		28B8946A22018CD000A156C9 /* Chinese_Text.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B8943F22018CCF00A156C9 /* Chinese_Text.dat */; };
 		28B8946B22018CD000A156C9 /* Chinese_Speech_Female.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B8944022018CCF00A156C9 /* Chinese_Speech_Female.dat */; };
 		28B8946C22018CD000A156C9 /* WakeUpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B8944222018CCF00A156C9 /* WakeUpManager.m */; };
-		28B8946D22018CD000A156C9 /* WakeUp.bin in Resources */ = {isa = PBXBuildFile; fileRef = 28B8944322018CCF00A156C9 /* WakeUp.bin */; };
 		28B8946E22018CD000A156C9 /* libBaiduSpeechSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28B8944522018CCF00A156C9 /* libBaiduSpeechSDK.a */; };
-		28B8946F22018CD000A156C9 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 28B8944622018CCF00A156C9 /* .gitignore */; };
 		28B8947022018CD000A156C9 /* RecognizeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B8944822018CCF00A156C9 /* RecognizeManager.m */; };
 		28B89498220190CC00A156C9 /* bds_license.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B8947D220190CC00A156C9 /* bds_license.dat */; };
 		28B89499220190CC00A156C9 /* bds_easr_basic_model.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B8947E220190CC00A156C9 /* bds_easr_basic_model.dat */; };
@@ -52,6 +48,7 @@
 		28B8949F220190CC00A156C9 /* bds_easr_wakeup_words.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B89484220190CC00A156C9 /* bds_easr_wakeup_words.dat */; };
 		28B894A0220190CC00A156C9 /* bds_easr_dnn_wakeup_model.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B89485220190CC00A156C9 /* bds_easr_dnn_wakeup_model.dat */; };
 		28B894B1220190E000A156C9 /* BDSClientResources in Resources */ = {isa = PBXBuildFile; fileRef = 28B894B0220190E000A156C9 /* BDSClientResources */; };
+		28B894B32201A05D00A156C9 /* WakeUp.bin in Resources */ = {isa = PBXBuildFile; fileRef = 28B894B22201A05D00A156C9 /* WakeUp.bin */; };
 		B1CFC9764E4898520C187548 /* libPods-BeaconYun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F5851AABDA97E315A353A0BF /* libPods-BeaconYun.a */; };
 		E532AFD01E9B92290001BE28 /* lock.js in Resources */ = {isa = PBXBuildFile; fileRef = E532AFCF1E9B92290001BE28 /* lock.js */; };
 		E539CF0D1E762AA800B9D731 /* ui2.js in Resources */ = {isa = PBXBuildFile; fileRef = E539CF0C1E762AA800B9D731 /* ui2.js */; };
@@ -186,7 +183,6 @@
 		28B8944022018CCF00A156C9 /* Chinese_Speech_Female.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chinese_Speech_Female.dat; sourceTree = "<group>"; };
 		28B8944122018CCF00A156C9 /* RecognizeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecognizeManager.h; sourceTree = "<group>"; };
 		28B8944222018CCF00A156C9 /* WakeUpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WakeUpManager.m; sourceTree = "<group>"; };
-		28B8944322018CCF00A156C9 /* WakeUp.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = WakeUp.bin; sourceTree = "<group>"; };
 		28B8944522018CCF00A156C9 /* libBaiduSpeechSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduSpeechSDK.a; sourceTree = "<group>"; };
 		28B8944622018CCF00A156C9 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		28B8944722018CCF00A156C9 /* WakeUpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WakeUpManager.h; sourceTree = "<group>"; };
@@ -201,6 +197,7 @@
 		28B89484220190CC00A156C9 /* bds_easr_wakeup_words.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_wakeup_words.dat; sourceTree = "<group>"; };
 		28B89485220190CC00A156C9 /* bds_easr_dnn_wakeup_model.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_dnn_wakeup_model.dat; sourceTree = "<group>"; };
 		28B894B0220190E000A156C9 /* BDSClientResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BDSClientResources; sourceTree = "<group>"; };
+		28B894B22201A05D00A156C9 /* WakeUp.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = WakeUp.bin; sourceTree = "<group>"; };
 		49E0A3CD57A1B7DE50179925 /* Pods-BeaconYun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaconYun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeaconYun/Pods-BeaconYun.debug.xcconfig"; sourceTree = "<group>"; };
 		B370C1B698562C91509A8E8F /* Pods-BeaconYun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaconYun.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeaconYun/Pods-BeaconYun.release.xcconfig"; sourceTree = "<group>"; };
 		E532AFCF1E9B92290001BE28 /* lock.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = lock.js; sourceTree = "<group>"; };
@@ -340,14 +337,14 @@
 		28B893FB22018CCF00A156C9 /* BaiduSDK */ = {
 			isa = PBXGroup;
 			children = (
+				28B894B22201A05D00A156C9 /* WakeUp.bin */,
 				28B893FC22018CCF00A156C9 /* BDSClientHeaders */,
 				28B8941522018CCF00A156C9 /* BDSClientResource */,
 				28B8944422018CCF00A156C9 /* BDSClientLib */,
 				28B8944122018CCF00A156C9 /* RecognizeManager.h */,
-				28B8944222018CCF00A156C9 /* WakeUpManager.m */,
-				28B8944322018CCF00A156C9 /* WakeUp.bin */,
-				28B8944722018CCF00A156C9 /* WakeUpManager.h */,
 				28B8944822018CCF00A156C9 /* RecognizeManager.m */,
+				28B8944722018CCF00A156C9 /* WakeUpManager.h */,
+				28B8944222018CCF00A156C9 /* WakeUpManager.m */,
 			);
 			path = BaiduSDK;
 			sourceTree = "<group>";
@@ -801,7 +798,7 @@
 				TargetAttributes = {
 					E56992961E5EB60B00C76E42 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = R4BAK83LRY;
+						DevelopmentTeam = 8FJMU234N7;
 						ProvisioningStyle = Automatic;
 					};
 					E56992AF1E5EB60B00C76E42 = {
@@ -854,6 +851,7 @@
 				E532AFD01E9B92290001BE28 /* lock.js in Resources */,
 				E54F0A2B1EA9D13F008B7CC3 /* auto.png in Resources */,
 				E540700D1E972B3E00D9ECB4 /* up.png in Resources */,
+				28B894B32201A05D00A156C9 /* WakeUp.bin in Resources */,
 				28B8946222018CD000A156C9 /* English_Speech_Female.dat in Resources */,
 				28B8949F220190CC00A156C9 /* bds_easr_wakeup_words.dat in Resources */,
 				28B8946622018CD000A156C9 /* English_Text.dat in Resources */,
@@ -862,7 +860,6 @@
 				E539CF0D1E762AA800B9D731 /* ui2.js in Resources */,
 				E5BF8E6F1EB03DFB00AF94DC /* colors.jpg in Resources */,
 				286D18D321E8368F000A122E /* shake.xcassets in Resources */,
-				28B8946D22018CD000A156C9 /* WakeUp.bin in Resources */,
 				E54070081E972B3E00D9ECB4 /* bluebed.js in Resources */,
 				E56992DD1E5EB91500C76E42 /* Assets.xcassets in Resources */,
 				28B894A0220190CC00A156C9 /* bds_easr_dnn_wakeup_model.dat in Resources */,
@@ -871,7 +868,6 @@
 				28B8946322018CD000A156C9 /* offline_engine_tmp_license.dat in Resources */,
 				28B8949B220190CC00A156C9 /* temp_license_2018-02-24.dat in Resources */,
 				28B8946922018CD000A156C9 /* Chinese_Speech_Male.dat in Resources */,
-				28B8946F22018CD000A156C9 /* .gitignore in Resources */,
 				28B89498220190CC00A156C9 /* bds_license.dat in Resources */,
 				E5CF142C1E9E189D00C1D26D /* lock.png in Resources */,
 				28B8946A22018CD000A156C9 /* Chinese_Text.dat in Resources */,
@@ -975,9 +971,7 @@
 				28B8947022018CD000A156C9 /* RecognizeManager.m in Sources */,
 				286D18DD21E86E83000A122E /* MinewModuleAPI.m in Sources */,
 				286D18E021E86E83000A122E /* MinewModule.m in Sources */,
-				28B8946422018CD000A156C9 /* TTDFileWriter.m in Sources */,
 				28B8946C22018CD000A156C9 /* WakeUpManager.m in Sources */,
-				28B8946522018CD000A156C9 /* TTDFileReader.m in Sources */,
 				E56992EF1E5EB97100C76E42 /* BYCommonTools.m in Sources */,
 				286D18DE21E86E83000A122E /* MinewCommonTool.m in Sources */,
 				E5A7E1EF1E602A6300D72212 /* BYHeaderView.m in Sources */,
@@ -1158,7 +1152,7 @@
 			baseConfigurationReference = 49E0A3CD57A1B7DE50179925 /* Pods-BeaconYun.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = R4BAK83LRY;
+				DEVELOPMENT_TEAM = 8FJMU234N7;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = $SRCROOT/BeaconYun/CommonTools/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/BeaconYun/Configs/Info.plist";
@@ -1168,8 +1162,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/BeaconYun/BaiduSDK/BDSClientLib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.minew.blelighttest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AnShunKang.testforBaidu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1178,7 +1173,7 @@
 			baseConfigurationReference = B370C1B698562C91509A8E8F /* Pods-BeaconYun.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = R4BAK83LRY;
+				DEVELOPMENT_TEAM = 8FJMU234N7;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = $SRCROOT/BeaconYun/CommonTools/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/BeaconYun/Configs/Info.plist";
@@ -1188,8 +1183,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/BeaconYun/BaiduSDK/BDSClientLib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.minew.blelighttest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AnShunKang.testforBaidu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

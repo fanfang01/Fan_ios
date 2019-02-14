@@ -21,7 +21,8 @@
 #import "MinewModuleAPI.h"
 #import "BYInfoViewController.h"
 
-//#import "WakeUpManager.h"
+#import "WakeUpManager.h"
+#import "RecognizeManager.h"
 
 @interface BYScanDeviceViewController ()<MinewModuleManagerDelegate>
 
@@ -52,8 +53,10 @@
 
 @property (nonatomic, strong) CustomSlider *timeCusSlider;
 
+//语音识别
+@property (nonatomic, strong) WakeUpManager *wakeupManager;
 
-//@property (nonatomic, strong) WakeUpManager *wakeupManager;
+@property (nonatomic, strong) RecognizeManager *recongnizeManager;
 @end
 
 @implementation BYScanDeviceViewController
@@ -79,6 +82,9 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"更新设备状态" style:UIBarButtonItemStylePlain target:self action:@selector(getDeviceStateInfo)];
     
     [SVProgressHUD showInfoWithStatus:@"设备信息更新中..."];
+    
+    
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -100,25 +106,65 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     [SVProgressHUD dismiss];
 }
 
-//- (void)wakeupConfiguration {
-//    _wakeupManager = [WakeUpManager sharedInstance];
-//
-//    [_wakeupManager startWakeup];
-//
-//    __weak BYScanDeviceViewController *weakSelf = self;
-//    _wakeupManager.voiceWakeUp = ^(NSString * _Nonnull keywords) {
-//
-//        __strong BYScanDeviceViewController *strongSelf = weakSelf;
-//
-//        NSLog(@"识别到关键词:%@",keywords);
-//        [strongSelf voiceToAdvertise:keywords];
-//
-//    };
-//}
+- (void)wakeupConfiguration {
+    _wakeupManager = [WakeUpManager sharedInstance];
+
+    [_wakeupManager startWakeup];
+
+    __weak BYScanDeviceViewController *weakSelf = self;
+    _wakeupManager.voiceWakeUp = ^(NSString * _Nonnull keywords) {
+
+        __strong BYScanDeviceViewController *strongSelf = weakSelf;
+
+        NSLog(@"识别到关键词:%@",keywords);
+        [strongSelf voiceToAdvertise:keywords];
+
+    };
+}
+
+- (void)recognizeConfiguration {
+    _recongnizeManager = [RecognizeManager sharedInstance];
+    
+    __weak BYScanDeviceViewController *weakSelf = self;
+    
+    _recongnizeManager.voiceReco = ^(NSString * _Nonnull voice) {
+        
+        __strong BYScanDeviceViewController *strongSelf = weakSelf;
+        
+        NSLog(@"收到的录音===%@",voice);
+        if ([voice containsString:@"设定风速为"]) {
+            NSInteger num = 0;
+            if (voice.length >= 7) {
+                num = [[voice substringWithRange:NSMakeRange(5, 2)] integerValue];
+            }else if (voice.length >= 6 ) {
+                num = [[voice substringWithRange:NSMakeRange(5, 1)] integerValue];
+            }
+            if (num > 32) {
+                [SVProgressHUD showSuccessWithStatus:@"风速的最大速度为32"];
+                num = 32;
+                _fanSpeed = 32;
+            }else {
+                _fanSpeed = num;
+            }
+            
+            _workSpeed = SpeedRealWind;
+            
+            [strongSelf setDeveiceState];
+        }
+    };
+}
+
+#pragma mark --- 录音识别结果处理
+- (void)recongnizeVoice:(NSString *)voice {
+    
+}
 
 #pragma mark --- 语音发送广播
 //后续 还可以更精准一点过滤   语音发送广播
 - (void)voiceToAdvertise:(NSString *)key {
+    
+    [self recognizeConfiguration];
+    
 //    NSMutableArray *keyArr = [self getALLKeys];
 //    NSString *recordKey = @"";
 //    for (NSString *okey in keyArr) {
@@ -349,10 +395,14 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
 - (IBAction)voiceRecognize:(UISwitch *)sender {
     if (sender.isOn) {
         [SVProgressHUD showSuccessWithStatus:@"您已开启语音识别"];
-        [self getDeviceInfo];
+        [self wakeupConfiguration];
+//        [self getDeviceInfo];
     }else {
         [SVProgressHUD showSuccessWithStatus:@"您已关闭语音识别"];
-        [self getDeviceMacAddress];
+        
+        [self.wakeupManager stopWakeup];
+        [self.recongnizeManager stopRecognize];
+//        [self getDeviceMacAddress];
     }
     //to be confirmed
 }
@@ -378,6 +428,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
 
     }else {
         _workMode = ModeNormal;
+//        _limitedTime = 0;
         [SVProgressHUD showSuccessWithStatus:@"您已关闭定时开关功能"];
 
     }

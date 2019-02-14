@@ -21,15 +21,15 @@
 #import "FanDeviceSet.h"
 #import "CustomSlider.h"
 
-//#import "BDSEventManager.h"
-//#import "BDSASRDefines.h"
-//#import "BDSASRParameters.h"
-//#import "BDSWakeupDefines.h"
-//#import "BDSWakeupParameters.h"
+#import "BDSEventManager.h"
+#import "BDSASRDefines.h"
+#import "BDSASRParameters.h"
+#import "BDSWakeupDefines.h"
+#import "BDSWakeupParameters.h"
 
-#define API_KEY @"tyiwdzbYQ9GTmfaGPTqAuXtB"
-#define SECRET_KEY @"ooDetcOCZyUyTYdtWpsXgG4iw3zih1aH"
-#define APP_ID @"15058256"
+#define API_KEY @"Lc0DZBA7Gtzegk2w01DMcNa4"
+#define SECRET_KEY @"d7jrmq11BrZLlqiaanCyPYSDSqRtRBd6"
+#define APP_ID @"15418226"
 
 #define statusBarHeight [[UIApplication sharedApplication] statusBarFrame].size.height
 

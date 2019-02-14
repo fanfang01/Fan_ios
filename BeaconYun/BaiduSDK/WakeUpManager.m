@@ -51,7 +51,7 @@
     // 默认的唤醒词为"百度一下"，如需自定义唤醒词，请在 http://ai.baidu.com/tech/speech/wake 中评估并下载唤醒词，替换此参数
     //    NSString* words = [[NSBundle mainBundle] pathForResource:@"bds_easr_wakeup_words" ofType:@"dat"];
     
-    NSString* keywords = [[NSBundle mainBundle] pathForResource:@"WakeUp-ch" ofType:@"bin"];
+    NSString* keywords = [[NSBundle mainBundle] pathForResource:@"WakeUp" ofType:@"bin"];
     [self.wakeupEventManager setParameter:dat forKey:BDS_WAKEUP_DAT_FILE_PATH];
     [self.wakeupEventManager setParameter:keywords forKey:BDS_WAKEUP_WORDS_FILE_PATH];
 }
@@ -156,10 +156,14 @@
 }
 
 - (void)dealloc {
+    
     [self stopWakeup];
 }
 
 - (void)stopWakeup {
+    
+    [self.wakeupEventManager sendCommand:BDS_WP_CMD_UNLOAD_ENGINE];
+    
     [self.wakeupEventManager sendCommand:BDS_WP_CMD_STOP];
 }
 

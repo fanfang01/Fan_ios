@@ -41,6 +41,8 @@
 	</dict>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>The app will communication with device by bluetooth module. </string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>风扇想使用你的麦克风录音</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>icon.ttf</string>

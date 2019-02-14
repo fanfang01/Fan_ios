@@ -70,6 +70,11 @@
     [self.asrEventManager sendCommand:BDS_ASR_CMD_START];
 }
 
+- (void)stopRecognize {
+    [self.asrEventManager sendCommand:BDS_ASR_CMD_UNLOAD_ENGINE];
+    [self.asrEventManager sendCommand:BDS_ASR_CMD_STOP];
+}
+
 
 #pragma mark --- BDSClientASRDelegate
 - (void)VoiceRecognitionClientWorkStatus:(int)workStatus obj:(id)aObj

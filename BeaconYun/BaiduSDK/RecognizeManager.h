@@ -16,6 +16,9 @@ typedef void(^FinalVoiceReco)(NSString *voice);
 @property (nonatomic, copy) FinalVoiceReco voiceReco;
 
 + (instancetype)sharedInstance;
+
+//停止语音识别
+- (void)stopRecognize;
 @end
 
 NS_ASSUME_NONNULL_END
