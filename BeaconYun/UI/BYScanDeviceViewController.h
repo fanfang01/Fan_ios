@@ -16,5 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UISlider *speedSlider;
 
+@property (weak, nonatomic) IBOutlet UILabel *currentSpeedLabel;
+
 
 @end

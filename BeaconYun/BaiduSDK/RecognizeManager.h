@@ -15,6 +15,9 @@ typedef void(^FinalVoiceReco)(NSString *voice);
 
 @property (nonatomic, copy) FinalVoiceReco voiceReco;
 
+@property (strong, nonatomic) BDSEventManager *asrEventManager;
+
+
 + (instancetype)sharedInstance;
 
 //停止语音识别

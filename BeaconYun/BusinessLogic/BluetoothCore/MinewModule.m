@@ -86,7 +86,7 @@
         if ([SERVICEUUID indexOfObject:s.UUID.UUIDString])
         {
             [peripheral discoverCharacteristics:nil forService:s];
-
+            
         }
         else
             [self executeConnectionHandler:NO];

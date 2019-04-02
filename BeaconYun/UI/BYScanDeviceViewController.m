@@ -35,7 +35,6 @@
 @property (nonatomic, strong) MinewModuleAPI *api;
 
 @property (nonatomic, assign) WorkMode workMode;
-@property (nonatomic, assign) WorkSpeed workSpeed;
 @property (nonatomic, assign) ShakeState shakeState;
 @property (nonatomic, assign) DisplayState displayState;
 
@@ -62,6 +61,7 @@
 @implementation BYScanDeviceViewController
 {
     BOOL _isWriting;
+    BOOL _isUserCloseTiming;
 }
 
 struct SendDataNodel dataModel = {0,0,0,0,0,0};
@@ -83,7 +83,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     
     [SVProgressHUD showInfoWithStatus:@"设备信息更新中..."];
     
-    
+
     
 }
 
@@ -117,13 +117,23 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         __strong BYScanDeviceViewController *strongSelf = weakSelf;
 
         NSLog(@"识别到关键词:%@",keywords);
-        [strongSelf voiceToAdvertise:keywords];
+        [strongSelf recognizeConfiguration];
+        
+//        [strongSelf voiceToAdvertise:keywords];
 
     };
 }
 
 - (void)recognizeConfiguration {
     _recongnizeManager = [RecognizeManager sharedInstance];
+    [_recongnizeManager.asrEventManager setParameter:@(NO) forKey:BDS_ASR_ENABLE_LONG_SPEECH];
+    [_recongnizeManager.asrEventManager setParameter:@(NO) forKey:BDS_ASR_NEED_CACHE_AUDIO];
+    [_recongnizeManager.asrEventManager setParameter:@"" forKey:BDS_ASR_OFFLINE_ENGINE_TRIGGERED_WAKEUP_WORD];
+    
+    [_recongnizeManager.asrEventManager setDelegate:self];
+    [_recongnizeManager.asrEventManager setParameter:nil forKey:BDS_ASR_AUDIO_FILE_PATH];
+    [_recongnizeManager.asrEventManager setParameter:nil forKey:BDS_ASR_AUDIO_INPUT_STREAM];
+    [_recongnizeManager.asrEventManager sendCommand:BDS_ASR_CMD_START];
     
     __weak BYScanDeviceViewController *weakSelf = self;
     
@@ -132,25 +142,64 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         __strong BYScanDeviceViewController *strongSelf = weakSelf;
         
         NSLog(@"收到的录音===%@",voice);
-        if ([voice containsString:@"设定风速为"]) {
-            NSInteger num = 0;
-            if (voice.length >= 7) {
-                num = [[voice substringWithRange:NSMakeRange(5, 2)] integerValue];
-            }else if (voice.length >= 6 ) {
-                num = [[voice substringWithRange:NSMakeRange(5, 1)] integerValue];
+        if ([voice containsString:@"打开摇头"]) {
+            [SVProgressHUD showSuccessWithStatus:@"您已开启摇头功能"];
+            _shakeState = ShakeYES;
+            
+            [strongSelf setDeveiceState];
+        }else if ([voice containsString:@"关闭摇头"]) {
+            [SVProgressHUD showSuccessWithStatus:@"您已关闭摇头功能"];
+            _shakeState = ShakeNo;
+            
+            [strongSelf setDeveiceState];
+        }else if ([voice containsString:@"定时"] && [voice containsString:@"小时"]) {
+            NSRange range1 = [voice rangeOfString:@"定时"];
+            NSRange range2 = [voice rangeOfString:@"小时"];
+            NSString *timeStr = [voice substringWithRange:NSMakeRange(range1.length, range2.location)];
+//            NSInteger fileteredNum = [Tools chineseNumbersReturnArabicNumerals:voice];
+            NSInteger fileteredNum = [timeStr integerValue];
+            if (fileteredNum > 0) {
+                _workMode = ModeLimitedTiming;
+                [strongSelf.timingonOffSwitch setOn:YES];
+                _isUserCloseTiming = NO;
             }
-            if (num > 32) {
-                [SVProgressHUD showSuccessWithStatus:@"风速的最大速度为32"];
-                num = 32;
-                _fanSpeed = 32;
+            if (_limitedTime<=12) {
+                _limitedTime = fileteredNum *60;
             }else {
-                _fanSpeed = num;
+                _limitedTime = 12*60;
+                [SVProgressHUD showSuccessWithStatus:@"风扇的最大定时时长为12小时"];
             }
             
-            _workSpeed = SpeedRealWind;
+            [strongSelf setDeveiceState];
+            NSLog(@"定时得到的时长为：%ld 分钟",fileteredNum*60);
+            
+        }else if ([voice containsString:@"设定风速为"]) {
+            NSInteger fileteredNum = [Tools chineseNumbersReturnArabicNumerals:voice];
+            if ( 0 == fileteredNum ) {
+                NSRange range = [voice rangeOfString:@"设定风速为"];
+                if (voice.length >= range.length+2) {
+                    NSString *speedStr = [voice substringWithRange:NSMakeRange(range.length, 2)];
+                    fileteredNum = [speedStr integerValue];
+                }
+            }
+            
+            NSLog(@"设定风速为：%ld",fileteredNum);
+            _fanSpeed = fileteredNum;
+            if (fileteredNum > 32) {
+                [SVProgressHUD showSuccessWithStatus:@"风速的最大速度为32"];
+                fileteredNum = 32;
+                _fanSpeed = 32;
+            }else {
+                _fanSpeed = fileteredNum;
+            }
+            
+            [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"您已设定风扇转速%ld",(long)fileteredNum]];
+            strongSelf.currentSpeedLabel.text = [NSString stringWithFormat:@"当前风速:%ld",(long)strongSelf.fanSpeed];
             
             [strongSelf setDeveiceState];
         }
+        
+        [strongSelf wakeupConfiguration];
     };
 }
 
@@ -178,23 +227,23 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
 }
 
 
-- (void)setWorkSpeed:(WorkSpeed)workSpeed
+- (void)setWorkMode:(WorkMode)workMode
 {
-    _workSpeed = workSpeed;
+    _workMode = workMode;
     [self setDeveiceState];
     
     NSString *title = @"";
-    switch (_workSpeed) {
-        case SpeedSleepWind:
+    switch (_workMode) {
+        case ModeSleepWind:
             title = @"睡眠风";
             break;
-        case SpeedNatureWind:
+        case ModeNatureWind:
             title = @"自然风";
             break;
-        case SpeedSuperStrongWind:
+        case ModeSuperStrongWind:
             title = @"超强风";
             break;
-        case SpeedSuperWeakWind:
+        case ModeSuperWeakWind:
             title = @"超微风";
             break;
         default:
@@ -215,10 +264,8 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     NSInteger speed = value ;
     _fanSpeed = speed;
     
-    _workSpeed = SpeedRealWind;
-    
-    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"您已设定风扇转速%ld",speed]];
-    [_speedModeSelectBtn setTitle:[NSString stringWithFormat:@"当前风速:%ld",_fanSpeed] forState:UIControlStateNormal];
+    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"您已设定风扇转速%ld",(long)speed]];
+    _currentSpeedLabel.text = [NSString stringWithFormat:@"当前风速:%ld",(long)_fanSpeed];
     
     [self setDeveiceState];
 
@@ -231,14 +278,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         CustomSlider *slider = [[CustomSlider alloc] initWithFrame:CGRectMake(0, 250, CGRectGetWidth(self.view.frame), 80)];
         _timeCusSlider = slider;
 
-//
         [self.view addSubview:slider];
-//        [slider mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.timeLabel.mas_right).offset(30);
-//            make.centerY.equalTo(self.timeLabel.mas_centerY);
-//            make.right.equalTo(self.view.mas_right).offset(-15);
-////            make.height.mas_equalTo(50);
-//        }];
 
         slider.backgroundColor = [UIColor clearColor];
         slider.sliderBarHeight = 10;
@@ -260,9 +300,10 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
 - (void)timeValuechange:(CustomSlider*)sender {
     NSLog(@"current index = %ld",(long)sender.value);
     NSInteger value = sender.value;
-    if (value>0) {
+    if (value > 0) {
         _workMode = ModeLimitedTiming;
         [_timingonOffSwitch setOn:YES];
+        _isUserCloseTiming = NO;
     }
     _limitedTime = value *30;
 
@@ -275,17 +316,17 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请选择风的模式" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
         
         UIAlertAction *sleep = [UIAlertAction actionWithTitle:@"睡眠风" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            self.workSpeed = SpeedSleepWind;
+            self.workMode = ModeSleepWind;
             
         }];
         UIAlertAction *natural = [UIAlertAction actionWithTitle:@"自然风" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            self.workSpeed = SpeedNatureWind;
+            self.workMode = ModeNatureWind;
         }];
         UIAlertAction *strong = [UIAlertAction actionWithTitle:@"超强风" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            self.workSpeed = SpeedSuperStrongWind;
+            self.workMode = ModeSuperStrongWind;
         }];
         UIAlertAction *weak = [UIAlertAction actionWithTitle:@"超微风" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            self.workSpeed = SpeedSuperWeakWind;
+            self.workMode = ModeSuperWeakWind;
         }];
         UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         
@@ -396,11 +437,12 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     if (sender.isOn) {
         [SVProgressHUD showSuccessWithStatus:@"您已开启语音识别"];
         [self wakeupConfiguration];
+//        [self recognizeConfiguration];
 //        [self getDeviceInfo];
     }else {
         [SVProgressHUD showSuccessWithStatus:@"您已关闭语音识别"];
         
-        [self.wakeupManager stopWakeup];
+//        [self.wakeupManager stopWakeup];
         [self.recongnizeManager stopRecognize];
 //        [self getDeviceMacAddress];
     }
@@ -425,11 +467,12 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     if (sender.isOn) {
         _workMode = ModeLimitedTiming;
         [SVProgressHUD showSuccessWithStatus:@"您已开启定时开关功能"];
-
+        _isUserCloseTiming = NO;
     }else {
         _workMode = ModeNormal;
 //        _limitedTime = 0;
         [SVProgressHUD showSuccessWithStatus:@"您已关闭定时开关功能"];
+        _isUserCloseTiming = YES;
 
     }
     
@@ -443,6 +486,13 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         //to be confirmed
         //需要恢复上次的状态吗？ 由notify给我的状态去设备吧!
         _workMode = ModeNormal;
+        if (_limitedTime > 0) {
+            if (!_isUserCloseTiming) {
+                _workMode = ModeLimitedTiming;
+                [_timingonOffSwitch setOn:YES];
+
+            }
+        }
     }else {
         [SVProgressHUD showSuccessWithStatus:@"您已关机"];
         //其他的按钮状态统一关闭
@@ -459,7 +509,6 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
 - (void)getDeviceInfo {
     [_api sendData:@"0201" hex:YES completion:^(id result, BOOL keepAlive) {
         //when write with response,you can receive a result
-        //when write with response,you can receive a result
 //        NSLog(@"发送设备基本信息==%@,发送结果===%u",result,keepAlive);
         
         NSObject *data = result;
@@ -467,7 +516,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         NSRange range = NSMakeRange(4, 18);
         NSString *deviceInfoString = [dataString substringWithRange:range];
         NSString *device_id = [deviceInfoString substringWithRange:NSMakeRange(0, 8)];
-        _api.lastModule.device_id =  [MinewCommonTool reverseString:device_id];
+        _api.lastModule.device_id = [MinewCommonTool reverseString:device_id];
 
         NSString *version = [deviceInfoString substringWithRange:NSMakeRange(8, 8)];
         _api.lastModule.version = [MinewCommonTool reverseString:version];
@@ -476,11 +525,9 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         _api.lastModule.pair_flag = [[MinewCommonTool reverseString:pair_flag] boolValue];
         NSLog(@"测试设备基本信息===%@  %@  %@  %lu",deviceInfoString,_api.lastModule.device_id,_api.lastModule.version,_api.lastModule.pair_flag);
 
-        NSData *deviceData = (NSData *)result;
+//        NSData *deviceData = (NSData *)result;
         
 //        deviceBaseInfoModel.deviceId =
-
-        
         
     }];
     
@@ -558,43 +605,11 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
             break;
     }
     
-    switch (dataModel.Wind_Speed) {
-        case SpeedSleepWind://
-        {
-            _fanSpeed = 0;
-            _workSpeed = SpeedSleepWind;
-        }
-            break;
-        case SpeedNatureWind://自然风
-        {
-            _fanSpeed = 0;
-            _workSpeed = SpeedNatureWind;
-        }
-            break;
-        case SpeedSuperWeakWind://
-        {
-            _fanSpeed = 0;
-            _workSpeed = SpeedSuperWeakWind;
-        }
-            break;
-        case SpeedSuperStrongWind://
-        {
-            _fanSpeed = 0;
-            _workSpeed = SpeedSuperStrongWind;
-        }
-            break;
-        default:
-        {
-            _fanSpeed = dataModel.Wind_Speed ;
-            _workSpeed = SpeedRealWind ;
-            [MinewCommonTool onMainThread:^{
-                _speedSlider.value = dataModel.Wind_Speed;
-
-            }];
-
-        }
-            break;
-    }
+    _fanSpeed = dataModel.Wind_Speed ;
+    [MinewCommonTool onMainThread:^{
+        _speedSlider.value = dataModel.Wind_Speed;
+        _currentSpeedLabel.text = [NSString stringWithFormat:@"当前风速:%ld",_fanSpeed];
+    }];
     
     switch (dataModel.Hand_Flag) {
         case ShakeYES:
@@ -637,18 +652,15 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     dataModel.Command_id = 2;
     dataModel.key = 3;
     dataModel.mode = _workMode;
-    if (_workSpeed != SpeedRealWind) {
-        dataModel.Wind_Speed = _workSpeed;
-    }else {
-        dataModel.Wind_Speed = _fanSpeed;
-    }
+    dataModel.Wind_Speed = _fanSpeed;
     //当开关为关闭的状态时
-    if (_onOffSwitch.isOn == NO) {
-        dataModel.Wind_Speed = 0;
-    }
+//    if (_onOffSwitch.isOn == NO) {
+//        dataModel.Wind_Speed = 0;
+//    }
     dataModel.Hand_Flag = _shakeSwitch.isOn?ShakeYES:ShakeNo;
     dataModel.Dispaly_Flag = DisplayNO;//to be confirmed  不确定是做什么用的
-    dataModel.Timing = _timingonOffSwitch.isOn?_limitedTime:0;
+//    dataModel.Timing = _timingonOffSwitch.isOn?_limitedTime:0;
+    dataModel.Timing = _limitedTime;
     
     NSString *timing = [NSString stringWithFormat:@"%04x",dataModel.Timing];
     timing = [MinewCommonTool reverseString:timing];

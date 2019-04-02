@@ -146,7 +146,7 @@
                                     <action selector="SpeedModeSelectAction:" destination="FcD-zM-bEG" eventType="touchUpInside" id="dOB-Qy-Utm"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="32" translatesAutoresizingMaskIntoConstraints="NO" id="NG8-kg-LoP">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="32" translatesAutoresizingMaskIntoConstraints="NO" id="NG8-kg-LoP">
                                 <rect key="frame" x="103" y="312" width="259" height="31"/>
                                 <connections>
                                     <action selector="speedSliderMoved:" destination="FcD-zM-bEG" eventType="touchUpInside" id="ZZX-qz-wAm"/>
@@ -158,11 +158,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aYQ-Wm-IvW">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aYQ-Wm-IvW">
                                 <rect key="frame" x="105" y="292" width="40" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Vrt-kO-FlG"/>
                                     <constraint firstAttribute="width" constant="40" id="xiG-5W-nvS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前风速：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5LQ-v9-HJL">
+                                <rect key="frame" x="127.5" y="271" width="120" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="RhM-P1-bWM"/>
+                                    <constraint firstAttribute="height" constant="21" id="dLf-Ue-RnO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -196,6 +206,7 @@
                             <constraint firstItem="nP9-UV-aCx" firstAttribute="centerY" secondItem="CvN-0P-XXK" secondAttribute="centerY" id="JbJ-Zv-swA"/>
                             <constraint firstItem="ss0-OG-qso" firstAttribute="centerY" secondItem="CvN-0P-XXK" secondAttribute="centerY" id="JxE-fJ-vcM"/>
                             <constraint firstItem="tvl-aX-9rR" firstAttribute="centerX" secondItem="vBv-pe-Iem" secondAttribute="centerX" id="K7I-WU-YSy"/>
+                            <constraint firstItem="NG8-kg-LoP" firstAttribute="top" secondItem="5LQ-v9-HJL" secondAttribute="bottom" constant="20" id="OOT-SK-r9i"/>
                             <constraint firstItem="0Vv-Sg-ZfK" firstAttribute="top" secondItem="PoT-cl-GA2" secondAttribute="bottom" constant="50" id="RII-BI-btf"/>
                             <constraint firstItem="nP9-UV-aCx" firstAttribute="width" secondItem="CvN-0P-XXK" secondAttribute="width" id="UGg-Lj-miW"/>
                             <constraint firstItem="AOX-W6-kAl" firstAttribute="leading" secondItem="CvN-0P-XXK" secondAttribute="trailing" constant="11" id="UOt-IU-D21"/>
@@ -203,6 +214,7 @@
                             <constraint firstItem="4Th-RB-7xD" firstAttribute="width" secondItem="aYQ-Wm-IvW" secondAttribute="width" id="XBl-gd-ehM"/>
                             <constraint firstItem="Tj5-VU-H9u" firstAttribute="centerX" secondItem="PoT-cl-GA2" secondAttribute="centerX" id="Y7Z-bW-Hj7"/>
                             <constraint firstAttribute="trailing" secondItem="Rzd-rd-vcf" secondAttribute="trailing" id="ZBS-K6-AJ5"/>
+                            <constraint firstItem="5LQ-v9-HJL" firstAttribute="centerX" secondItem="vBv-pe-Iem" secondAttribute="centerX" id="aPZ-5R-zMT"/>
                             <constraint firstAttribute="trailing" secondItem="NG8-kg-LoP" secondAttribute="trailing" constant="15" id="c0J-AP-bzf"/>
                             <constraint firstItem="xVH-22-3dt" firstAttribute="leading" secondItem="dYq-qN-LMn" secondAttribute="trailing" constant="10" id="d7Y-gy-iNO"/>
                             <constraint firstItem="NG8-kg-LoP" firstAttribute="centerY" secondItem="Tj5-VU-H9u" secondAttribute="centerY" id="dH6-TJ-Tyb"/>
@@ -226,6 +238,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="xWK-3L-DDt"/>
                     <connections>
+                        <outlet property="currentSpeedLabel" destination="5LQ-v9-HJL" id="9JV-VT-nG6"/>
                         <outlet property="onOffSwitch" destination="AOX-W6-kAl" id="nmD-Fq-xvw"/>
                         <outlet property="setSwitch" destination="ss0-OG-qso" id="Qlz-GJ-DhG"/>
                         <outlet property="shakeSwitch" destination="PcN-fo-Wuh" id="7mE-BY-0vI"/>
@@ -237,7 +250,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hba-7L-l9Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1836" y="-853.22338830584715"/>
+            <point key="canvasLocation" x="-2711" y="-889"/>
         </scene>
     </scenes>
     <resources>

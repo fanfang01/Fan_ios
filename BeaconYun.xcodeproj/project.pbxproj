@@ -20,6 +20,7 @@
 		2845217A21F9964F0089D6FE /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845217921F9964F0089D6FE /* libc++.tbd */; };
 		2845217C21F9965A0089D6FE /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845217B21F9965A0089D6FE /* libiconv.2.4.0.tbd */; };
 		2845217E21F996650089D6FE /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845217D21F996650089D6FE /* libsqlite3.0.tbd */; };
+		28613FD522530F9B00E7B0FD /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 28613FD422530F9B00E7B0FD /* Tools.m */; };
 		286D18D021E829B1000A122E /* ScanConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286D18CF21E829B1000A122E /* ScanConnectViewController.m */; };
 		286D18D321E8368F000A122E /* shake.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 286D18D221E8368F000A122E /* shake.xcassets */; };
 		286D18DD21E86E83000A122E /* MinewModuleAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 286D18D621E86E83000A122E /* MinewModuleAPI.m */; };
@@ -135,6 +136,8 @@
 		2845217921F9964F0089D6FE /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		2845217B21F9965A0089D6FE /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
 		2845217D21F996650089D6FE /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		28613FD322530F9B00E7B0FD /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
+		28613FD422530F9B00E7B0FD /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		286D18CE21E829B1000A122E /* ScanConnectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanConnectViewController.h; sourceTree = "<group>"; };
 		286D18CF21E829B1000A122E /* ScanConnectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanConnectViewController.m; sourceTree = "<group>"; };
 		286D18D121E830FF000A122E /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -337,6 +340,8 @@
 		28B893FB22018CCF00A156C9 /* BaiduSDK */ = {
 			isa = PBXGroup;
 			children = (
+				28613FD322530F9B00E7B0FD /* Tools.h */,
+				28613FD422530F9B00E7B0FD /* Tools.m */,
 				28B894B22201A05D00A156C9 /* WakeUp.bin */,
 				28B893FC22018CCF00A156C9 /* BDSClientHeaders */,
 				28B8941522018CCF00A156C9 /* BDSClientResource */,
@@ -986,6 +991,7 @@
 				E56992F31E5EB97100C76E42 /* BYNavigationController.m in Sources */,
 				28193E9721F6EE7A00AD3B97 /* CustomSlider.m in Sources */,
 				E5E4BDAF1E710B780086472B /* NSTimer+Blocks.m in Sources */,
+				28613FD522530F9B00E7B0FD /* Tools.m in Sources */,
 				E56992FB1E5EBE6B00C76E42 /* BYTableViewModel.m in Sources */,
 				E56992E01E5EB91500C76E42 /* main.m in Sources */,
 				286D18DF21E86E83000A122E /* MinewModuleManager.m in Sources */,

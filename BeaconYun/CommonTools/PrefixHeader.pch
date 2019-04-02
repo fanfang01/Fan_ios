@@ -27,6 +27,8 @@
 #import "BDSWakeupDefines.h"
 #import "BDSWakeupParameters.h"
 
+#import "Tools.h"
+
 #define API_KEY @"Lc0DZBA7Gtzegk2w01DMcNa4"
 #define SECRET_KEY @"d7jrmq11BrZLlqiaanCyPYSDSqRtRBd6"
 #define APP_ID @"15418226"

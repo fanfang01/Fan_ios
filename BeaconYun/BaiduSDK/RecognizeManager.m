@@ -10,7 +10,6 @@
 
 @interface RecognizeManager ()<BDSClientASRDelegate>
 
-@property (strong, nonatomic) BDSEventManager *asrEventManager;
 
 @end
 
@@ -111,7 +110,7 @@
                 //                self.resultTextView.text = [self getDescriptionForDic:aObj];
                 
                 NSLog(@"系统的最终得到的录音:%@",[self getDescriptionForDic:aObj]);
-                [SVProgressHUD showSuccessWithStatus:[self getDescriptionForDic:aObj]];
+//                [SVProgressHUD showSuccessWithStatus:[self getDescriptionForDic:aObj]];
                 if (self.voiceReco) {
                     self.voiceReco([self getDescriptionForDic:aObj]);
                 }
@@ -202,9 +201,15 @@
 
 - (NSString *)getDescriptionForDic:(NSDictionary *)dic {
     if (dic) {
-        return [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:dic
-                                                                              options:NSJSONWritingPrettyPrinted
-                                                                                error:nil] encoding:NSUTF8StringEncoding];
+        NSArray *array = [dic objectForKey:@"results_recognition"];
+        if (array.count) {
+            return [array firstObject];
+        }
+        NSString *returnStr = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:dic
+                                                                                             options:NSJSONWritingPrettyPrinted
+                                                                                               error:nil] encoding:NSUTF8StringEncoding];
+        
+        return returnStr;
     }
     return @"noting";
 }

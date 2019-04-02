@@ -14,14 +14,10 @@ typedef NS_ENUM(NSUInteger, WorkMode) {
     ModeClose = 0,
     ModeNormal,
     ModeLimitedTiming,
-};
-
-typedef NS_ENUM(NSUInteger, WorkSpeed) {
-    SpeedRealWind = 0,
-    SpeedSleepWind = 161,
-    SpeedNatureWind = 162,
-    SpeedSuperStrongWind = 163,
-    SpeedSuperWeakWind = 164,
+    ModeSleepWind = 6,
+    ModeNatureWind = 5,
+    ModeSuperStrongWind = 3,
+    ModeSuperWeakWind = 4,
 };
 
 typedef NS_ENUM(NSUInteger, ShakeState) {
