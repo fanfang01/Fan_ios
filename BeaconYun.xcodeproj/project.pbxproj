@@ -49,7 +49,11 @@
 		28B8949F220190CC00A156C9 /* bds_easr_wakeup_words.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B89484220190CC00A156C9 /* bds_easr_wakeup_words.dat */; };
 		28B894A0220190CC00A156C9 /* bds_easr_dnn_wakeup_model.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B89485220190CC00A156C9 /* bds_easr_dnn_wakeup_model.dat */; };
 		28B894B1220190E000A156C9 /* BDSClientResources in Resources */ = {isa = PBXBuildFile; fileRef = 28B894B0220190E000A156C9 /* BDSClientResources */; };
-		28B894B32201A05D00A156C9 /* WakeUp.bin in Resources */ = {isa = PBXBuildFile; fileRef = 28B894B22201A05D00A156C9 /* WakeUp.bin */; };
+		28BF7C422264597600C8AB53 /* WakeUp.bin in Resources */ = {isa = PBXBuildFile; fileRef = 28BF7C412264597600C8AB53 /* WakeUp.bin */; };
+		28BF7C452264763800C8AB53 /* BYInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BF7C442264763800C8AB53 /* BYInfoViewController.m */; };
+		28CD4740225B28D3000D0342 /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CD473E225B28D3000D0342 /* AudioPlayer.m */; };
+		28CD4742225B29A0000D0342 /* ok.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 28CD4741225B29A0000D0342 /* ok.mp3 */; };
+		28CD4744225B4056000D0342 /* im_here.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 28CD4743225B4056000D0342 /* im_here.mp3 */; };
 		B1CFC9764E4898520C187548 /* libPods-BeaconYun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F5851AABDA97E315A353A0BF /* libPods-BeaconYun.a */; };
 		E532AFD01E9B92290001BE28 /* lock.js in Resources */ = {isa = PBXBuildFile; fileRef = E532AFCF1E9B92290001BE28 /* lock.js */; };
 		E539CF0D1E762AA800B9D731 /* ui2.js in Resources */ = {isa = PBXBuildFile; fileRef = E539CF0C1E762AA800B9D731 /* ui2.js */; };
@@ -101,7 +105,6 @@
 		E5CF142D1E9E189D00C1D26D /* switch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5CF14271E9E189D00C1D26D /* switch@2x.png */; };
 		E5CF142E1E9E189D00C1D26D /* switchimg.png in Resources */ = {isa = PBXBuildFile; fileRef = E5CF14281E9E189D00C1D26D /* switchimg.png */; };
 		E5E4BDAF1E710B780086472B /* NSTimer+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E4BDAE1E710B780086472B /* NSTimer+Blocks.m */; };
-		E5E4BDB51E71427D0086472B /* BYInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E4BDB41E71427D0086472B /* BYInfoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,7 +203,12 @@
 		28B89484220190CC00A156C9 /* bds_easr_wakeup_words.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_wakeup_words.dat; sourceTree = "<group>"; };
 		28B89485220190CC00A156C9 /* bds_easr_dnn_wakeup_model.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_dnn_wakeup_model.dat; sourceTree = "<group>"; };
 		28B894B0220190E000A156C9 /* BDSClientResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BDSClientResources; sourceTree = "<group>"; };
-		28B894B22201A05D00A156C9 /* WakeUp.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = WakeUp.bin; sourceTree = "<group>"; };
+		28BF7C412264597600C8AB53 /* WakeUp.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = WakeUp.bin; sourceTree = "<group>"; };
+		28BF7C442264763800C8AB53 /* BYInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BYInfoViewController.m; path = "../../../Ai-Switch/ASK插排+唤醒chinese/socket/BYInfoViewController.m"; sourceTree = "<group>"; };
+		28CD473E225B28D3000D0342 /* AudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayer.m; sourceTree = "<group>"; };
+		28CD473F225B28D3000D0342 /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
+		28CD4741225B29A0000D0342 /* ok.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ok.mp3; sourceTree = "<group>"; };
+		28CD4743225B4056000D0342 /* im_here.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = im_here.mp3; sourceTree = "<group>"; };
 		49E0A3CD57A1B7DE50179925 /* Pods-BeaconYun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaconYun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeaconYun/Pods-BeaconYun.debug.xcconfig"; sourceTree = "<group>"; };
 		B370C1B698562C91509A8E8F /* Pods-BeaconYun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaconYun.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeaconYun/Pods-BeaconYun.release.xcconfig"; sourceTree = "<group>"; };
 		E532AFCF1E9B92290001BE28 /* lock.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = lock.js; sourceTree = "<group>"; };
@@ -280,7 +288,6 @@
 		E5E4BDAD1E710B780086472B /* NSTimer+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Blocks.h"; sourceTree = "<group>"; };
 		E5E4BDAE1E710B780086472B /* NSTimer+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Blocks.m"; sourceTree = "<group>"; };
 		E5E4BDB31E71427D0086472B /* BYInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYInfoViewController.h; sourceTree = "<group>"; };
-		E5E4BDB41E71427D0086472B /* BYInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYInfoViewController.m; sourceTree = "<group>"; };
 		F5851AABDA97E315A353A0BF /* libPods-BeaconYun.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BeaconYun.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -340,9 +347,13 @@
 		28B893FB22018CCF00A156C9 /* BaiduSDK */ = {
 			isa = PBXGroup;
 			children = (
+				28BF7C412264597600C8AB53 /* WakeUp.bin */,
+				28CD4743225B4056000D0342 /* im_here.mp3 */,
+				28CD4741225B29A0000D0342 /* ok.mp3 */,
+				28CD473F225B28D3000D0342 /* AudioPlayer.h */,
+				28CD473E225B28D3000D0342 /* AudioPlayer.m */,
 				28613FD322530F9B00E7B0FD /* Tools.h */,
 				28613FD422530F9B00E7B0FD /* Tools.m */,
-				28B894B22201A05D00A156C9 /* WakeUp.bin */,
 				28B893FC22018CCF00A156C9 /* BDSClientHeaders */,
 				28B8941522018CCF00A156C9 /* BDSClientResource */,
 				28B8944422018CCF00A156C9 /* BDSClientLib */,
@@ -658,7 +669,7 @@
 				E54520311E68469500C0D46E /* BYDeviceDetailViewController.h */,
 				E54520321E68469500C0D46E /* BYDeviceDetailViewController.m */,
 				E5E4BDB31E71427D0086472B /* BYInfoViewController.h */,
-				E5E4BDB41E71427D0086472B /* BYInfoViewController.m */,
+				28BF7C442264763800C8AB53 /* BYInfoViewController.m */,
 				286D18CE21E829B1000A122E /* ScanConnectViewController.h */,
 				286D18CF21E829B1000A122E /* ScanConnectViewController.m */,
 			);
@@ -805,6 +816,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 8FJMU234N7;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					E56992AF1E5EB60B00C76E42 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -856,7 +872,7 @@
 				E532AFD01E9B92290001BE28 /* lock.js in Resources */,
 				E54F0A2B1EA9D13F008B7CC3 /* auto.png in Resources */,
 				E540700D1E972B3E00D9ECB4 /* up.png in Resources */,
-				28B894B32201A05D00A156C9 /* WakeUp.bin in Resources */,
+				28CD4742225B29A0000D0342 /* ok.mp3 in Resources */,
 				28B8946222018CD000A156C9 /* English_Speech_Female.dat in Resources */,
 				28B8949F220190CC00A156C9 /* bds_easr_wakeup_words.dat in Resources */,
 				28B8946622018CD000A156C9 /* English_Text.dat in Resources */,
@@ -868,6 +884,7 @@
 				E54070081E972B3E00D9ECB4 /* bluebed.js in Resources */,
 				E56992DD1E5EB91500C76E42 /* Assets.xcassets in Resources */,
 				28B894A0220190CC00A156C9 /* bds_easr_dnn_wakeup_model.dat in Resources */,
+				28BF7C422264597600C8AB53 /* WakeUp.bin in Resources */,
 				28B8949E220190CC00A156C9 /* bds_easr_gramm.dat in Resources */,
 				E5A7E1E81E60251900D72212 /* InfoPlist.strings in Resources */,
 				28B8946322018CD000A156C9 /* offline_engine_tmp_license.dat in Resources */,
@@ -887,6 +904,7 @@
 				E54F0A311EA9D13F008B7CC3 /* timer_select.png in Resources */,
 				E54070071E972B3E00D9ECB4 /* bed.png in Resources */,
 				E540700B1E972B3E00D9ECB4 /* union_down.png in Resources */,
+				28CD4744225B4056000D0342 /* im_here.mp3 in Resources */,
 				28B8946722018CD000A156C9 /* .gitignore in Resources */,
 				E54F0A351EA9D25F008B7CC3 /* bluefan.js in Resources */,
 				E54F0A301EA9D13F008B7CC3 /* sleep.png in Resources */,
@@ -972,7 +990,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5E4BDB51E71427D0086472B /* BYInfoViewController.m in Sources */,
+				28CD4740225B28D3000D0342 /* AudioPlayer.m in Sources */,
 				28B8947022018CD000A156C9 /* RecognizeManager.m in Sources */,
 				286D18DD21E86E83000A122E /* MinewModuleAPI.m in Sources */,
 				286D18E021E86E83000A122E /* MinewModule.m in Sources */,
@@ -990,6 +1008,7 @@
 				E5A7E1E31E600FB000D72212 /* BYScanDeviceViewController.m in Sources */,
 				E56992F31E5EB97100C76E42 /* BYNavigationController.m in Sources */,
 				28193E9721F6EE7A00AD3B97 /* CustomSlider.m in Sources */,
+				28BF7C452264763800C8AB53 /* BYInfoViewController.m in Sources */,
 				E5E4BDAF1E710B780086472B /* NSTimer+Blocks.m in Sources */,
 				28613FD522530F9B00E7B0FD /* Tools.m in Sources */,
 				E56992FB1E5EBE6B00C76E42 /* BYTableViewModel.m in Sources */,

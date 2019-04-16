@@ -204,7 +204,7 @@
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI
 {
-    NSLog(@"还在持续扫描");
+//    NSLog(@"还在持续扫描");
     NSDictionary *adverDataDict = advertisementData[CBAdvertisementDataServiceDataKey];
     
     NSString *name = peripheral.name;
@@ -213,7 +213,7 @@
     NSString *adName = advertisementData[CBAdvertisementDataLocalNameKey];
     
     
-    if ( [adName isEqualToString:@"S301R"] )
+    if ( [adName isEqualToString:@"S303R"] )
     {
 
         NSLog(@"扫描到的数据::::%@",advertisementData);
@@ -257,17 +257,18 @@
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    MinewModule *module = _connectingModuleDict[peripheral.identifier.UUIDString];;
+    MinewModule *module = _connectingModuleDict[peripheral.identifier.UUIDString];
     
     if (module)
     {
-        if (module.activeDisconnect)
-            module.activeDisconnect = NO;
-        else
-        {
-            [module didDisconnect];
-            [self callBack:module connect:LinkStatusDisconnect];
-        }
+//        if (module.activeDisconnect)
+//            module.activeDisconnect = NO;
+//        else
+//        {
+//
+//        }
+        [module didDisconnect];
+        [self callBack:module connect:LinkStatusDisconnect];
         
         [_connectingModuleDict removeObjectForKey:peripheral.identifier.UUIDString];
     }

@@ -29,9 +29,9 @@
 
 #import "Tools.h"
 
-#define API_KEY @"Lc0DZBA7Gtzegk2w01DMcNa4"
-#define SECRET_KEY @"d7jrmq11BrZLlqiaanCyPYSDSqRtRBd6"
-#define APP_ID @"15418226"
+#define API_KEY @"77qmcej4jPKInuIpG4UhIeLG"
+#define SECRET_KEY @"ZACMtEfHXGGw12aBilymvq7MdlOah3HI"
+#define APP_ID @"15970851"
 
 #define statusBarHeight [[UIApplication sharedApplication] statusBarFrame].size.height
 

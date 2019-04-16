@@ -42,4 +42,7 @@
 // 16进制转10进制
 + (NSNumber *) numberHexString:(NSString *)aHexString;
 
++ (NSString *)transformPinYinWithString:(NSString *)chinese;
+
++ (BOOL)isNum:(NSString *)checkedNumString ;
 @end

@@ -23,8 +23,10 @@
 
 #import "WakeUpManager.h"
 #import "RecognizeManager.h"
+#import "AudioPlayer.h"
 
-@interface BYScanDeviceViewController ()<MinewModuleManagerDelegate>
+@interface BYScanDeviceViewController ()<MinewModuleManagerDelegate,AudioPlayerDelegate>
+@property (nonatomic, strong) AudioPlayer *player;
 
 @property (nonatomic, strong) MinewModuleManager *manager;
 
@@ -62,6 +64,9 @@
 {
     BOOL _isWriting;
     BOOL _isUserCloseTiming;
+    BOOL _isShouldINRecognize;
+    NSTimer *_recognizeTimer;
+    NSInteger _countDown;
 }
 
 struct SendDataNodel dataModel = {0,0,0,0,0,0};
@@ -72,8 +77,13 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     [super viewDidLoad];
     
     self.title = @"Fan";
+    _countDown = 0;
     
     _isWriting = NO;
+    
+    _player = [[AudioPlayer alloc]init];
+    _player.immediate = YES;
+    _player.delegate = self;
     
     [self timeCusSlider];
 
@@ -106,6 +116,38 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     [SVProgressHUD dismiss];
 }
 
+#pragma mark --- 开始识别的倒计时 NSTimer
+- (void) initRecognizeTimer {
+    [self invalidateTimer];
+    
+    if (!_recognizeTimer) {
+        _recognizeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(startCountDown) userInfo:nil repeats:YES];
+    }
+}
+
+- (void) startCountDown {
+    _countDown ++;
+    if (_countDown > 4) {
+        [self invalidateTimer];
+        
+        [self.recongnizeManager stopRecognize];
+        [self wakeupConfiguration];
+    }
+}
+
+- (void)invalidateTimer {
+    
+    [_recognizeTimer invalidate];
+    _recognizeTimer = nil;
+    
+    _countDown = 0;
+}
+
+- (void)dealloc {
+    
+    [self invalidateTimer];
+}
+
 - (void)wakeupConfiguration {
     _wakeupManager = [WakeUpManager sharedInstance];
 
@@ -117,17 +159,53 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         __strong BYScanDeviceViewController *strongSelf = weakSelf;
 
         NSLog(@"识别到关键词:%@",keywords);
-        [strongSelf recognizeConfiguration];
         
-//        [strongSelf voiceToAdvertise:keywords];
+        [strongSelf.wakeupManager stopWakeup];
+        
+        if ([keywords containsString:@"工作模式"]) {
+            [SVProgressHUD showSuccessWithStatus:@"您已开机"];
+            //to be confirmed
+            _workMode = ModeNormal;
+            
+            [strongSelf setDeveiceState];
+            
+            [MinewCommonTool onMainThread:^{
+                [strongSelf.onOffSwitch setOn:YES];
+                [strongSelf playOKAudio];
+            }];
+        }else if ([keywords containsString:@"关机模式"]) {
+            [SVProgressHUD showSuccessWithStatus:@"您已关机"];
+            //其他的按钮状态统一关闭
+            [strongSelf.timingonOffSwitch setOn:NO];
+            [strongSelf.shakeSwitch setOn:NO];
+            
+            strongSelf.workMode = ModeClose;
+            
+            [strongSelf setDeveiceState];
+            
+            [MinewCommonTool onMainThread:^{
+                [strongSelf.onOffSwitch setOn:NO];
+                [strongSelf playOKAudio];
+            }];
+        }else {
+            [SVProgressHUD showSuccessWithStatus:@"您可以发送命令了"];
+            
+            [MinewCommonTool onMainThread:^{
+                [strongSelf playHereAudio];
+            }];
+        }
 
     };
 }
 
 - (void)recognizeConfiguration {
+    [self initRecognizeTimer];
+    
     _recongnizeManager = [RecognizeManager sharedInstance];
     [_recongnizeManager.asrEventManager setParameter:@(NO) forKey:BDS_ASR_ENABLE_LONG_SPEECH];
-    [_recongnizeManager.asrEventManager setParameter:@(NO) forKey:BDS_ASR_NEED_CACHE_AUDIO];
+    [_recongnizeManager.asrEventManager setParameter:@(YES) forKey:BDS_ASR_NEED_CACHE_AUDIO];
+    [_recongnizeManager.asrEventManager setParameter:@"3" forKey:BDS_ASR_MFE_MAX_WAIT_DURATION];
+    [_recongnizeManager.asrEventManager setParameter:@(6.) forKey:BDS_ASR_MFE_MAX_SPEECH_PAUSE];
     [_recongnizeManager.asrEventManager setParameter:@"" forKey:BDS_ASR_OFFLINE_ENGINE_TRIGGERED_WAKEUP_WORD];
     
     [_recongnizeManager.asrEventManager setDelegate:self];
@@ -142,90 +220,186 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         __strong BYScanDeviceViewController *strongSelf = weakSelf;
         
         NSLog(@"收到的录音===%@",voice);
-        if ([voice containsString:@"打开摇头"]) {
-            [SVProgressHUD showSuccessWithStatus:@"您已开启摇头功能"];
-            _shakeState = ShakeYES;
-            
-            [strongSelf setDeveiceState];
-        }else if ([voice containsString:@"关闭摇头"]) {
-            [SVProgressHUD showSuccessWithStatus:@"您已关闭摇头功能"];
-            _shakeState = ShakeNo;
-            
-            [strongSelf setDeveiceState];
-        }else if ([voice containsString:@"定时"] && [voice containsString:@"小时"]) {
-            NSRange range1 = [voice rangeOfString:@"定时"];
-            NSRange range2 = [voice rangeOfString:@"小时"];
-            NSString *timeStr = [voice substringWithRange:NSMakeRange(range1.length, range2.location)];
-//            NSInteger fileteredNum = [Tools chineseNumbersReturnArabicNumerals:voice];
-            NSInteger fileteredNum = [timeStr integerValue];
-            if (fileteredNum > 0) {
-                _workMode = ModeLimitedTiming;
-                [strongSelf.timingonOffSwitch setOn:YES];
-                _isUserCloseTiming = NO;
-            }
-            if (_limitedTime<=12) {
-                _limitedTime = fileteredNum *60;
-            }else {
-                _limitedTime = 12*60;
-                [SVProgressHUD showSuccessWithStatus:@"风扇的最大定时时长为12小时"];
-            }
-            
-            [strongSelf setDeveiceState];
-            NSLog(@"定时得到的时长为：%ld 分钟",fileteredNum*60);
-            
-        }else if ([voice containsString:@"设定风速为"]) {
-            NSInteger fileteredNum = [Tools chineseNumbersReturnArabicNumerals:voice];
-            if ( 0 == fileteredNum ) {
-                NSRange range = [voice rangeOfString:@"设定风速为"];
-                if (voice.length >= range.length+2) {
-                    NSString *speedStr = [voice substringWithRange:NSMakeRange(range.length, 2)];
-                    fileteredNum = [speedStr integerValue];
-                }
-            }
-            
-            NSLog(@"设定风速为：%ld",fileteredNum);
-            _fanSpeed = fileteredNum;
-            if (fileteredNum > 32) {
-                [SVProgressHUD showSuccessWithStatus:@"风速的最大速度为32"];
-                fileteredNum = 32;
-                _fanSpeed = 32;
-            }else {
-                _fanSpeed = fileteredNum;
-            }
-            
-            [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"您已设定风扇转速%ld",(long)fileteredNum]];
-            strongSelf.currentSpeedLabel.text = [NSString stringWithFormat:@"当前风速:%ld",(long)strongSelf.fanSpeed];
-            
-            [strongSelf setDeveiceState];
-        }
         
-        [strongSelf wakeupConfiguration];
+        [strongSelf invalidateTimer];
+        
+        [strongSelf recongnizeVoice:voice];
+        
+//        [strongSelf.recongnizeManager stopRecognize];
+        
+        
     };
 }
 
 #pragma mark --- 录音识别结果处理
 - (void)recongnizeVoice:(NSString *)voice {
-    
+    if ([voice containsString:@"打开摇头"] || [voice containsString:@"开启摇头"]) {
+        [SVProgressHUD showSuccessWithStatus:@"您已开启摇头"];
+        _shakeState = ShakeYES;
+        
+        [_shakeSwitch setOn:YES];
+        
+        [self setDeveiceState];
+        [MinewCommonTool onMainThread:^{
+            [self playOKAudio];
+        }];
+
+    }else if ([voice containsString:@"停止摇头"] || [voice containsString:@"关闭摇头"]) {
+        [SVProgressHUD showSuccessWithStatus:@"您已停止摇头"];
+        _shakeState = ShakeNo;
+        [_shakeSwitch setOn:NO];
+        
+        [self setDeveiceState];
+        [MinewCommonTool onMainThread:^{
+            [self playOKAudio];
+        }];
+    }else if ([voice containsString:@"定时"] && [voice containsString:@"小时"]) {
+        NSRange range1 = [voice rangeOfString:@"定时"];
+        NSRange range2 = [voice rangeOfString:@"小时"];
+        NSString *timeStr = [voice substringWithRange:NSMakeRange(range1.length, range2.location)];
+        //            NSInteger fileteredNum = [Tools chineseNumbersReturnArabicNumerals:voice];
+        NSInteger fileteredNum = [timeStr integerValue];
+        if (fileteredNum > 0) {
+            _workMode = ModeLimitedTiming;
+            [self.timingonOffSwitch setOn:YES];
+            _isUserCloseTiming = NO;
+        }
+        if (fileteredNum <= 12) {
+            _limitedTime = fileteredNum *60;
+        }else {
+            _limitedTime = 12*60;
+            [SVProgressHUD showSuccessWithStatus:@"风扇的最大定时时长为12小时"];
+        }
+        
+        [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"已定时%ld小时",(long)fileteredNum]];
+        [self setDeveiceState];
+        
+        [MinewCommonTool onMainThread:^{
+            self.timeCusSlider.value = _limitedTime/60;
+            [self playOKAudio];
+        }];
+        
+        NSLog(@"定时得到的时长为：%d 分钟",fileteredNum*60);
+        
+    }else if ([voice containsString:@"第"] && [voice containsString:@"档"]) {
+        NSRange firstRange = [voice rangeOfString:@"第"];
+        NSRange secondRange = [voice rangeOfString:@"档"];
+        NSString *speedStr = [voice substringWithRange:NSMakeRange(firstRange.length, secondRange.location-firstRange.length)];
+        NSInteger speed = [Tools chineseNumbersReturnArabicNumerals:speedStr];
+        
+#warning 这个地方需要好好测试
+        
+        if (speed == 0) {
+            //判断是否纯数字
+            if ([MinewCommonTool isNum:speedStr]) {
+                speed = [speedStr integerValue];
+            }
+        }
+        NSLog(@"第 速度为:%ld",speed);
+
+        NSInteger fileteredNum = speed;
+        [self setSpeedNumber:fileteredNum];
+        
+    }else if ([voice containsString:@"d"] && [voice containsString:@"档"]) {
+        NSRange firstRange = [voice rangeOfString:@"d"];
+        NSRange secondRange = [voice rangeOfString:@"档"];
+        NSString *speedStr = [voice substringWithRange:NSMakeRange(firstRange.length, secondRange.location-firstRange.length)];
+        NSInteger speed = [Tools chineseNumbersReturnArabicNumerals:speedStr];
+        if (speed == 0) {
+            //判断是否纯数字
+            if ([MinewCommonTool isNum:speedStr]) {
+                speed = [speedStr integerValue];
+            }
+        }
+        NSLog(@"d 速度为:%ld",speed);
+        NSInteger fileteredNum = speed;
+        [self setSpeedNumber:fileteredNum];
+
+    } else if ([voice containsString:@"上一档"] || [voice containsString:@"上一当"]) {
+        _fanSpeed -= 1;
+        
+        [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"您已设定风扇转速%ld",(long)_fanSpeed]];
+        _currentSpeedLabel.text = [NSString stringWithFormat:@"当前风速:%ld",(long)_fanSpeed];
+        
+        [self setDeveiceState];
+        [MinewCommonTool onMainThread:^{
+            [self playOKAudio];
+        }];
+    }else if ([voice containsString:@"下一档"]) {
+        _fanSpeed += 1;
+        
+        [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"您已设定风扇转速%ld",(long)_fanSpeed]];
+        _currentSpeedLabel.text = [NSString stringWithFormat:@"当前风速:%ld",(long)_fanSpeed];
+        
+        [self setDeveiceState];
+
+        [MinewCommonTool onMainThread:^{
+            [self playOKAudio];
+        }];
+        
+    }else if ([voice containsString:@"增加定时"]) {
+        NSInteger value = _limitedTime+60;
+        NSLog(@"增加定时");
+        if (value < 60*12) {
+            _workMode = ModeLimitedTiming;
+            [_timingonOffSwitch setOn:YES];
+            _isUserCloseTiming = NO;
+            [MinewCommonTool onMainThread:^{
+                _limitedTime = value;
+                self.timeCusSlider.value = value/30;
+                [self playOKAudio];
+            }];
+        }
+        
+        [self setDeveiceState];
+        
+    }else if ([voice containsString:@"减小定时"] || [voice containsString:@"减少定时"]) {
+        NSInteger value = _limitedTime-60;
+        NSLog(@"减小定时");
+        if (value < 0) {
+            value = 0;
+        }
+        _workMode = ModeLimitedTiming;
+        [_timingonOffSwitch setOn:YES];
+        _isUserCloseTiming = NO;
+        [self setDeveiceState];
+        
+        [MinewCommonTool onMainThread:^{
+            _limitedTime = value;
+            self.timeCusSlider.value = value/30;
+            [self playOKAudio];
+        }];
+        
+    }else if ([[MinewCommonTool transformPinYinWithString:voice] containsString:@"xiaoaoxiaoao"]) {
+        [MinewCommonTool onMainThread:^{
+            [self playHereAudio];
+        }];
+    }
+    else {
+        
+        [self wakeupConfiguration];
+    }
 }
 
-#pragma mark --- 语音发送广播
-//后续 还可以更精准一点过滤   语音发送广播
-- (void)voiceToAdvertise:(NSString *)key {
+//语音识别风速
+- (void)setSpeedNumber:(NSInteger)fileteredNum {
+    NSLog(@"设定风速为：%ld",(long)fileteredNum);
+    _fanSpeed = fileteredNum;
+    if (fileteredNum > 32) {
+        [SVProgressHUD showSuccessWithStatus:@"风速的最大速度为32"];
+        _fanSpeed = 32;
+    }
     
-    [self recognizeConfiguration];
+    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"您已设定风扇转速%ld",(long)self.fanSpeed]];
+    self.currentSpeedLabel.text = [NSString stringWithFormat:@"当前风速:%ld",(long)self.fanSpeed];
     
-//    NSMutableArray *keyArr = [self getALLKeys];
-//    NSString *recordKey = @"";
-//    for (NSString *okey in keyArr) {
-//        if ([okey containsString:key] || [key containsString:okey]) {
-//            recordKey = okey;
-//            NSInteger index = [keyArr indexOfObject:recordKey];
-//
-//
-//        }
-//    }
+    [self setDeveiceState];
+    if (_fanSpeed > 0) {
+        [MinewCommonTool onMainThread:^{
+            [self playOKAudio];
+        }];
+    }
 }
-
 
 - (void)setWorkMode:(WorkMode)workMode
 {
@@ -317,7 +491,6 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         
         UIAlertAction *sleep = [UIAlertAction actionWithTitle:@"睡眠风" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             self.workMode = ModeSleepWind;
-            
         }];
         UIAlertAction *natural = [UIAlertAction actionWithTitle:@"自然风" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             self.workMode = ModeNatureWind;
@@ -393,20 +566,18 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
             NSString *timingStr = [NSString stringWithFormat:@"%02x%02x",testByte[7],testByte[6]];
             uint16_t timing =  [[MinewCommonTool numberHexString:timingStr] integerValue];
             dataModel.Timing = timing;
-            NSLog(@"得到的设备状态信息===%02x %02x %02x %02x %04x ",dataModel.mode,dataModel.Wind_Speed,dataModel.Hand_Flag,dataModel.Dispaly_Flag,dataModel.Timing);
+            NSLog(@"得到的设备状态信息===%02x %02x %02x %02x %04x",dataModel.mode,dataModel.Wind_Speed,dataModel.Hand_Flag,dataModel.Dispaly_Flag,dataModel.Timing);
             
-
             [MinewCommonTool onMainThread:^{
                 if (dataModel.key == 1) {
                     return ;
                 }
                 if (_isWriting) {
-                    return;
+                    return ;
                 }
                 //更新风扇的状态
                 [self updateViewState];
             }];
-
         }
     }];
     //start scan
@@ -426,7 +597,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     });
 }
 
-- (void)infoButtonClick:(UIButton *)sender
+- (void)showInfoViewVC
 {
     BYInfoViewController *bvc = [[BYInfoViewController alloc] init];
     [self.navigationController pushViewController:bvc animated:YES];
@@ -437,16 +608,13 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     if (sender.isOn) {
         [SVProgressHUD showSuccessWithStatus:@"您已开启语音识别"];
         [self wakeupConfiguration];
-//        [self recognizeConfiguration];
-//        [self getDeviceInfo];
+
     }else {
         [SVProgressHUD showSuccessWithStatus:@"您已关闭语音识别"];
         
-//        [self.wakeupManager stopWakeup];
+        [self.wakeupManager stopWakeup];
         [self.recongnizeManager stopRecognize];
-//        [self getDeviceMacAddress];
     }
-    //to be confirmed
 }
 
 #pragma mark --- 摇头功能
@@ -490,7 +658,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
             if (!_isUserCloseTiming) {
                 _workMode = ModeLimitedTiming;
                 [_timingonOffSwitch setOn:YES];
-
+                
             }
         }
     }else {
@@ -530,7 +698,6 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
 //        deviceBaseInfoModel.deviceId =
         
     }];
-    
 }
 
 #pragma mark 获取设备的Mac地址
@@ -593,10 +760,34 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
             [_onOffSwitch setOn:YES];
         }
             break;
-        case ModeNormal: // 关闭
+        case ModeNormal: // 正常
         {
             [_timingonOffSwitch setOn:NO];
             [_onOffSwitch setOn:YES];
+            _timeCusSlider.value = 0;
+        }
+            break;
+        case ModeSleepWind: // 睡眠风
+        {
+            [_speedModeSelectBtn setTitle:@"睡眠风" forState:UIControlStateNormal];
+            _timeCusSlider.value = 0;
+        }
+            break;
+        case ModeNatureWind: // 自然风
+        {
+            [_speedModeSelectBtn setTitle:@"自然风" forState:UIControlStateNormal];
+            _timeCusSlider.value = 0;
+        }
+            break;
+        case ModeSuperStrongWind: // 超强风
+        {
+            [_speedModeSelectBtn setTitle:@"超强风" forState:UIControlStateNormal];
+            _timeCusSlider.value = 0;
+        }
+            break;
+        case ModeSuperWeakWind: // 超微风
+        {
+            [_speedModeSelectBtn setTitle:@"超微风" forState:UIControlStateNormal];
             _timeCusSlider.value = 0;
         }
             break;
@@ -608,7 +799,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     _fanSpeed = dataModel.Wind_Speed ;
     [MinewCommonTool onMainThread:^{
         _speedSlider.value = dataModel.Wind_Speed;
-        _currentSpeedLabel.text = [NSString stringWithFormat:@"当前风速:%ld",_fanSpeed];
+        _currentSpeedLabel.text = [NSString stringWithFormat:@"当前风速:%ld",(long)self.fanSpeed];
     }];
     
     switch (dataModel.Hand_Flag) {
@@ -632,7 +823,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         if (dataModel.Timing % 30 >= 10) {
             index += 1;
         }
-        if (index>=12) {
+        if (index >= 12) {
             index = 12;
         }
         _timeCusSlider.value = index;
@@ -648,6 +839,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
 }
 
 - (void)setDeveiceState {
+    
     struct SendDataNodel dataModel = {0,0,0};
     dataModel.Command_id = 2;
     dataModel.key = 3;
@@ -675,5 +867,53 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         NSLog(@"在此处判断写入是否成功!");
     }];
 }
+
+
+#pragma mark ---- 语音相关操作
+- (void)playOKAudio {
+    NSLog(@"播放OK的语音");
+
+    _isShouldINRecognize = NO;
+    //    [self.recognizeManager stopListening];
+    NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"ok" ofType:@"mp3"];
+    self.player.soundPath = soundPath;
+    [self.player startPlayingAlarmSound];
+}
+
+- (void)playHereAudio {
+    NSLog(@"播放here的语音");
+    _isShouldINRecognize = YES;
+
+    NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"im_here" ofType:@"mp3"];
+    self.player.soundPath = soundPath;
+    [self.player startPlayingAlarmSound];
+}
+
+- (void)audioPlayerDidFinished
+{
+    NSLog(@"完成播放");
+    __weak BYScanDeviceViewController *weakSelf = self;
+    [MinewCommonTool onMainThread:^{
+        __strong BYScanDeviceViewController *strongSelf = weakSelf;
+        
+        if (_isShouldINRecognize) {
+            NSLog(@"播放完here后的唤醒");
+            [strongSelf.wakeupManager stopWakeup];
+            
+            [strongSelf recognizeConfiguration];
+        }else {
+            NSLog(@"播放完OK后的唤醒");
+             [strongSelf wakeupConfiguration];
+        }
+    }];
+    
+}
+
+//进入设置详情界面
+- (IBAction)setupAction:(UIButton *)sender {
+    
+    [self showInfoViewVC];
+}
+
 
 @end

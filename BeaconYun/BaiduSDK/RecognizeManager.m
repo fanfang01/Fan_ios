@@ -66,7 +66,7 @@
     [self.asrEventManager setParameter:@"1537" forKey:BDS_ASR_PRODUCT_ID];
 
     //发送指令：启动识别
-    [self.asrEventManager sendCommand:BDS_ASR_CMD_START];
+//    [self.asrEventManager sendCommand:BDS_ASR_CMD_START];
 }
 
 - (void)stopRecognize {
@@ -81,6 +81,14 @@
     switch (workStatus) {
         case EVoiceRecognitionClientWorkStatusNewRecordData:
         {
+            if (aObj) {
+                
+                NSLog(@"收到的新回调==%@",aObj);
+//                //                [SVProgressHUD showSuccessWithStatus:[self getDescriptionForDic:aObj]];
+//                if (self.voiceReco && [self getDescriptionForDic:aObj].length) {
+//                    self.voiceReco([self getDescriptionForDic:aObj]);
+//                }
+            }
             NSLog(@"进入EVoiceRecognitionClientWorkStatusNewRecordData 状态");
             break;
         }
@@ -93,10 +101,12 @@
             break;
         }
         case EVoiceRecognitionClientWorkStatusStart: {
+            NSLog(@"EVoiceRecognitionClientWorkStatusStart");
             [self printLogTextView:@"CALLBACK: detect voice start point.\n"];
             break;
         }
         case EVoiceRecognitionClientWorkStatusEnd: {
+            NSLog(@"EVoiceRecognitionClientWorkStatusEnd");
             [self printLogTextView:@"CALLBACK: detect voice end point.\n"];
             break;
         }
@@ -200,7 +210,7 @@
 }
 
 - (NSString *)getDescriptionForDic:(NSDictionary *)dic {
-    if (dic) {
+    if ([dic isKindOfClass:[NSDictionary class]] && dic) {
         NSArray *array = [dic objectForKey:@"results_recognition"];
         if (array.count) {
             return [array firstObject];
