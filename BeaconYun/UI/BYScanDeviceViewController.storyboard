@@ -76,7 +76,7 @@
                                     <action selector="voiceRecognize:" destination="FcD-zM-bEG" eventType="valueChanged" id="Epu-Wc-zW8"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="定时时长 x 30min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Vv-Sg-ZfK">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="定时时长 x 1h" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Vv-Sg-ZfK">
                                 <rect key="frame" x="20" y="167" width="160" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="zqu-Jo-Om9"/>

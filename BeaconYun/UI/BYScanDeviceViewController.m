@@ -127,8 +127,9 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
 
 - (void) startCountDown {
     _countDown ++;
-    if (_countDown > 4) {
+    if (_countDown > 2) {
         [self invalidateTimer];
+        NSLog(@"这里会执行吗，如果取消了定时器");
         
         [self.recongnizeManager stopRecognize];
         [self wakeupConfiguration];
@@ -140,6 +141,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     [_recognizeTimer invalidate];
     _recognizeTimer = nil;
     
+    NSLog(@"定时器无效");
     _countDown = 0;
 }
 
@@ -151,7 +153,11 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
 - (void)wakeupConfiguration {
     _wakeupManager = [WakeUpManager sharedInstance];
 
-    [_wakeupManager startWakeup];
+    [MinewCommonTool onMainThread:^{
+        [_wakeupManager stopWakeup];
+        [_recongnizeManager stopRecognize];
+        [_wakeupManager startWakeup];
+    }];
 
     __weak BYScanDeviceViewController *weakSelf = self;
     _wakeupManager.voiceWakeUp = ^(NSString * _Nonnull keywords) {
@@ -220,12 +226,13 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         __strong BYScanDeviceViewController *strongSelf = weakSelf;
         
         NSLog(@"收到的录音===%@",voice);
-        
-        [strongSelf invalidateTimer];
-        
-        [strongSelf recongnizeVoice:voice];
-        
-//        [strongSelf.recongnizeManager stopRecognize];
+        [MinewCommonTool onMainThread:^{
+            [strongSelf invalidateTimer];
+            
+            [strongSelf recongnizeVoice:voice];
+            
+            [strongSelf.recongnizeManager stopRecognize];
+        }];
         
         
     };
@@ -233,7 +240,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
 
 #pragma mark --- 录音识别结果处理
 - (void)recongnizeVoice:(NSString *)voice {
-    if ([voice containsString:@"打开摇头"] || [voice containsString:@"开启摇头"]) {
+    if ([voice containsString:@"打开摇头"] || [voice containsString:@"开始摇头"] || [[MinewCommonTool transformPinYinWithString:voice] containsString:@"kaishiyaotou"] || [[MinewCommonTool transformPinYinWithString:voice] containsString:@"dakaiyaotou"]) {
         [SVProgressHUD showSuccessWithStatus:@"您已开启摇头"];
         _shakeState = ShakeYES;
         
@@ -244,7 +251,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
             [self playOKAudio];
         }];
 
-    }else if ([voice containsString:@"停止摇头"] || [voice containsString:@"关闭摇头"]) {
+    }else if ([voice containsString:@"停止摇头"] || [voice containsString:@"关闭摇头"] ||[[MinewCommonTool transformPinYinWithString:voice] containsString:@"tingzhiyaotou"] || [[MinewCommonTool transformPinYinWithString:voice] containsString:@"guanbiyaotou"]) {
         [SVProgressHUD showSuccessWithStatus:@"您已停止摇头"];
         _shakeState = ShakeNo;
         [_shakeSwitch setOn:NO];
@@ -314,9 +321,14 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         NSLog(@"d 速度为:%ld",speed);
         NSInteger fileteredNum = speed;
         [self setSpeedNumber:fileteredNum];
+        
+        
 
-    } else if ([voice containsString:@"上一档"] || [voice containsString:@"上一当"]) {
+    } else if ([voice containsString:@"上一档"] || [voice containsString:@"上一当"] || [[MinewCommonTool transformPinYinWithString:voice] containsString:@"shangyidang"]) {
         _fanSpeed -= 1;
+        if (_fanSpeed<=0) {
+            _fanSpeed = 1;
+        }
         
         [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"您已设定风扇转速%ld",(long)_fanSpeed]];
         _currentSpeedLabel.text = [NSString stringWithFormat:@"当前风速:%ld",(long)_fanSpeed];
@@ -325,8 +337,11 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         [MinewCommonTool onMainThread:^{
             [self playOKAudio];
         }];
-    }else if ([voice containsString:@"下一档"]) {
+    }else if ([voice containsString:@"下一档"] || [voice containsString:@"下一挡"] || [[MinewCommonTool transformPinYinWithString:voice] containsString:@"xiayidang"]) {
         _fanSpeed += 1;
+        if (_fanSpeed > 12) {
+            _fanSpeed = 12;
+        }
         
         [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"您已设定风扇转速%ld",(long)_fanSpeed]];
         _currentSpeedLabel.text = [NSString stringWithFormat:@"当前风速:%ld",(long)_fanSpeed];
@@ -337,7 +352,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
             [self playOKAudio];
         }];
         
-    }else if ([voice containsString:@"增加定时"]) {
+    }else if ([voice containsString:@"增加定时"] || [[MinewCommonTool transformPinYinWithString:voice] containsString:@"zengjiadingshi"]) {
         NSInteger value = _limitedTime+60;
         NSLog(@"增加定时");
         if (value < 60*12) {
@@ -346,14 +361,14 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
             _isUserCloseTiming = NO;
             [MinewCommonTool onMainThread:^{
                 _limitedTime = value;
-                self.timeCusSlider.value = value/30;
+                self.timeCusSlider.value = value/60;
                 [self playOKAudio];
             }];
         }
         
         [self setDeveiceState];
         
-    }else if ([voice containsString:@"减小定时"] || [voice containsString:@"减少定时"]) {
+    }else if ([voice containsString:@"减小定时"] || [voice containsString:@"减少定时"] || [[MinewCommonTool transformPinYinWithString:voice] containsString:@"jianxiaodingshi"] || [[MinewCommonTool transformPinYinWithString:voice] containsString:@"jianshaodingshi"]) {
         NSInteger value = _limitedTime-60;
         NSLog(@"减小定时");
         if (value < 0) {
@@ -366,7 +381,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         
         [MinewCommonTool onMainThread:^{
             _limitedTime = value;
-            self.timeCusSlider.value = value/30;
+            self.timeCusSlider.value = value/60;
             [self playOKAudio];
         }];
         
@@ -391,9 +406,13 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     }
     
     [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"您已设定风扇转速%ld",(long)self.fanSpeed]];
-    self.currentSpeedLabel.text = [NSString stringWithFormat:@"当前风速:%ld",(long)self.fanSpeed];
-    
+    [MinewCommonTool onMainThread:^{
+        self.currentSpeedLabel.text = [NSString stringWithFormat:@"当前风速:%ld",(long)self.fanSpeed];
+        self.speedSlider.value = _fanSpeed;
+
+    }];
     [self setDeveiceState];
+    
     if (_fanSpeed > 0) {
         [MinewCommonTool onMainThread:^{
             [self playOKAudio];
@@ -479,7 +498,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         [_timingonOffSwitch setOn:YES];
         _isUserCloseTiming = NO;
     }
-    _limitedTime = value *30;
+    _limitedTime = value *60;
 
     [self setDeveiceState];
 }
@@ -819,8 +838,8 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     
     if (dataModel.Timing) {
         
-        NSInteger index = dataModel.Timing/30;
-        if (dataModel.Timing % 30 >= 10) {
+        NSInteger index = dataModel.Timing/60;
+        if (dataModel.Timing % 60 >= 10) {
             index += 1;
         }
         if (index >= 12) {

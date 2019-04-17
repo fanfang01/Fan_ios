@@ -71,6 +71,7 @@
 
 - (void)stopRecognize {
     [self.asrEventManager sendCommand:BDS_ASR_CMD_UNLOAD_ENGINE];
+//    [self.asrEventManager sendCommand:BDS_ASR_CMD_CANCEL];
     [self.asrEventManager sendCommand:BDS_ASR_CMD_STOP];
 }
 

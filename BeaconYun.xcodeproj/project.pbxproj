@@ -50,7 +50,7 @@
 		28B894A0220190CC00A156C9 /* bds_easr_dnn_wakeup_model.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B89485220190CC00A156C9 /* bds_easr_dnn_wakeup_model.dat */; };
 		28B894B1220190E000A156C9 /* BDSClientResources in Resources */ = {isa = PBXBuildFile; fileRef = 28B894B0220190E000A156C9 /* BDSClientResources */; };
 		28BF7C422264597600C8AB53 /* WakeUp.bin in Resources */ = {isa = PBXBuildFile; fileRef = 28BF7C412264597600C8AB53 /* WakeUp.bin */; };
-		28BF7C452264763800C8AB53 /* BYInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BF7C442264763800C8AB53 /* BYInfoViewController.m */; };
+		28BF7C4A2265BA0700C8AB53 /* BYInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BF7C492265BA0700C8AB53 /* BYInfoViewController.m */; };
 		28CD4740225B28D3000D0342 /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CD473E225B28D3000D0342 /* AudioPlayer.m */; };
 		28CD4742225B29A0000D0342 /* ok.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 28CD4741225B29A0000D0342 /* ok.mp3 */; };
 		28CD4744225B4056000D0342 /* im_here.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 28CD4743225B4056000D0342 /* im_here.mp3 */; };
@@ -204,7 +204,7 @@
 		28B89485220190CC00A156C9 /* bds_easr_dnn_wakeup_model.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_dnn_wakeup_model.dat; sourceTree = "<group>"; };
 		28B894B0220190E000A156C9 /* BDSClientResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BDSClientResources; sourceTree = "<group>"; };
 		28BF7C412264597600C8AB53 /* WakeUp.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = WakeUp.bin; sourceTree = "<group>"; };
-		28BF7C442264763800C8AB53 /* BYInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BYInfoViewController.m; path = "../../../Ai-Switch/ASK插排+唤醒chinese/socket/BYInfoViewController.m"; sourceTree = "<group>"; };
+		28BF7C492265BA0700C8AB53 /* BYInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYInfoViewController.m; sourceTree = "<group>"; };
 		28CD473E225B28D3000D0342 /* AudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayer.m; sourceTree = "<group>"; };
 		28CD473F225B28D3000D0342 /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
 		28CD4741225B29A0000D0342 /* ok.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ok.mp3; sourceTree = "<group>"; };
@@ -669,7 +669,7 @@
 				E54520311E68469500C0D46E /* BYDeviceDetailViewController.h */,
 				E54520321E68469500C0D46E /* BYDeviceDetailViewController.m */,
 				E5E4BDB31E71427D0086472B /* BYInfoViewController.h */,
-				28BF7C442264763800C8AB53 /* BYInfoViewController.m */,
+				28BF7C492265BA0700C8AB53 /* BYInfoViewController.m */,
 				286D18CE21E829B1000A122E /* ScanConnectViewController.h */,
 				286D18CF21E829B1000A122E /* ScanConnectViewController.m */,
 			);
@@ -1008,7 +1008,7 @@
 				E5A7E1E31E600FB000D72212 /* BYScanDeviceViewController.m in Sources */,
 				E56992F31E5EB97100C76E42 /* BYNavigationController.m in Sources */,
 				28193E9721F6EE7A00AD3B97 /* CustomSlider.m in Sources */,
-				28BF7C452264763800C8AB53 /* BYInfoViewController.m in Sources */,
+				28BF7C4A2265BA0700C8AB53 /* BYInfoViewController.m in Sources */,
 				E5E4BDAF1E710B780086472B /* NSTimer+Blocks.m in Sources */,
 				28613FD522530F9B00E7B0FD /* Tools.m in Sources */,
 				E56992FB1E5EBE6B00C76E42 /* BYTableViewModel.m in Sources */,
