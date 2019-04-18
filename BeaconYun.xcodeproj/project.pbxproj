@@ -51,6 +51,8 @@
 		28B894B1220190E000A156C9 /* BDSClientResources in Resources */ = {isa = PBXBuildFile; fileRef = 28B894B0220190E000A156C9 /* BDSClientResources */; };
 		28BF7C422264597600C8AB53 /* WakeUp.bin in Resources */ = {isa = PBXBuildFile; fileRef = 28BF7C412264597600C8AB53 /* WakeUp.bin */; };
 		28BF7C4A2265BA0700C8AB53 /* BYInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BF7C492265BA0700C8AB53 /* BYInfoViewController.m */; };
+		28BF7C4F226857E100C8AB53 /* BDVRSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BF7C4C226857E100C8AB53 /* BDVRSettings.m */; };
+		28BF7C50226857E100C8AB53 /* BDVRSettingsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BF7C4E226857E100C8AB53 /* BDVRSettingsItem.m */; };
 		28CD4740225B28D3000D0342 /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CD473E225B28D3000D0342 /* AudioPlayer.m */; };
 		28CD4742225B29A0000D0342 /* ok.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 28CD4741225B29A0000D0342 /* ok.mp3 */; };
 		28CD4744225B4056000D0342 /* im_here.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 28CD4743225B4056000D0342 /* im_here.mp3 */; };
@@ -205,6 +207,10 @@
 		28B894B0220190E000A156C9 /* BDSClientResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BDSClientResources; sourceTree = "<group>"; };
 		28BF7C412264597600C8AB53 /* WakeUp.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = WakeUp.bin; sourceTree = "<group>"; };
 		28BF7C492265BA0700C8AB53 /* BYInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYInfoViewController.m; sourceTree = "<group>"; };
+		28BF7C4B226857E100C8AB53 /* BDVRSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDVRSettings.h; sourceTree = "<group>"; };
+		28BF7C4C226857E100C8AB53 /* BDVRSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDVRSettings.m; sourceTree = "<group>"; };
+		28BF7C4D226857E100C8AB53 /* BDVRSettingsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDVRSettingsItem.h; sourceTree = "<group>"; };
+		28BF7C4E226857E100C8AB53 /* BDVRSettingsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDVRSettingsItem.m; sourceTree = "<group>"; };
 		28CD473E225B28D3000D0342 /* AudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayer.m; sourceTree = "<group>"; };
 		28CD473F225B28D3000D0342 /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
 		28CD4741225B29A0000D0342 /* ok.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ok.mp3; sourceTree = "<group>"; };
@@ -347,6 +353,10 @@
 		28B893FB22018CCF00A156C9 /* BaiduSDK */ = {
 			isa = PBXGroup;
 			children = (
+				28BF7C4B226857E100C8AB53 /* BDVRSettings.h */,
+				28BF7C4C226857E100C8AB53 /* BDVRSettings.m */,
+				28BF7C4D226857E100C8AB53 /* BDVRSettingsItem.h */,
+				28BF7C4E226857E100C8AB53 /* BDVRSettingsItem.m */,
 				28BF7C412264597600C8AB53 /* WakeUp.bin */,
 				28CD4743225B4056000D0342 /* im_here.mp3 */,
 				28CD4741225B29A0000D0342 /* ok.mp3 */,
@@ -1006,6 +1016,7 @@
 				E56992DC1E5EB91500C76E42 /* AppDelegate.m in Sources */,
 				E54520331E68469500C0D46E /* BYDeviceDetailViewController.m in Sources */,
 				E5A7E1E31E600FB000D72212 /* BYScanDeviceViewController.m in Sources */,
+				28BF7C50226857E100C8AB53 /* BDVRSettingsItem.m in Sources */,
 				E56992F31E5EB97100C76E42 /* BYNavigationController.m in Sources */,
 				28193E9721F6EE7A00AD3B97 /* CustomSlider.m in Sources */,
 				28BF7C4A2265BA0700C8AB53 /* BYInfoViewController.m in Sources */,
@@ -1014,6 +1025,7 @@
 				E56992FB1E5EBE6B00C76E42 /* BYTableViewModel.m in Sources */,
 				E56992E01E5EB91500C76E42 /* main.m in Sources */,
 				286D18DF21E86E83000A122E /* MinewModuleManager.m in Sources */,
+				28BF7C4F226857E100C8AB53 /* BDVRSettings.m in Sources */,
 				E54070101E97320100D9ECB4 /* WXImgLoaderDefaultImpl.m in Sources */,
 				E56993011E5ECA9400C76E42 /* BYCellModel.m in Sources */,
 				E56993041E5ED41100C76E42 /* BYSectionModel.m in Sources */,

@@ -19,6 +19,7 @@ typedef void(^FinalVoiceReco)(NSString *voice);
 
 
 + (instancetype)sharedInstance;
+- (void)startRecognize ;
 
 //停止语音识别
 - (void)stopRecognize;

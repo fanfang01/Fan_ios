@@ -7,6 +7,7 @@
 //
 
 #import "RecognizeManager.h"
+#import "BDVRSettings.h"
 
 @interface RecognizeManager ()<BDSClientASRDelegate>
 
@@ -38,6 +39,8 @@
     self.asrEventManager = [BDSEventManager createEventManagerWithName:BDS_ASR_NAME];
     //设置语音识别代理
     [self.asrEventManager setDelegate:self];
+    [[BDVRSettings getInstance] configBDVRClient];
+
     
     //参数配置
     //1.设置DEBUG_LOG的级别
@@ -51,6 +54,7 @@
     
     NSLog(@"Current SDK version: %@",[self.asrEventManager libver]);
     
+    //配置端点检测
     NSString *modelVAD_filepath = [[NSBundle mainBundle] pathForResource:@"bds_easr_basic_model" ofType:@"dat"];
     
     [self.asrEventManager setParameter:modelVAD_filepath forKey:BDS_ASR_MODEL_VAD_DAT_FILE];
@@ -62,15 +66,26 @@
     [self.asrEventManager setParameter:@(YES) forKey:BDS_ASR_ENABLE_NLU];
     
     
-//    [self.asrEventManager setParameter:@"1536" forKey:BDS_ASR_PRODUCT_ID];
-    [self.asrEventManager setParameter:@"1537" forKey:BDS_ASR_PRODUCT_ID];
+    [self.asrEventManager setParameter:@"1536" forKey:BDS_ASR_PRODUCT_ID];
+//    [self.asrEventManager setParameter:@"1537" forKey:BDS_ASR_PRODUCT_ID];
 
     //发送指令：启动识别
 //    [self.asrEventManager sendCommand:BDS_ASR_CMD_START];
 }
 
+- (void)startRecognize {
+    [self.asrEventManager setParameter:@(NO) forKey:BDS_ASR_ENABLE_LONG_SPEECH];
+    [self.asrEventManager setParameter:@(NO) forKey:BDS_ASR_NEED_CACHE_AUDIO];
+    [self.asrEventManager setParameter:@"" forKey:BDS_ASR_OFFLINE_ENGINE_TRIGGERED_WAKEUP_WORD];
+    
+    [self.asrEventManager setDelegate:self];
+    [self.asrEventManager setParameter:nil forKey:BDS_ASR_AUDIO_FILE_PATH];
+    [self.asrEventManager setParameter:nil forKey:BDS_ASR_AUDIO_INPUT_STREAM];
+    [self.asrEventManager sendCommand:BDS_ASR_CMD_START];
+}
+
 - (void)stopRecognize {
-    [self.asrEventManager sendCommand:BDS_ASR_CMD_UNLOAD_ENGINE];
+//    [self.asrEventManager sendCommand:BDS_ASR_CMD_UNLOAD_ENGINE];
 //    [self.asrEventManager sendCommand:BDS_ASR_CMD_CANCEL];
     [self.asrEventManager sendCommand:BDS_ASR_CMD_STOP];
 }
@@ -84,7 +99,7 @@
         {
             if (aObj) {
                 
-                NSLog(@"收到的新回调==%@",aObj);
+//                NSLog(@"收到的新回调==%@",aObj);
 //                //                [SVProgressHUD showSuccessWithStatus:[self getDescriptionForDic:aObj]];
 //                if (self.voiceReco && [self getDescriptionForDic:aObj].length) {
 //                    self.voiceReco([self getDescriptionForDic:aObj]);

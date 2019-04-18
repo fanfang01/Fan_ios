@@ -205,7 +205,7 @@
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI
 {
 //    NSLog(@"还在持续扫描");
-    NSDictionary *adverDataDict = advertisementData[CBAdvertisementDataServiceDataKey];
+//    NSDictionary *adverDataDict = advertisementData[CBAdvertisementDataServiceDataKey];
     
     NSString *name = peripheral.name;
 
@@ -213,7 +213,7 @@
     NSString *adName = advertisementData[CBAdvertisementDataLocalNameKey];
     
     
-    if ( [adName isEqualToString:@"S303R"] )
+    if ( [adName isEqualToString:@"S301R"] )
     {
 
         NSLog(@"扫描到的数据::::%@",advertisementData);

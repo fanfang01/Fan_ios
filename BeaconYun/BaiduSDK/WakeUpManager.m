@@ -58,7 +58,7 @@
 
 - (void)startWakeup
 {
-    //    [self configWakeupClient];
+        [self configWakeupClient];
     [self.wakeupEventManager setParameter:nil forKey:BDS_WAKEUP_AUDIO_FILE_PATH];
     [self.wakeupEventManager setParameter:nil forKey:BDS_WAKEUP_AUDIO_INPUT_STREAM];
     [self.wakeupEventManager sendCommand:BDS_WP_CMD_LOAD_ENGINE];
@@ -91,9 +91,12 @@
             //                self.continueToVR = NO;
             NSString *key = [NSString stringWithFormat:@"%@",((NSString *)aObj)];
             [SVProgressHUD showSuccessWithStatus:key];
-//            [self.asrEventManager setParameter:@(YES) forKey:BDS_ASR_NEED_CACHE_AUDIO];
-//            [self.asrEventManager setParameter:aObj forKey:BDS_ASR_OFFLINE_ENGINE_TRIGGERED_WAKEUP_WORD];
-//            [self voiceRecogButtonHelper];
+            if ([key isEqualToString:@"小奥小奥"]) {
+//                [self.asrEventManager setParameter:@(YES) forKey:BDS_ASR_NEED_CACHE_AUDIO];
+//                [self.asrEventManager setParameter:aObj forKey:BDS_ASR_OFFLINE_ENGINE_TRIGGERED_WAKEUP_WORD];
+//                [self voiceRecogButtonHelper];
+            }
+
             
             if (self.voiceWakeUp) {
                 self.voiceWakeUp(key);
@@ -161,10 +164,11 @@
 }
 
 - (void)stopWakeup {
+    [self.wakeupEventManager sendCommand:BDS_WP_CMD_STOP];
+
     
     [self.wakeupEventManager sendCommand:BDS_WP_CMD_UNLOAD_ENGINE];
     
-    [self.wakeupEventManager sendCommand:BDS_WP_CMD_STOP];
 }
 
 @end

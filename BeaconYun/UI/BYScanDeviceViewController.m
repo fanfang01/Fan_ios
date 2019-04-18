@@ -132,6 +132,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         NSLog(@"这里会执行吗，如果取消了定时器");
         
         [self.recongnizeManager stopRecognize];
+       
         [self wakeupConfiguration];
     }
 }
@@ -169,55 +170,66 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         [strongSelf.wakeupManager stopWakeup];
         
         if ([keywords containsString:@"工作模式"]) {
-            [SVProgressHUD showSuccessWithStatus:@"您已开机"];
-            //to be confirmed
-            _workMode = ModeNormal;
             
-            [strongSelf setDeveiceState];
+            [strongSelf setPowerOn];
             
-            [MinewCommonTool onMainThread:^{
-                [strongSelf.onOffSwitch setOn:YES];
-                [strongSelf playOKAudio];
-            }];
         }else if ([keywords containsString:@"关机模式"]) {
-            [SVProgressHUD showSuccessWithStatus:@"您已关机"];
-            //其他的按钮状态统一关闭
-            [strongSelf.timingonOffSwitch setOn:NO];
-            [strongSelf.shakeSwitch setOn:NO];
             
-            strongSelf.workMode = ModeClose;
+            [strongSelf setPowerOff];
             
-            [strongSelf setDeveiceState];
-            
-            [MinewCommonTool onMainThread:^{
-                [strongSelf.onOffSwitch setOn:NO];
-                [strongSelf playOKAudio];
-            }];
         }else {
             [SVProgressHUD showSuccessWithStatus:@"您可以发送命令了"];
             
             [MinewCommonTool onMainThread:^{
-                [strongSelf playHereAudio];
+//                [strongSelf playHereAudio];
+                [strongSelf.wakeupManager stopWakeup];
+                
+//                [self.recongnizeManager.asrEventManager setParameter:@(YES) forKey:BDS_ASR_NEED_CACHE_AUDIO];
+//                [self.recongnizeManager.asrEventManager setParameter:aObj forKey:BDS_ASR_OFFLINE_ENGINE_TRIGGERED_WAKEUP_WORD];
+//                [self voiceRecogButtonHelper];
+                
+                [strongSelf recognizeConfiguration];
             }];
         }
 
     };
 }
 
+- (void)setPowerOn {
+    [SVProgressHUD showSuccessWithStatus:@"您已开机"];
+    //to be confirmed
+    _workMode = ModeNormal;
+    
+    [self setDeveiceState];
+    
+    [MinewCommonTool onMainThread:^{
+        [self.onOffSwitch setOn:YES];
+        [self playOKAudio];
+    }];
+}
+
+- (void)setPowerOff {
+    [SVProgressHUD showSuccessWithStatus:@"您已关机"];
+    //其他的按钮状态统一关闭
+    [self.timingonOffSwitch setOn:NO];
+    [self.shakeSwitch setOn:NO];
+    
+    self.workMode = ModeClose;
+    
+    [self setDeveiceState];
+    
+    [MinewCommonTool onMainThread:^{
+        [self.onOffSwitch setOn:NO];
+        [self playOKAudio];
+    }];
+}
+
 - (void)recognizeConfiguration {
     [self initRecognizeTimer];
     
     _recongnizeManager = [RecognizeManager sharedInstance];
-    [_recongnizeManager.asrEventManager setParameter:@(NO) forKey:BDS_ASR_ENABLE_LONG_SPEECH];
-    [_recongnizeManager.asrEventManager setParameter:@(YES) forKey:BDS_ASR_NEED_CACHE_AUDIO];
-    [_recongnizeManager.asrEventManager setParameter:@"3" forKey:BDS_ASR_MFE_MAX_WAIT_DURATION];
-    [_recongnizeManager.asrEventManager setParameter:@(6.) forKey:BDS_ASR_MFE_MAX_SPEECH_PAUSE];
-    [_recongnizeManager.asrEventManager setParameter:@"" forKey:BDS_ASR_OFFLINE_ENGINE_TRIGGERED_WAKEUP_WORD];
-    
-    [_recongnizeManager.asrEventManager setDelegate:self];
-    [_recongnizeManager.asrEventManager setParameter:nil forKey:BDS_ASR_AUDIO_FILE_PATH];
-    [_recongnizeManager.asrEventManager setParameter:nil forKey:BDS_ASR_AUDIO_INPUT_STREAM];
-    [_recongnizeManager.asrEventManager sendCommand:BDS_ASR_CMD_START];
+
+    [_recongnizeManager startRecognize];
     
     __weak BYScanDeviceViewController *weakSelf = self;
     
@@ -240,7 +252,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
 
 #pragma mark --- 录音识别结果处理
 - (void)recongnizeVoice:(NSString *)voice {
-    if ([voice containsString:@"打开摇头"] || [voice containsString:@"开始摇头"] || [[MinewCommonTool transformPinYinWithString:voice] containsString:@"kaishiyaotou"] || [[MinewCommonTool transformPinYinWithString:voice] containsString:@"dakaiyaotou"]) {
+    if ([voice containsString:@"打开摇头"] || [voice containsString:@"开始摇头"] || [[MinewCommonTool transformPinYinWithString:voice] containsString:@"kaishiyaotou"] || [[MinewCommonTool transformPinYinWithString:voice] containsString:@"dakaiyaotou"] || [[MinewCommonTool transformPinYinWithString:voice] containsString:@"kanshiyaotou"]) {
         [SVProgressHUD showSuccessWithStatus:@"您已开启摇头"];
         _shakeState = ShakeYES;
         
@@ -251,7 +263,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
             [self playOKAudio];
         }];
 
-    }else if ([voice containsString:@"停止摇头"] || [voice containsString:@"关闭摇头"] ||[[MinewCommonTool transformPinYinWithString:voice] containsString:@"tingzhiyaotou"] || [[MinewCommonTool transformPinYinWithString:voice] containsString:@"guanbiyaotou"]) {
+    }else if ( [voice containsString:@"停止摇头"] || [voice containsString:@"关闭摇头"] || [[MinewCommonTool transformPinYinWithString:voice] containsString:@"tingzhiyaotou"] || [[MinewCommonTool transformPinYinWithString:voice] containsString:@"guanbiyaotou"] ) {
         [SVProgressHUD showSuccessWithStatus:@"您已停止摇头"];
         _shakeState = ShakeNo;
         [_shakeSwitch setOn:NO];
@@ -263,9 +275,13 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     }else if ([voice containsString:@"定时"] && [voice containsString:@"小时"]) {
         NSRange range1 = [voice rangeOfString:@"定时"];
         NSRange range2 = [voice rangeOfString:@"小时"];
-        NSString *timeStr = [voice substringWithRange:NSMakeRange(range1.length, range2.location)];
-        //            NSInteger fileteredNum = [Tools chineseNumbersReturnArabicNumerals:voice];
-        NSInteger fileteredNum = [timeStr integerValue];
+        NSString *timeStr = [voice substringWithRange:NSMakeRange(range1.length, range2.location-range1.length)];
+        NSInteger fileteredNum = [Tools chineseNumbersReturnArabicNumerals:voice];
+        if (0 == fileteredNum) {
+            if ([MinewCommonTool isNum:timeStr]) {
+                fileteredNum = [timeStr integerValue];
+            }
+        }
         if (fileteredNum > 0) {
             _workMode = ModeLimitedTiming;
             [self.timingonOffSwitch setOn:YES];
@@ -321,8 +337,6 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         NSLog(@"d 速度为:%ld",speed);
         NSInteger fileteredNum = speed;
         [self setSpeedNumber:fileteredNum];
-        
-        
 
     } else if ([voice containsString:@"上一档"] || [voice containsString:@"上一当"] || [[MinewCommonTool transformPinYinWithString:voice] containsString:@"shangyidang"]) {
         _fanSpeed -= 1;
@@ -339,8 +353,8 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         }];
     }else if ([voice containsString:@"下一档"] || [voice containsString:@"下一挡"] || [[MinewCommonTool transformPinYinWithString:voice] containsString:@"xiayidang"]) {
         _fanSpeed += 1;
-        if (_fanSpeed > 12) {
-            _fanSpeed = 12;
+        if (_fanSpeed > 32) {
+            _fanSpeed = 32;
         }
         
         [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"您已设定风扇转速%ld",(long)_fanSpeed]];
@@ -355,16 +369,19 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
     }else if ([voice containsString:@"增加定时"] || [[MinewCommonTool transformPinYinWithString:voice] containsString:@"zengjiadingshi"]) {
         NSInteger value = _limitedTime+60;
         NSLog(@"增加定时");
-        if (value < 60*12) {
-            _workMode = ModeLimitedTiming;
-            [_timingonOffSwitch setOn:YES];
-            _isUserCloseTiming = NO;
-            [MinewCommonTool onMainThread:^{
-                _limitedTime = value;
-                self.timeCusSlider.value = value/60;
-                [self playOKAudio];
-            }];
+        if (value > 60*12) {
+            value = 60*12;
+            
         }
+        _workMode = ModeLimitedTiming;
+        [_timingonOffSwitch setOn:YES];
+        _isUserCloseTiming = NO;
+        
+        [MinewCommonTool onMainThread:^{
+            _limitedTime = value;
+            self.timeCusSlider.value = value/60;
+            [self playOKAudio];
+        }];
         
         [self setDeveiceState];
         
@@ -387,8 +404,15 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
         
     }else if ([[MinewCommonTool transformPinYinWithString:voice] containsString:@"xiaoaoxiaoao"]) {
         [MinewCommonTool onMainThread:^{
-            [self playHereAudio];
+//            [self playHereAudio];
+            [self.wakeupManager stopWakeup];
+            
+            [self recognizeConfiguration];
         }];
+    }else if ([[MinewCommonTool transformPinYinWithString:voice] containsString:@"guanjimoshi"]) {
+        [self setPowerOff];
+    }else if ([[MinewCommonTool transformPinYinWithString:voice] containsString:@"gongzuomoshi"]) {
+        [self setPowerOn];
     }
     else {
         
@@ -922,7 +946,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
             [strongSelf recognizeConfiguration];
         }else {
             NSLog(@"播放完OK后的唤醒");
-             [strongSelf wakeupConfiguration];
+            [strongSelf wakeupConfiguration];
         }
     }];
     
