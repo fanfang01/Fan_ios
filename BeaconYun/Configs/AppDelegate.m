@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "BYNavigationController.h"
-#import "BYScanDeviceViewController.h"
+#import "ScanConnectViewController.h"
 #import <WeexSDK/WeexSDK.h>
 #import "MinewModuleAPI.h"
 #import "WXImgLoaderDefaultImpl.h"
@@ -23,25 +23,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    NSString *storyboardName = @"BYScanDeviceViewController";
-    UIStoryboard *scanStory = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
-    BYNavigationController *nvc = (BYNavigationController *)[scanStory instantiateViewControllerWithIdentifier:@"BYScanDeviceViewController"];
+
     
+    ScanConnectViewController *scanVC = [[ScanConnectViewController alloc] init];
+    BYNavigationController *nav = [[BYNavigationController alloc] initWithRootViewController:scanVC];
 //    nvc.navigationBar.barTintColor = [UIColor colorWithRed:0.20 green:0.20 blue:0.20 alpha:1.00];
-    nvc.navigationBar.barTintColor = RGB(0, 88, 85);
-    nvc.navigationBar.translucent = NO;
-    nvc.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
-    nvc.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
-    nvc.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
-    nvc.navigationBar.tintColor = [UIColor whiteColor];
     
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController = nvc;
+    self.window.rootViewController = nav;
     self.window.backgroundColor = [UIColor whiteColor];
     
-    UINavigationBar *navigationBar = nvc.navigationController.navigationBar;
-    _navBarHairlineImageView = [self slnFindHairlineImageViewUnder:navigationBar];
-    _navBarHairlineImageView.hidden = YES;
+//    UINavigationBar *navigationBar = nvc.navigationController.navigationBar;
+//    _navBarHairlineImageView = [self slnFindHairlineImageViewUnder:navigationBar];
+//    _navBarHairlineImageView.hidden = YES;
 
     [self.window makeKeyAndVisible];
     

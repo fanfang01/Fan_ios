@@ -15,17 +15,48 @@ typedef NS_ENUM(NSUInteger, ConnectionState) {
 
 @class MinewModule;
 
+//发送给设备的数据结构
+struct SendDataNodel {
+    uint8_t Command_id;
+    uint8_t key;
+    uint8_t mode;
+    uint8_t Wind_Speed;
+    uint8_t Hand_Flag;
+    uint8_t Dispaly_Flag;
+    uint16_t Timing;
+    Byte reserve[12];
+};
+
+struct DeviceBaseInfo {
+    uint32_t deviceId;
+    uint32_t firewareVer;
+    uint8_t PairFlag;
+};
+
 typedef void(^Connection)(NSDictionary *dataDict, MinewModule *module);
-typedef void(^Receive)(NSData *data);
-typedef void(^Send)(BOOL result);
+typedef void(^Receive)(BOOL result, NSData *data);
+typedef void(^Send)(BOOL result,NSData *data);//写入回应的回调
+typedef void(^Notify)(NSData *data);
 
 @class CBPeripheral;
+
+//struct SendDataNodel dataModel = {0,0,0,0,0,0,0,0};
+
 
 @interface MinewModule : NSObject
 
 @property (nonatomic, strong) CBPeripheral *peripheral;
 
 @property (nonatomic, strong) NSString *UUID;
+
+@property (nonatomic, strong) NSString *macString;
+@property (nonatomic, strong) NSString *device_id;
+@property (nonatomic, strong) NSString *version;
+@property (nonatomic, assign) BOOL pair_flag;
+
+//设备状态
+//@property (nonatomic, assign) WorkMode workMode;
+//@property (nonatomic, assign) WorkMode workMode;
 
 @property (nonatomic, assign) BOOL connecting;
 
@@ -49,8 +80,10 @@ typedef void(^Send)(BOOL result);
 
 @property (nonatomic, copy) Receive receiveHandler;
 
-@property (nonatomic, copy) Send writeHandler;
+//获取设备推送过来的数据
+@property (nonatomic, copy) Notify notifyHandler;
 
+@property (nonatomic, copy) Send writeHandler;
 
 - (instancetype)initWithPeripheral:(CBPeripheral *)per infoDict:(NSDictionary *)info;
 

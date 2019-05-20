@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class MinewModule;
 
 typedef NS_ENUM(NSUInteger, BluetoothStatus) {
     BluetoothStatusPowerOff,
@@ -21,6 +22,8 @@ typedef NS_ENUM(NSUInteger, LinkStatus) {
     LinkStatusConnected,
     LinkStatusConnectFailed,
 };
+
+typedef void(^FindDevice)(MinewModule *module);
 
 @class MinewModuleManager, MinewModule, MinewModule;
 
@@ -67,7 +70,7 @@ typedef NS_ENUM(NSUInteger, LinkStatus) {
 @end
 
 @interface MinewModuleManager : NSObject
-
+@property (nonatomic, copy)FindDevice findDevice;
 
 // current bluetooth status
 @property (nonatomic, assign) BluetoothStatus status;

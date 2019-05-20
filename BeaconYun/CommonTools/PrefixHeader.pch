@@ -1,0 +1,53 @@
+//
+//  PrefixHeader.pch
+//  BeaconYun
+//
+//  Created by 樊芳 on 2018/12/4.
+//  Copyright © 2018 MinewTech. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import <SVProgressHUD.h>
+#import <Masonry.h>
+
+#import "BYCommonTools.h"
+#import "MinewModuleAPI.h"
+#import "MinewModule.h"
+#import "MinewCommonTool.h"
+#import "BYNavigationController.h"
+
+#import "FanDeviceSet.h"
+#import "CustomSlider.h"
+
+#import "BDSEventManager.h"
+#import "BDSASRDefines.h"
+#import "BDSASRParameters.h"
+#import "BDSWakeupDefines.h"
+#import "BDSWakeupParameters.h"
+
+#import "Tools.h"
+
+#define API_KEY @"77qmcej4jPKInuIpG4UhIeLG"
+#define SECRET_KEY @"ZACMtEfHXGGw12aBilymvq7MdlOah3HI"
+#define APP_ID @"15970851"
+
+#define statusBarHeight [[UIApplication sharedApplication] statusBarFrame].size.height
+
+#define ScreenWidth  ([[UIScreen mainScreen] bounds].size.width)
+#define ScreenHeight  ([[UIScreen mainScreen] bounds].size.height)
+
+#define COLOR_RGBA(r,g,b,a) ([UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:a])
+#define COLOR_RGB(r,g,b) ([UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1])
+
+#define swap16Big2Little(x) ( ( (x)&(0x00ff) ) << 16 | ( (x)&(0xff00) >> 16 )
+
+#define swap32Big2Little(x)    (   ( (x)&(0x0000ffff) ) << 32 |  ( (x)&(0xffff0000) >> 32   )
+
+#define swap32Big2Little(x)    (   ( (x)&(0x00000000ffffffff) ) >> 64 |  ( (x)&(0xffffffff00000000) >>64  )
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* PrefixHeader_pch */

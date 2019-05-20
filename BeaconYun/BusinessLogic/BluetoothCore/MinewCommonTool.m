@@ -203,4 +203,103 @@
     }
 }
 
++ (NSData *)hexString:(NSString *)hexString {
+    int j=0;
+    Byte bytes[20];
+    ///3ds key的Byte 数组， 128位
+    for(int i=0; i<[hexString length]; i++)
+    {
+        int int_ch;  /// 两位16进制数转化后的10进制数
+        
+        unichar hex_char1 = [hexString characterAtIndex:i]; ////两位16进制数中的第一位(高位*16)
+        int int_ch1;
+        if(hex_char1 >= '0' && hex_char1 <='9')
+            int_ch1 = (hex_char1-48)*16;   //// 0 的Ascll - 48
+        else if(hex_char1 >= 'A' && hex_char1 <='F')
+            int_ch1 = (hex_char1-55)*16; //// A 的Ascll - 65
+        else
+            int_ch1 = (hex_char1-87)*16; //// a 的Ascll - 97
+        i++;
+        
+        unichar hex_char2 = [hexString characterAtIndex:i]; ///两位16进制数中的第二位(低位)
+        int int_ch2;
+        if(hex_char2 >= '0' && hex_char2 <='9')
+            int_ch2 = (hex_char2-48); //// 0 的Ascll - 48
+        else if(hex_char1 >= 'A' && hex_char1 <='F')
+            int_ch2 = hex_char2-55; //// A 的Ascll - 65
+        else
+            int_ch2 = hex_char2-87; //// a 的Ascll - 97
+        
+        int_ch = int_ch1+int_ch2;
+        NSLog(@"int_ch=%d",int_ch);
+        bytes[j] = int_ch;  ///将转化后的数放入Byte数组里
+        j++;
+    }
+    
+    NSData *newData = [[NSData alloc] initWithBytes:bytes length:20];
+    
+    return newData;
+}
+
++ (NSString *)reverseString:(NSString *)string {
+    NSMutableString *reverseStr = [[NSMutableString alloc] init];
+    for (NSInteger i = string.length; i>1; i-=2) {
+        NSRange range = NSMakeRange(i-2, 2);
+        NSString *str = [string substringWithRange:range];
+        reverseStr = [reverseStr stringByAppendingString:str];
+    }
+    return reverseStr;
+}
+
+// 16进制转10进制
++ (NSNumber *) numberHexString:(NSString *)aHexString
+{
+        // 空,直接返回.
+        if (nil == aHexString)
+            {
+                    return nil;
+                }
+        NSScanner * scanner = [NSScanner scannerWithString:aHexString];
+        unsigned long long longlongValue;
+        [scanner scanHexLongLong:&longlongValue];
+    
+        //将整数转换为NSNumber,存储到数组中
+        NSNumber * hexNumber = [NSNumber numberWithLongLong:longlongValue];
+        return hexNumber;
+        
+}
+
++ (NSString *)transformPinYinWithString:(NSString *)chinese
+{
+    NSString  * pinYinStr = [NSString string];
+    if (chinese.length){
+        NSMutableString * pinYin = [[NSMutableString alloc]initWithString:chinese];
+        //1.先转换为带声调的拼音
+        if(CFStringTransform((__bridge CFMutableStringRef)pinYin, NULL, kCFStringTransformMandarinLatin, NO)) {
+            NSLog(@"带声调的pinyin: %@", pinYin);
+        }
+        //2.再转换为不带声调的拼音
+        if (CFStringTransform((__bridge CFMutableStringRef)pinYin, NULL, kCFStringTransformStripDiacritics, NO)) {
+            NSLog(@"不带声调的pinyin: %@", pinYin);
+        }
+        //3.去除掉首尾的空白字符和换行字符
+        pinYinStr = [pinYin stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        //4.去除掉其它位置的空白字符和换行字符
+        pinYinStr = [pinYinStr stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+        pinYinStr = [pinYinStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        pinYinStr = [pinYinStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSLog(@"去掉空白字符和换行字符的pinyin: %@", pinYinStr);
+        [pinYinStr capitalizedString];
+        
+    }
+    return pinYinStr;
+}
+
++ (BOOL)isNum:(NSString *)checkedNumString {
+    checkedNumString = [checkedNumString stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]];
+    if(checkedNumString.length > 0) {
+        return NO;
+    }
+    return YES;
+}
 @end

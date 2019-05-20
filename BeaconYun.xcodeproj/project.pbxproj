@@ -7,7 +7,55 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28193E9721F6EE7A00AD3B97 /* CustomSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 28193E9521F6EE7A00AD3B97 /* CustomSlider.m */; };
 		2842134A21BF8E0000B36B94 /* BYScanDeviceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2842134921BF8E0000B36B94 /* BYScanDeviceViewController.storyboard */; };
+		2845216A21F9960A0089D6FE /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845216921F9960A0089D6FE /* CoreTelephony.framework */; };
+		2845216C21F996130089D6FE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845216B21F996120089D6FE /* CoreLocation.framework */; };
+		2845216E21F9961A0089D6FE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845216D21F9961A0089D6FE /* CFNetwork.framework */; };
+		2845217021F996230089D6FE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845216F21F996230089D6FE /* AVFoundation.framework */; };
+		2845217221F9962D0089D6FE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845217121F9962D0089D6FE /* AudioToolbox.framework */; };
+		2845217421F996350089D6FE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845217321F996350089D6FE /* SystemConfiguration.framework */; };
+		2845217621F9963F0089D6FE /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845217521F9963F0089D6FE /* GLKit.framework */; };
+		2845217821F996470089D6FE /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845217721F996470089D6FE /* libz.1.2.5.tbd */; };
+		2845217A21F9964F0089D6FE /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845217921F9964F0089D6FE /* libc++.tbd */; };
+		2845217C21F9965A0089D6FE /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845217B21F9965A0089D6FE /* libiconv.2.4.0.tbd */; };
+		2845217E21F996650089D6FE /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845217D21F996650089D6FE /* libsqlite3.0.tbd */; };
+		28613FD522530F9B00E7B0FD /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 28613FD422530F9B00E7B0FD /* Tools.m */; };
+		286D18D021E829B1000A122E /* ScanConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286D18CF21E829B1000A122E /* ScanConnectViewController.m */; };
+		286D18D321E8368F000A122E /* shake.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 286D18D221E8368F000A122E /* shake.xcassets */; };
+		286D18DD21E86E83000A122E /* MinewModuleAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 286D18D621E86E83000A122E /* MinewModuleAPI.m */; };
+		286D18DE21E86E83000A122E /* MinewCommonTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 286D18D721E86E83000A122E /* MinewCommonTool.m */; };
+		286D18DF21E86E83000A122E /* MinewModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 286D18DA21E86E83000A122E /* MinewModuleManager.m */; };
+		286D18E021E86E83000A122E /* MinewModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 286D18DB21E86E83000A122E /* MinewModule.m */; };
+		28B8944922018CCF00A156C9 /* .gitIgnore in Resources */ = {isa = PBXBuildFile; fileRef = 28B8940122018CCF00A156C9 /* .gitIgnore */; };
+		28B8946222018CD000A156C9 /* English_Speech_Female.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B8943422018CCF00A156C9 /* English_Speech_Female.dat */; };
+		28B8946322018CD000A156C9 /* offline_engine_tmp_license.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B8943522018CCF00A156C9 /* offline_engine_tmp_license.dat */; };
+		28B8946622018CD000A156C9 /* English_Text.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B8943B22018CCF00A156C9 /* English_Text.dat */; };
+		28B8946722018CD000A156C9 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 28B8943C22018CCF00A156C9 /* .gitignore */; };
+		28B8946822018CD000A156C9 /* English_Speech_Male.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B8943D22018CCF00A156C9 /* English_Speech_Male.dat */; };
+		28B8946922018CD000A156C9 /* Chinese_Speech_Male.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B8943E22018CCF00A156C9 /* Chinese_Speech_Male.dat */; };
+		28B8946A22018CD000A156C9 /* Chinese_Text.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B8943F22018CCF00A156C9 /* Chinese_Text.dat */; };
+		28B8946B22018CD000A156C9 /* Chinese_Speech_Female.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B8944022018CCF00A156C9 /* Chinese_Speech_Female.dat */; };
+		28B8946C22018CD000A156C9 /* WakeUpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B8944222018CCF00A156C9 /* WakeUpManager.m */; };
+		28B8946E22018CD000A156C9 /* libBaiduSpeechSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28B8944522018CCF00A156C9 /* libBaiduSpeechSDK.a */; };
+		28B8947022018CD000A156C9 /* RecognizeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B8944822018CCF00A156C9 /* RecognizeManager.m */; };
+		28B89498220190CC00A156C9 /* bds_license.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B8947D220190CC00A156C9 /* bds_license.dat */; };
+		28B89499220190CC00A156C9 /* bds_easr_basic_model.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B8947E220190CC00A156C9 /* bds_easr_basic_model.dat */; };
+		28B8949A220190CC00A156C9 /* bds_easr_mfe_cmvn.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B8947F220190CC00A156C9 /* bds_easr_mfe_cmvn.dat */; };
+		28B8949B220190CC00A156C9 /* temp_license_2018-02-24.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B89480220190CC00A156C9 /* temp_license_2018-02-24.dat */; };
+		28B8949C220190CC00A156C9 /* bds_easr_input_model.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B89481220190CC00A156C9 /* bds_easr_input_model.dat */; };
+		28B8949D220190CC00A156C9 /* bds_easr_mfe_dnn.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B89482220190CC00A156C9 /* bds_easr_mfe_dnn.dat */; };
+		28B8949E220190CC00A156C9 /* bds_easr_gramm.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B89483220190CC00A156C9 /* bds_easr_gramm.dat */; };
+		28B8949F220190CC00A156C9 /* bds_easr_wakeup_words.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B89484220190CC00A156C9 /* bds_easr_wakeup_words.dat */; };
+		28B894A0220190CC00A156C9 /* bds_easr_dnn_wakeup_model.dat in Resources */ = {isa = PBXBuildFile; fileRef = 28B89485220190CC00A156C9 /* bds_easr_dnn_wakeup_model.dat */; };
+		28B894B1220190E000A156C9 /* BDSClientResources in Resources */ = {isa = PBXBuildFile; fileRef = 28B894B0220190E000A156C9 /* BDSClientResources */; };
+		28BF7C422264597600C8AB53 /* WakeUp.bin in Resources */ = {isa = PBXBuildFile; fileRef = 28BF7C412264597600C8AB53 /* WakeUp.bin */; };
+		28BF7C4A2265BA0700C8AB53 /* BYInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BF7C492265BA0700C8AB53 /* BYInfoViewController.m */; };
+		28BF7C4F226857E100C8AB53 /* BDVRSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BF7C4C226857E100C8AB53 /* BDVRSettings.m */; };
+		28BF7C50226857E100C8AB53 /* BDVRSettingsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BF7C4E226857E100C8AB53 /* BDVRSettingsItem.m */; };
+		28CD4740225B28D3000D0342 /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CD473E225B28D3000D0342 /* AudioPlayer.m */; };
+		28CD4742225B29A0000D0342 /* ok.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 28CD4741225B29A0000D0342 /* ok.mp3 */; };
+		28CD4744225B4056000D0342 /* im_here.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 28CD4743225B4056000D0342 /* im_here.mp3 */; };
 		B1CFC9764E4898520C187548 /* libPods-BeaconYun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F5851AABDA97E315A353A0BF /* libPods-BeaconYun.a */; };
 		E532AFD01E9B92290001BE28 /* lock.js in Resources */ = {isa = PBXBuildFile; fileRef = E532AFCF1E9B92290001BE28 /* lock.js */; };
 		E539CF0D1E762AA800B9D731 /* ui2.js in Resources */ = {isa = PBXBuildFile; fileRef = E539CF0C1E762AA800B9D731 /* ui2.js */; };
@@ -21,10 +69,6 @@
 		E540700C1E972B3E00D9ECB4 /* union_up.png in Resources */ = {isa = PBXBuildFile; fileRef = E54070051E972B3E00D9ECB4 /* union_up.png */; };
 		E540700D1E972B3E00D9ECB4 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = E54070061E972B3E00D9ECB4 /* up.png */; };
 		E54070101E97320100D9ECB4 /* WXImgLoaderDefaultImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = E540700F1E97320100D9ECB4 /* WXImgLoaderDefaultImpl.m */; };
-		E545202A1E67FFB700C0D46E /* MinewCommonTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E54520231E67FFB700C0D46E /* MinewCommonTool.m */; };
-		E545202C1E67FFB700C0D46E /* MinewModule.m in Sources */ = {isa = PBXBuildFile; fileRef = E54520271E67FFB700C0D46E /* MinewModule.m */; };
-		E545202D1E67FFB700C0D46E /* MinewModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E54520291E67FFB700C0D46E /* MinewModuleManager.m */; };
-		E54520301E68000000C0D46E /* MinewModuleAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = E545202F1E68000000C0D46E /* MinewModuleAPI.m */; };
 		E54520331E68469500C0D46E /* BYDeviceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E54520321E68469500C0D46E /* BYDeviceDetailViewController.m */; };
 		E54F0A2B1EA9D13F008B7CC3 /* auto.png in Resources */ = {isa = PBXBuildFile; fileRef = E54F0A221EA9D13F008B7CC3 /* auto.png */; };
 		E54F0A2C1EA9D13F008B7CC3 /* down@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E54F0A231EA9D13F008B7CC3 /* down@3x.png */; };
@@ -63,7 +107,6 @@
 		E5CF142D1E9E189D00C1D26D /* switch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5CF14271E9E189D00C1D26D /* switch@2x.png */; };
 		E5CF142E1E9E189D00C1D26D /* switchimg.png in Resources */ = {isa = PBXBuildFile; fileRef = E5CF14281E9E189D00C1D26D /* switchimg.png */; };
 		E5E4BDAF1E710B780086472B /* NSTimer+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E4BDAE1E710B780086472B /* NSTimer+Blocks.m */; };
-		E5E4BDB51E71427D0086472B /* BYInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E4BDB41E71427D0086472B /* BYInfoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,7 +127,94 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		28193E9521F6EE7A00AD3B97 /* CustomSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSlider.m; sourceTree = "<group>"; };
+		28193E9621F6EE7A00AD3B97 /* CustomSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSlider.h; sourceTree = "<group>"; };
 		2842134921BF8E0000B36B94 /* BYScanDeviceViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BYScanDeviceViewController.storyboard; sourceTree = "<group>"; };
+		2845216921F9960A0089D6FE /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		2845216B21F996120089D6FE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		2845216D21F9961A0089D6FE /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		2845216F21F996230089D6FE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		2845217121F9962D0089D6FE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		2845217321F996350089D6FE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2845217521F9963F0089D6FE /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		2845217721F996470089D6FE /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		2845217921F9964F0089D6FE /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		2845217B21F9965A0089D6FE /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
+		2845217D21F996650089D6FE /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		28613FD322530F9B00E7B0FD /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
+		28613FD422530F9B00E7B0FD /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
+		286D18CE21E829B1000A122E /* ScanConnectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanConnectViewController.h; sourceTree = "<group>"; };
+		286D18CF21E829B1000A122E /* ScanConnectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanConnectViewController.m; sourceTree = "<group>"; };
+		286D18D121E830FF000A122E /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		286D18D221E8368F000A122E /* shake.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = shake.xcassets; sourceTree = "<group>"; };
+		286D18D521E86E83000A122E /* MinewModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinewModuleManager.h; sourceTree = "<group>"; };
+		286D18D621E86E83000A122E /* MinewModuleAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinewModuleAPI.m; sourceTree = "<group>"; };
+		286D18D721E86E83000A122E /* MinewCommonTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinewCommonTool.m; sourceTree = "<group>"; };
+		286D18D821E86E83000A122E /* MinewModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinewModule.h; sourceTree = "<group>"; };
+		286D18D921E86E83000A122E /* MinewModuleAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinewModuleAPI.h; sourceTree = "<group>"; };
+		286D18DA21E86E83000A122E /* MinewModuleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinewModuleManager.m; sourceTree = "<group>"; };
+		286D18DB21E86E83000A122E /* MinewModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinewModule.m; sourceTree = "<group>"; };
+		286D18DC21E86E83000A122E /* MinewCommonTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinewCommonTool.h; sourceTree = "<group>"; };
+		286D18ED21EEDC68000A122E /* FanDeviceSet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FanDeviceSet.h; sourceTree = "<group>"; };
+		28B893FE22018CCF00A156C9 /* BDSWakeupParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSWakeupParameters.h; sourceTree = "<group>"; };
+		28B893FF22018CCF00A156C9 /* BDSASRParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSASRParameters.h; sourceTree = "<group>"; };
+		28B8940022018CCF00A156C9 /* BDSEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSEventManager.h; sourceTree = "<group>"; };
+		28B8940122018CCF00A156C9 /* .gitIgnore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitIgnore; sourceTree = "<group>"; };
+		28B8940222018CCF00A156C9 /* BDSUploaderDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSUploaderDefines.h; sourceTree = "<group>"; };
+		28B8940322018CCF00A156C9 /* BDSASRDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSASRDefines.h; sourceTree = "<group>"; };
+		28B8940422018CCF00A156C9 /* BDSUploaderParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSUploaderParameters.h; sourceTree = "<group>"; };
+		28B8940522018CCF00A156C9 /* BDSWakeupDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSWakeupDefines.h; sourceTree = "<group>"; };
+		28B8940722018CCF00A156C9 /* BDRecognizerViewParamsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDRecognizerViewParamsObject.h; sourceTree = "<group>"; };
+		28B8940822018CCF00A156C9 /* BDRecognizerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDRecognizerViewController.h; sourceTree = "<group>"; };
+		28B8940922018CCF00A156C9 /* BDTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDTheme.h; sourceTree = "<group>"; };
+		28B8940A22018CCF00A156C9 /* BDRecognizerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDRecognizerViewDelegate.h; sourceTree = "<group>"; };
+		28B8940C22018CCF00A156C9 /* BDSSpeechSynthesizerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizerDelegate.h; sourceTree = "<group>"; };
+		28B8940D22018CCF00A156C9 /* BDS_EttsModelManagerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDS_EttsModelManagerInterface.h; sourceTree = "<group>"; };
+		28B8940E22018CCF00A156C9 /* BDSBuiltInPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSBuiltInPlayer.h; sourceTree = "<group>"; };
+		28B8940F22018CCF00A156C9 /* BDSMixedModeSynthesizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSMixedModeSynthesizer.h; sourceTree = "<group>"; };
+		28B8941022018CCF00A156C9 /* BDSSpeechSynthesizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizer.h; sourceTree = "<group>"; };
+		28B8941122018CCF00A156C9 /* BDSSpeechSynthesizerParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizerParams.h; sourceTree = "<group>"; };
+		28B8941222018CCF00A156C9 /* BDSSynthesizerLogLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSynthesizerLogLevel.h; sourceTree = "<group>"; };
+		28B8941322018CCF00A156C9 /* BDSTTSEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSTTSEventManager.h; sourceTree = "<group>"; };
+		28B8941422018CCF00A156C9 /* BDSSpeechSynthesizerErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizerErrors.h; sourceTree = "<group>"; };
+		28B8943422018CCF00A156C9 /* English_Speech_Female.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = English_Speech_Female.dat; sourceTree = "<group>"; };
+		28B8943522018CCF00A156C9 /* offline_engine_tmp_license.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = offline_engine_tmp_license.dat; sourceTree = "<group>"; };
+		28B8943722018CCF00A156C9 /* TTDFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFileReader.h; sourceTree = "<group>"; };
+		28B8943822018CCF00A156C9 /* TTDFileWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFileWriter.m; sourceTree = "<group>"; };
+		28B8943922018CCF00A156C9 /* TTDFileReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFileReader.m; sourceTree = "<group>"; };
+		28B8943A22018CCF00A156C9 /* TTDFileWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFileWriter.h; sourceTree = "<group>"; };
+		28B8943B22018CCF00A156C9 /* English_Text.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = English_Text.dat; sourceTree = "<group>"; };
+		28B8943C22018CCF00A156C9 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		28B8943D22018CCF00A156C9 /* English_Speech_Male.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = English_Speech_Male.dat; sourceTree = "<group>"; };
+		28B8943E22018CCF00A156C9 /* Chinese_Speech_Male.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chinese_Speech_Male.dat; sourceTree = "<group>"; };
+		28B8943F22018CCF00A156C9 /* Chinese_Text.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chinese_Text.dat; sourceTree = "<group>"; };
+		28B8944022018CCF00A156C9 /* Chinese_Speech_Female.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chinese_Speech_Female.dat; sourceTree = "<group>"; };
+		28B8944122018CCF00A156C9 /* RecognizeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecognizeManager.h; sourceTree = "<group>"; };
+		28B8944222018CCF00A156C9 /* WakeUpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WakeUpManager.m; sourceTree = "<group>"; };
+		28B8944522018CCF00A156C9 /* libBaiduSpeechSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduSpeechSDK.a; sourceTree = "<group>"; };
+		28B8944622018CCF00A156C9 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		28B8944722018CCF00A156C9 /* WakeUpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WakeUpManager.h; sourceTree = "<group>"; };
+		28B8944822018CCF00A156C9 /* RecognizeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecognizeManager.m; sourceTree = "<group>"; };
+		28B8947D220190CC00A156C9 /* bds_license.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bds_license.dat; sourceTree = "<group>"; };
+		28B8947E220190CC00A156C9 /* bds_easr_basic_model.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_basic_model.dat; sourceTree = "<group>"; };
+		28B8947F220190CC00A156C9 /* bds_easr_mfe_cmvn.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bds_easr_mfe_cmvn.dat; sourceTree = "<group>"; };
+		28B89480220190CC00A156C9 /* temp_license_2018-02-24.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "temp_license_2018-02-24.dat"; sourceTree = "<group>"; };
+		28B89481220190CC00A156C9 /* bds_easr_input_model.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_input_model.dat; sourceTree = "<group>"; };
+		28B89482220190CC00A156C9 /* bds_easr_mfe_dnn.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_mfe_dnn.dat; sourceTree = "<group>"; };
+		28B89483220190CC00A156C9 /* bds_easr_gramm.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bds_easr_gramm.dat; sourceTree = "<group>"; };
+		28B89484220190CC00A156C9 /* bds_easr_wakeup_words.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_wakeup_words.dat; sourceTree = "<group>"; };
+		28B89485220190CC00A156C9 /* bds_easr_dnn_wakeup_model.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_dnn_wakeup_model.dat; sourceTree = "<group>"; };
+		28B894B0220190E000A156C9 /* BDSClientResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BDSClientResources; sourceTree = "<group>"; };
+		28BF7C412264597600C8AB53 /* WakeUp.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = WakeUp.bin; sourceTree = "<group>"; };
+		28BF7C492265BA0700C8AB53 /* BYInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYInfoViewController.m; sourceTree = "<group>"; };
+		28BF7C4B226857E100C8AB53 /* BDVRSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDVRSettings.h; sourceTree = "<group>"; };
+		28BF7C4C226857E100C8AB53 /* BDVRSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDVRSettings.m; sourceTree = "<group>"; };
+		28BF7C4D226857E100C8AB53 /* BDVRSettingsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDVRSettingsItem.h; sourceTree = "<group>"; };
+		28BF7C4E226857E100C8AB53 /* BDVRSettingsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDVRSettingsItem.m; sourceTree = "<group>"; };
+		28CD473E225B28D3000D0342 /* AudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayer.m; sourceTree = "<group>"; };
+		28CD473F225B28D3000D0342 /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
+		28CD4741225B29A0000D0342 /* ok.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ok.mp3; sourceTree = "<group>"; };
+		28CD4743225B4056000D0342 /* im_here.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = im_here.mp3; sourceTree = "<group>"; };
 		49E0A3CD57A1B7DE50179925 /* Pods-BeaconYun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaconYun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeaconYun/Pods-BeaconYun.debug.xcconfig"; sourceTree = "<group>"; };
 		B370C1B698562C91509A8E8F /* Pods-BeaconYun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaconYun.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeaconYun/Pods-BeaconYun.release.xcconfig"; sourceTree = "<group>"; };
 		E532AFCF1E9B92290001BE28 /* lock.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = lock.js; sourceTree = "<group>"; };
@@ -101,14 +231,6 @@
 		E54070061E972B3E00D9ECB4 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
 		E540700E1E97320100D9ECB4 /* WXImgLoaderDefaultImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXImgLoaderDefaultImpl.h; path = BeaconYun/CommonTools/WXImgLoaderDefaultImpl.h; sourceTree = SOURCE_ROOT; };
 		E540700F1E97320100D9ECB4 /* WXImgLoaderDefaultImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WXImgLoaderDefaultImpl.m; path = BeaconYun/CommonTools/WXImgLoaderDefaultImpl.m; sourceTree = SOURCE_ROOT; };
-		E54520221E67FFB700C0D46E /* MinewCommonTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinewCommonTool.h; sourceTree = "<group>"; };
-		E54520231E67FFB700C0D46E /* MinewCommonTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinewCommonTool.m; sourceTree = "<group>"; };
-		E54520261E67FFB700C0D46E /* MinewModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinewModule.h; sourceTree = "<group>"; };
-		E54520271E67FFB700C0D46E /* MinewModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinewModule.m; sourceTree = "<group>"; };
-		E54520281E67FFB700C0D46E /* MinewModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinewModuleManager.h; sourceTree = "<group>"; };
-		E54520291E67FFB700C0D46E /* MinewModuleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinewModuleManager.m; sourceTree = "<group>"; };
-		E545202E1E68000000C0D46E /* MinewModuleAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinewModuleAPI.h; sourceTree = "<group>"; };
-		E545202F1E68000000C0D46E /* MinewModuleAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinewModuleAPI.m; sourceTree = "<group>"; };
 		E54520311E68469500C0D46E /* BYDeviceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYDeviceDetailViewController.h; sourceTree = "<group>"; };
 		E54520321E68469500C0D46E /* BYDeviceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYDeviceDetailViewController.m; sourceTree = "<group>"; };
 		E54F0A221EA9D13F008B7CC3 /* auto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = auto.png; sourceTree = "<group>"; };
@@ -172,7 +294,6 @@
 		E5E4BDAD1E710B780086472B /* NSTimer+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Blocks.h"; sourceTree = "<group>"; };
 		E5E4BDAE1E710B780086472B /* NSTimer+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Blocks.m"; sourceTree = "<group>"; };
 		E5E4BDB31E71427D0086472B /* BYInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYInfoViewController.h; sourceTree = "<group>"; };
-		E5E4BDB41E71427D0086472B /* BYInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYInfoViewController.m; sourceTree = "<group>"; };
 		F5851AABDA97E315A353A0BF /* libPods-BeaconYun.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BeaconYun.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -181,6 +302,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2845217E21F996650089D6FE /* libsqlite3.0.tbd in Frameworks */,
+				2845217C21F9965A0089D6FE /* libiconv.2.4.0.tbd in Frameworks */,
+				28B8946E22018CD000A156C9 /* libBaiduSpeechSDK.a in Frameworks */,
+				2845217A21F9964F0089D6FE /* libc++.tbd in Frameworks */,
+				2845217821F996470089D6FE /* libz.1.2.5.tbd in Frameworks */,
+				2845217621F9963F0089D6FE /* GLKit.framework in Frameworks */,
+				2845217421F996350089D6FE /* SystemConfiguration.framework in Frameworks */,
+				2845217221F9962D0089D6FE /* AudioToolbox.framework in Frameworks */,
+				2845217021F996230089D6FE /* AVFoundation.framework in Frameworks */,
+				2845216E21F9961A0089D6FE /* CFNetwork.framework in Frameworks */,
+				2845216C21F996130089D6FE /* CoreLocation.framework in Frameworks */,
+				2845216A21F9960A0089D6FE /* CoreTelephony.framework in Frameworks */,
 				B1CFC9764E4898520C187548 /* libPods-BeaconYun.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,9 +335,182 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		286D18D421E86E83000A122E /* BluetoothCore */ = {
+			isa = PBXGroup;
+			children = (
+				286D18D521E86E83000A122E /* MinewModuleManager.h */,
+				286D18DA21E86E83000A122E /* MinewModuleManager.m */,
+				286D18D921E86E83000A122E /* MinewModuleAPI.h */,
+				286D18D621E86E83000A122E /* MinewModuleAPI.m */,
+				286D18DC21E86E83000A122E /* MinewCommonTool.h */,
+				286D18D721E86E83000A122E /* MinewCommonTool.m */,
+				286D18D821E86E83000A122E /* MinewModule.h */,
+				286D18DB21E86E83000A122E /* MinewModule.m */,
+			);
+			path = BluetoothCore;
+			sourceTree = "<group>";
+		};
+		28B893FB22018CCF00A156C9 /* BaiduSDK */ = {
+			isa = PBXGroup;
+			children = (
+				28BF7C4B226857E100C8AB53 /* BDVRSettings.h */,
+				28BF7C4C226857E100C8AB53 /* BDVRSettings.m */,
+				28BF7C4D226857E100C8AB53 /* BDVRSettingsItem.h */,
+				28BF7C4E226857E100C8AB53 /* BDVRSettingsItem.m */,
+				28BF7C412264597600C8AB53 /* WakeUp.bin */,
+				28CD4743225B4056000D0342 /* im_here.mp3 */,
+				28CD4741225B29A0000D0342 /* ok.mp3 */,
+				28CD473F225B28D3000D0342 /* AudioPlayer.h */,
+				28CD473E225B28D3000D0342 /* AudioPlayer.m */,
+				28613FD322530F9B00E7B0FD /* Tools.h */,
+				28613FD422530F9B00E7B0FD /* Tools.m */,
+				28B893FC22018CCF00A156C9 /* BDSClientHeaders */,
+				28B8941522018CCF00A156C9 /* BDSClientResource */,
+				28B8944422018CCF00A156C9 /* BDSClientLib */,
+				28B8944122018CCF00A156C9 /* RecognizeManager.h */,
+				28B8944822018CCF00A156C9 /* RecognizeManager.m */,
+				28B8944722018CCF00A156C9 /* WakeUpManager.h */,
+				28B8944222018CCF00A156C9 /* WakeUpManager.m */,
+			);
+			path = BaiduSDK;
+			sourceTree = "<group>";
+		};
+		28B893FC22018CCF00A156C9 /* BDSClientHeaders */ = {
+			isa = PBXGroup;
+			children = (
+				28B893FD22018CCF00A156C9 /* ASR */,
+				28B8940B22018CCF00A156C9 /* TTS */,
+			);
+			path = BDSClientHeaders;
+			sourceTree = "<group>";
+		};
+		28B893FD22018CCF00A156C9 /* ASR */ = {
+			isa = PBXGroup;
+			children = (
+				28B893FE22018CCF00A156C9 /* BDSWakeupParameters.h */,
+				28B893FF22018CCF00A156C9 /* BDSASRParameters.h */,
+				28B8940022018CCF00A156C9 /* BDSEventManager.h */,
+				28B8940122018CCF00A156C9 /* .gitIgnore */,
+				28B8940222018CCF00A156C9 /* BDSUploaderDefines.h */,
+				28B8940322018CCF00A156C9 /* BDSASRDefines.h */,
+				28B8940422018CCF00A156C9 /* BDSUploaderParameters.h */,
+				28B8940522018CCF00A156C9 /* BDSWakeupDefines.h */,
+				28B8940622018CCF00A156C9 /* UIHeaders */,
+			);
+			path = ASR;
+			sourceTree = "<group>";
+		};
+		28B8940622018CCF00A156C9 /* UIHeaders */ = {
+			isa = PBXGroup;
+			children = (
+				28B8940722018CCF00A156C9 /* BDRecognizerViewParamsObject.h */,
+				28B8940822018CCF00A156C9 /* BDRecognizerViewController.h */,
+				28B8940922018CCF00A156C9 /* BDTheme.h */,
+				28B8940A22018CCF00A156C9 /* BDRecognizerViewDelegate.h */,
+			);
+			path = UIHeaders;
+			sourceTree = "<group>";
+		};
+		28B8940B22018CCF00A156C9 /* TTS */ = {
+			isa = PBXGroup;
+			children = (
+				28B8940C22018CCF00A156C9 /* BDSSpeechSynthesizerDelegate.h */,
+				28B8940D22018CCF00A156C9 /* BDS_EttsModelManagerInterface.h */,
+				28B8940E22018CCF00A156C9 /* BDSBuiltInPlayer.h */,
+				28B8940F22018CCF00A156C9 /* BDSMixedModeSynthesizer.h */,
+				28B8941022018CCF00A156C9 /* BDSSpeechSynthesizer.h */,
+				28B8941122018CCF00A156C9 /* BDSSpeechSynthesizerParams.h */,
+				28B8941222018CCF00A156C9 /* BDSSynthesizerLogLevel.h */,
+				28B8941322018CCF00A156C9 /* BDSTTSEventManager.h */,
+				28B8941422018CCF00A156C9 /* BDSSpeechSynthesizerErrors.h */,
+			);
+			path = TTS;
+			sourceTree = "<group>";
+		};
+		28B8941522018CCF00A156C9 /* BDSClientResource */ = {
+			isa = PBXGroup;
+			children = (
+				28B8947B220190CC00A156C9 /* ASR */,
+				28B8943322018CCF00A156C9 /* TTS */,
+			);
+			path = BDSClientResource;
+			sourceTree = "<group>";
+		};
+		28B8943322018CCF00A156C9 /* TTS */ = {
+			isa = PBXGroup;
+			children = (
+				28B8943422018CCF00A156C9 /* English_Speech_Female.dat */,
+				28B8943522018CCF00A156C9 /* offline_engine_tmp_license.dat */,
+				28B8943622018CCF00A156C9 /* FileAccessor */,
+				28B8943B22018CCF00A156C9 /* English_Text.dat */,
+				28B8943C22018CCF00A156C9 /* .gitignore */,
+				28B8943D22018CCF00A156C9 /* English_Speech_Male.dat */,
+				28B8943E22018CCF00A156C9 /* Chinese_Speech_Male.dat */,
+				28B8943F22018CCF00A156C9 /* Chinese_Text.dat */,
+				28B8944022018CCF00A156C9 /* Chinese_Speech_Female.dat */,
+			);
+			path = TTS;
+			sourceTree = "<group>";
+		};
+		28B8943622018CCF00A156C9 /* FileAccessor */ = {
+			isa = PBXGroup;
+			children = (
+				28B8943722018CCF00A156C9 /* TTDFileReader.h */,
+				28B8943822018CCF00A156C9 /* TTDFileWriter.m */,
+				28B8943922018CCF00A156C9 /* TTDFileReader.m */,
+				28B8943A22018CCF00A156C9 /* TTDFileWriter.h */,
+			);
+			path = FileAccessor;
+			sourceTree = "<group>";
+		};
+		28B8944422018CCF00A156C9 /* BDSClientLib */ = {
+			isa = PBXGroup;
+			children = (
+				28B8944522018CCF00A156C9 /* libBaiduSpeechSDK.a */,
+				28B8944622018CCF00A156C9 /* .gitignore */,
+			);
+			path = BDSClientLib;
+			sourceTree = "<group>";
+		};
+		28B8947B220190CC00A156C9 /* ASR */ = {
+			isa = PBXGroup;
+			children = (
+				28B894B0220190E000A156C9 /* BDSClientResources */,
+				28B8947C220190CC00A156C9 /* BDSClientEASRResources */,
+			);
+			path = ASR;
+			sourceTree = "<group>";
+		};
+		28B8947C220190CC00A156C9 /* BDSClientEASRResources */ = {
+			isa = PBXGroup;
+			children = (
+				28B8947D220190CC00A156C9 /* bds_license.dat */,
+				28B8947E220190CC00A156C9 /* bds_easr_basic_model.dat */,
+				28B8947F220190CC00A156C9 /* bds_easr_mfe_cmvn.dat */,
+				28B89480220190CC00A156C9 /* temp_license_2018-02-24.dat */,
+				28B89481220190CC00A156C9 /* bds_easr_input_model.dat */,
+				28B89482220190CC00A156C9 /* bds_easr_mfe_dnn.dat */,
+				28B89483220190CC00A156C9 /* bds_easr_gramm.dat */,
+				28B89484220190CC00A156C9 /* bds_easr_wakeup_words.dat */,
+				28B89485220190CC00A156C9 /* bds_easr_dnn_wakeup_model.dat */,
+			);
+			path = BDSClientEASRResources;
+			sourceTree = "<group>";
+		};
 		4A16B165B91471A682D1289E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2845217D21F996650089D6FE /* libsqlite3.0.tbd */,
+				2845217B21F9965A0089D6FE /* libiconv.2.4.0.tbd */,
+				2845217921F9964F0089D6FE /* libc++.tbd */,
+				2845217721F996470089D6FE /* libz.1.2.5.tbd */,
+				2845217521F9963F0089D6FE /* GLKit.framework */,
+				2845217321F996350089D6FE /* SystemConfiguration.framework */,
+				2845217121F9962D0089D6FE /* AudioToolbox.framework */,
+				2845216F21F996230089D6FE /* AVFoundation.framework */,
+				2845216D21F9961A0089D6FE /* CFNetwork.framework */,
+				2845216B21F996120089D6FE /* CoreLocation.framework */,
+				2845216921F9960A0089D6FE /* CoreTelephony.framework */,
 				F5851AABDA97E315A353A0BF /* libPods-BeaconYun.a */,
 			);
 			name = Frameworks;
@@ -254,21 +560,6 @@
 			path = BeaconYun/Resources;
 			sourceTree = SOURCE_ROOT;
 		};
-		E54520211E67FFB700C0D46E /* BluetoothCore */ = {
-			isa = PBXGroup;
-			children = (
-				E54520221E67FFB700C0D46E /* MinewCommonTool.h */,
-				E54520231E67FFB700C0D46E /* MinewCommonTool.m */,
-				E54520261E67FFB700C0D46E /* MinewModule.h */,
-				E54520271E67FFB700C0D46E /* MinewModule.m */,
-				E54520281E67FFB700C0D46E /* MinewModuleManager.h */,
-				E54520291E67FFB700C0D46E /* MinewModuleManager.m */,
-				E545202E1E68000000C0D46E /* MinewModuleAPI.h */,
-				E545202F1E68000000C0D46E /* MinewModuleAPI.m */,
-			);
-			path = BluetoothCore;
-			sourceTree = "<group>";
-		};
 		E569928E1E5EB60B00C76E42 = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +585,7 @@
 		E56992991E5EB60B00C76E42 /* BeaconYun */ = {
 			isa = PBXGroup;
 			children = (
+				28B893FB22018CCF00A156C9 /* BaiduSDK */,
 				E56992E21E5EB97100C76E42 /* CommonTools */,
 				E56992E61E5EB97100C76E42 /* Editors */,
 				E56992EA1E5EB97100C76E42 /* UI */,
@@ -338,6 +630,7 @@
 		E56992D21E5EB91500C76E42 /* Configs */ = {
 			isa = PBXGroup;
 			children = (
+				286D18D221E8368F000A122E /* shake.xcassets */,
 				E56992D31E5EB91500C76E42 /* AppDelegate.h */,
 				E56992D41E5EB91500C76E42 /* AppDelegate.m */,
 				E56992D51E5EB91500C76E42 /* Assets.xcassets */,
@@ -351,6 +644,7 @@
 		E56992E21E5EB97100C76E42 /* CommonTools */ = {
 			isa = PBXGroup;
 			children = (
+				286D18D121E830FF000A122E /* PrefixHeader.pch */,
 				E56992E31E5EB97100C76E42 /* BYCommonMacros.h */,
 				E56992E41E5EB97100C76E42 /* BYCommonTools.h */,
 				E56992E51E5EB97100C76E42 /* BYCommonTools.m */,
@@ -385,7 +679,9 @@
 				E54520311E68469500C0D46E /* BYDeviceDetailViewController.h */,
 				E54520321E68469500C0D46E /* BYDeviceDetailViewController.m */,
 				E5E4BDB31E71427D0086472B /* BYInfoViewController.h */,
-				E5E4BDB41E71427D0086472B /* BYInfoViewController.m */,
+				28BF7C492265BA0700C8AB53 /* BYInfoViewController.m */,
+				286D18CE21E829B1000A122E /* ScanConnectViewController.h */,
+				286D18CF21E829B1000A122E /* ScanConnectViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -393,6 +689,8 @@
 		E56992F81E5EBE6B00C76E42 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				28193E9621F6EE7A00AD3B97 /* CustomSlider.h */,
+				28193E9521F6EE7A00AD3B97 /* CustomSlider.m */,
 				E540700E1E97320100D9ECB4 /* WXImgLoaderDefaultImpl.h */,
 				E540700F1E97320100D9ECB4 /* WXImgLoaderDefaultImpl.m */,
 				E56992F91E5EBE6B00C76E42 /* BYTableViewModel.h */,
@@ -409,7 +707,8 @@
 		E56992FC1E5ECA4200C76E42 /* BusinessLogic */ = {
 			isa = PBXGroup;
 			children = (
-				E54520211E67FFB700C0D46E /* BluetoothCore */,
+				286D18ED21EEDC68000A122E /* FanDeviceSet.h */,
+				286D18D421E86E83000A122E /* BluetoothCore */,
 			);
 			name = BusinessLogic;
 			path = BeaconYun/BusinessLogic;
@@ -525,8 +824,13 @@
 				TargetAttributes = {
 					E56992961E5EB60B00C76E42 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = PXH72F7T3D;
+						DevelopmentTeam = 8FJMU234N7;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					E56992AF1E5EB60B00C76E42 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -568,6 +872,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28B894B1220190E000A156C9 /* BDSClientResources in Resources */,
+				28B8944922018CCF00A156C9 /* .gitIgnore in Resources */,
 				E5CF142E1E9E189D00C1D26D /* switchimg.png in Resources */,
 				E5CF142D1E9E189D00C1D26D /* switch@2x.png in Resources */,
 				E54F0A2C1EA9D13F008B7CC3 /* down@3x.png in Resources */,
@@ -576,26 +882,47 @@
 				E532AFD01E9B92290001BE28 /* lock.js in Resources */,
 				E54F0A2B1EA9D13F008B7CC3 /* auto.png in Resources */,
 				E540700D1E972B3E00D9ECB4 /* up.png in Resources */,
+				28CD4742225B29A0000D0342 /* ok.mp3 in Resources */,
+				28B8946222018CD000A156C9 /* English_Speech_Female.dat in Resources */,
+				28B8949F220190CC00A156C9 /* bds_easr_wakeup_words.dat in Resources */,
+				28B8946622018CD000A156C9 /* English_Text.dat in Resources */,
 				E5A7E1E91E60251900D72212 /* Localizable.strings in Resources */,
 				E54070091E972B3E00D9ECB4 /* down.png in Resources */,
 				E539CF0D1E762AA800B9D731 /* ui2.js in Resources */,
 				E5BF8E6F1EB03DFB00AF94DC /* colors.jpg in Resources */,
+				286D18D321E8368F000A122E /* shake.xcassets in Resources */,
 				E54070081E972B3E00D9ECB4 /* bluebed.js in Resources */,
 				E56992DD1E5EB91500C76E42 /* Assets.xcassets in Resources */,
+				28B894A0220190CC00A156C9 /* bds_easr_dnn_wakeup_model.dat in Resources */,
+				28BF7C422264597600C8AB53 /* WakeUp.bin in Resources */,
+				28B8949E220190CC00A156C9 /* bds_easr_gramm.dat in Resources */,
 				E5A7E1E81E60251900D72212 /* InfoPlist.strings in Resources */,
+				28B8946322018CD000A156C9 /* offline_engine_tmp_license.dat in Resources */,
+				28B8949B220190CC00A156C9 /* temp_license_2018-02-24.dat in Resources */,
+				28B8946922018CD000A156C9 /* Chinese_Speech_Male.dat in Resources */,
+				28B89498220190CC00A156C9 /* bds_license.dat in Resources */,
 				E5CF142C1E9E189D00C1D26D /* lock.png in Resources */,
+				28B8946A22018CD000A156C9 /* Chinese_Text.dat in Resources */,
 				E540700A1E972B3E00D9ECB4 /* onoff.png in Resources */,
 				E54F0A2D1EA9D13F008B7CC3 /* fan.png in Resources */,
+				28B89499220190CC00A156C9 /* bds_easr_basic_model.dat in Resources */,
+				28B8946822018CD000A156C9 /* English_Speech_Male.dat in Resources */,
 				2842134A21BF8E0000B36B94 /* BYScanDeviceViewController.storyboard in Resources */,
+				28B8946B22018CD000A156C9 /* Chinese_Speech_Female.dat in Resources */,
 				E56992F01E5EB97100C76E42 /* BYCustomConfig.plist in Resources */,
 				E54F0A331EA9D13F008B7CC3 /* up@3x.png in Resources */,
 				E54F0A311EA9D13F008B7CC3 /* timer_select.png in Resources */,
 				E54070071E972B3E00D9ECB4 /* bed.png in Resources */,
 				E540700B1E972B3E00D9ECB4 /* union_down.png in Resources */,
+				28CD4744225B4056000D0342 /* im_here.mp3 in Resources */,
+				28B8946722018CD000A156C9 /* .gitignore in Resources */,
 				E54F0A351EA9D25F008B7CC3 /* bluefan.js in Resources */,
 				E54F0A301EA9D13F008B7CC3 /* sleep.png in Resources */,
+				28B8949C220190CC00A156C9 /* bds_easr_input_model.dat in Resources */,
 				E54F0A2F1EA9D13F008B7CC3 /* osc.png in Resources */,
+				28B8949A220190CC00A156C9 /* bds_easr_mfe_cmvn.dat in Resources */,
 				E5CF142B1E9E189D00C1D26D /* lock@2x.png in Resources */,
+				28B8949D220190CC00A156C9 /* bds_easr_mfe_dnn.dat in Resources */,
 				E56992DE1E5EB91500C76E42 /* LaunchScreen.storyboard in Resources */,
 				E5CF142A1E9E189D00C1D26D /* key.png in Resources */,
 				E53B58661E642AA200860CBB /* icon.ttf in Resources */,
@@ -673,24 +1000,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5E4BDB51E71427D0086472B /* BYInfoViewController.m in Sources */,
-				E545202D1E67FFB700C0D46E /* MinewModuleManager.m in Sources */,
+				28CD4740225B28D3000D0342 /* AudioPlayer.m in Sources */,
+				28B8947022018CD000A156C9 /* RecognizeManager.m in Sources */,
+				286D18DD21E86E83000A122E /* MinewModuleAPI.m in Sources */,
+				286D18E021E86E83000A122E /* MinewModule.m in Sources */,
+				28B8946C22018CD000A156C9 /* WakeUpManager.m in Sources */,
 				E56992EF1E5EB97100C76E42 /* BYCommonTools.m in Sources */,
+				286D18DE21E86E83000A122E /* MinewCommonTool.m in Sources */,
 				E5A7E1EF1E602A6300D72212 /* BYHeaderView.m in Sources */,
-				E545202A1E67FFB700C0D46E /* MinewCommonTool.m in Sources */,
-				E54520301E68000000C0D46E /* MinewModuleAPI.m in Sources */,
 				E53E94CB1E6526FB0047D49A /* BYSetDeviceViewController.m in Sources */,
 				E56992F11E5EB97100C76E42 /* BYCustomManager.m in Sources */,
 				E5BF8E721EB040A300AF94DC /* ColorPickerView.m in Sources */,
 				E56992F21E5EB97100C76E42 /* BYBindDeviceViewController.m in Sources */,
+				286D18D021E829B1000A122E /* ScanConnectViewController.m in Sources */,
 				E56992DC1E5EB91500C76E42 /* AppDelegate.m in Sources */,
 				E54520331E68469500C0D46E /* BYDeviceDetailViewController.m in Sources */,
 				E5A7E1E31E600FB000D72212 /* BYScanDeviceViewController.m in Sources */,
+				28BF7C50226857E100C8AB53 /* BDVRSettingsItem.m in Sources */,
 				E56992F31E5EB97100C76E42 /* BYNavigationController.m in Sources */,
+				28193E9721F6EE7A00AD3B97 /* CustomSlider.m in Sources */,
+				28BF7C4A2265BA0700C8AB53 /* BYInfoViewController.m in Sources */,
 				E5E4BDAF1E710B780086472B /* NSTimer+Blocks.m in Sources */,
+				28613FD522530F9B00E7B0FD /* Tools.m in Sources */,
 				E56992FB1E5EBE6B00C76E42 /* BYTableViewModel.m in Sources */,
 				E56992E01E5EB91500C76E42 /* main.m in Sources */,
-				E545202C1E67FFB700C0D46E /* MinewModule.m in Sources */,
+				286D18DF21E86E83000A122E /* MinewModuleManager.m in Sources */,
+				28BF7C4F226857E100C8AB53 /* BDVRSettings.m in Sources */,
 				E54070101E97320100D9ECB4 /* WXImgLoaderDefaultImpl.m in Sources */,
 				E56993011E5ECA9400C76E42 /* BYCellModel.m in Sources */,
 				E56993041E5ED41100C76E42 /* BYSectionModel.m in Sources */,
@@ -854,12 +1189,19 @@
 			baseConfigurationReference = 49E0A3CD57A1B7DE50179925 /* Pods-BeaconYun.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PXH72F7T3D;
+				DEVELOPMENT_TEAM = 8FJMU234N7;
+				ENABLE_BITCODE = NO;
+				GCC_PREFIX_HEADER = $SRCROOT/BeaconYun/CommonTools/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/BeaconYun/Configs/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.minew.blelighttest;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BeaconYun/BaiduSDK/BDSClientLib",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.AnShunKang.testforBaidu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -868,12 +1210,19 @@
 			baseConfigurationReference = B370C1B698562C91509A8E8F /* Pods-BeaconYun.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PXH72F7T3D;
+				DEVELOPMENT_TEAM = 8FJMU234N7;
+				ENABLE_BITCODE = NO;
+				GCC_PREFIX_HEADER = $SRCROOT/BeaconYun/CommonTools/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/BeaconYun/Configs/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.minew.blelighttest;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BeaconYun/BaiduSDK/BDSClientLib",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.AnShunKang.testforBaidu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

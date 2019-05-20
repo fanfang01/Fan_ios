@@ -36,6 +36,14 @@
 
 - (void)dataReceive:(WXModuleKeepAliveCallback)handler;
 
+//基本信息的收取
+- (void)devieceInfoReceive:(WXModuleKeepAliveCallback)handler;
+
+- (void)macAddressReceive:(WXModuleKeepAliveCallback)handler;
+
+//设备收到的回调
+- (void)dataNotify:(WXModuleKeepAliveCallback)handler;
+
 - (void)sendData:(NSString *)data hex:(BOOL)hex completion:(WXModuleKeepAliveCallback)handler;
 
 - (void)sendCycleData:(NSString *)data hex:(BOOL)hex interval:(NSString *)inter completion:(WXModuleKeepAliveCallback)handler;
