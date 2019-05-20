@@ -213,14 +213,14 @@
     NSString *adName = advertisementData[CBAdvertisementDataLocalNameKey];
     
     
-    if ( [adName isEqualToString:@"S301R"] )
+    if ( [adName isEqualToString:@"S303R"] )
     {
 
         NSLog(@"扫描到的数据::::%@",advertisementData);
 
         MinewModule *module = [self moduleExist:peripheral.identifier.UUIDString];
         
-        if ( module.connecting)
+        if ( module.connecting )
             return ;
         
         if (!module)

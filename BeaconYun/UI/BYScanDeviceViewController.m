@@ -318,7 +318,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
                 speed = [speedStr integerValue];
             }
         }
-        NSLog(@"第 速度为:%ld",speed);
+        NSLog(@"第 速度为:%ld",(long)speed);
 
         NSInteger fileteredNum = speed;
         [self setSpeedNumber:fileteredNum];
@@ -334,7 +334,7 @@ struct DeviceBaseInfo deviceBaseInfoModel = {0,0,0};
                 speed = [speedStr integerValue];
             }
         }
-        NSLog(@"d 速度为:%ld",speed);
+        NSLog(@"d 速度为:%ld",(long)speed);
         NSInteger fileteredNum = speed;
         [self setSpeedNumber:fileteredNum];
 
